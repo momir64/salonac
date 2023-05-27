@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="rs.moma.gui.WelcomePage">
+  <grid id="27dc6" binding="welcomePanel" layout-manager="GridBagLayout">
+    <constraints>
+      <xy x="20" y="20" width="817" height="532"/>
+    </constraints>
+    <properties>
+      <preferredSize width="400" height="300"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <component id="c026" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="6" fill="0" indent="0" use-parent-layout="false"/>
+          <gridbag top="0" left="0" bottom="10" right="5" weightx="1.0" weighty="1.0"/>
+        </constraints>
+        <properties>
+          <alignmentY value="0.0"/>
+          <text value="Radno vreme:"/>
+        </properties>
+      </component>
+      <component id="8c73a" class="javax.swing.JLabel" binding="radnoVremeLabel">
+        <constraints>
+          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="10" fill="0" indent="0" use-parent-layout="false"/>
+          <gridbag top="0" left="5" bottom="10" right="0" weightx="1.0" weighty="1.0"/>
+        </constraints>
+        <properties>
+          <alignmentY value="0.0"/>
+          <text value="08h - 20h"/>
+        </properties>
+      </component>
+      <component id="b7ef3" class="javax.swing.JButton" binding="registerBtn">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="1" fill="0" indent="0" use-parent-layout="false"/>
+          <gridbag top="10" left="0" bottom="0" right="0" weightx="1.0" weighty="1.0"/>
+        </constraints>
+        <properties>
+          <focusPainted value="false"/>
+          <preferredSize width="200" height="50"/>
+          <text value="Registruj se"/>
+        </properties>
+      </component>
+      <component id="c0ff4" class="javax.swing.JButton" binding="loginBtn">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="2" fill="0" indent="0" use-parent-layout="false"/>
+          <gridbag top="0" left="0" bottom="10" right="0" weightx="1.0" weighty="1.0"/>
+        </constraints>
+        <properties>
+          <focusPainted value="false"/>
+          <margin top="0" left="0" bottom="0" right="0"/>
+          <preferredSize width="200" height="50"/>
+          <text value="Prijavi se"/>
+        </properties>
+      </component>
+      <vspacer id="47aca">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="1.0"/>
+        </constraints>
+      </vspacer>
+      <vspacer id="f16a6">
+        <constraints>
+          <grid row="4" column="0" row-span="1" col-span="2" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="0.1"/>
+        </constraints>
+      </vspacer>
+    </children>
+  </grid>
+</form>

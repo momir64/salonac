@@ -1,0 +1,37 @@
+0;4;Relaks masaža;2000.0;45
+1;4;Sportska masaža;2500.0;75
+2;3;Gel lak;1600.0;80
+3;3;Spa manikir;2000.0;90
+4;3;Francuski manikir;1500.0;55
+5;8;Spa pedikir;1600.0;45
+6;4;Aromaterapija masaža;2500.0;60
+7;0;Depilacija bikini zone;2000.0;120
+8;0;Depilacija;1500.0;30
+9;2;Dubinsko čišćenje lica;3000.0;90
+10;0;Epilacija;3000.0;90
+11;7;Farbanje obrva;800.0;30
+12;2;Hidratacija kože lica;3000.0;90
+13;9;Kozmetička depilacija ruku;1200.0;30
+14;10;Kozmetička depilacija stomaka;2000.0;60
+15;2;Lifting;3000.0;90
+16;6;Manikir;1000.0;60
+17;4;Masaža celog tela sa aromatičnim uljima;4000.0;120
+18;4;Masaža glave i temena;1800.0;30
+19;4;Masaža gluteusa;1500.0;30
+20;1;Masaža leđa;2500.0;60
+21;5;Masaža nogu;2000.0;45
+22;9;Masaža ruku;1200.0;30
+23;10;Masaža stomaka;2000.0;60
+24;11;Masaža stopala;1500.0;30
+25;2;Mezoterapija lica;4500.0;120
+26;2;Mikrodermoabrazija lica;3500.0;60
+27;7;Oblikovanje obrva;800.0;30
+28;6;Pedikir;1500.0;60
+29;2;Piling;2000.0;45
+30;4;Piling i masaža celog tela;3500.0;90
+31;12;Piling tela kofeinom;2500.0;60
+32;2;Tretman lica;2500.0;60
+33;12;Tretman za uklanjanje celulita;3000.0;90
+34;2;Uklanjanje bubuljica;1500.0;30
+35;2;Uklanjanje mladeža;5000.0;120
+36;2;Uklanjanje ožiljaka;4000.0;90
