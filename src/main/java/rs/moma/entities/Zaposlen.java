@@ -46,7 +46,7 @@ public class Zaposlen extends Korisnik {
         KoeficijentStaz        = Float.parseFloat(data[12]);
         PlataOsnova            = Float.parseFloat(data[13]);
         Bonus                  = data[14];
-        ZaduzeniTipoviTretmana = Arrays.stream(Arrays.copyOfRange(data, 14, data.length)).mapToInt(Integer::parseInt).toArray();
+        ZaduzeniTipoviTretmana = Arrays.stream(Arrays.copyOfRange(data, 15, data.length)).mapToInt(Integer::parseInt).toArray();
     }
 
     @Override
@@ -59,9 +59,9 @@ public class Zaposlen extends Korisnik {
                 GodineStaza + SP1 +
                 KoeficijentStaz + SP1 +
                 PlataOsnova + SP1 +
-                Bonus);
-        if (ZaduzeniTipoviTretmana == null) str.append(SP1).append(-1);
-        else for (int tipID : ZaduzeniTipoviTretmana) str.append(SP1).append(tipID);
+                Bonus + SP1);
+        if (ZaduzeniTipoviTretmana == null) str.append(-1);
+        else for (int tipID : ZaduzeniTipoviTretmana) str.append(tipID);
         return str.toString();
     }
 
