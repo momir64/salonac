@@ -1,11 +1,13 @@
 package rs.moma.entities;
 
-import rs.moma.managers.ZakazaniTretmani;
-import rs.moma.DataTools.ETipZaposlenog;
 import rs.moma.DataTools.ENivoSpreme;
 import rs.moma.DataTools.EPol;
+import rs.moma.DataTools.ETipZaposlenog;
+import rs.moma.managers.Tretmani;
+import rs.moma.managers.ZakazaniTretmani;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import static rs.moma.DataTools.SP1;
@@ -79,6 +81,18 @@ public class Zaposlen extends Korisnik {
     }
 
     // Specijalne get metode
+    public ArrayList<String> getTretmani() {
+        ArrayList<String> tretmani = new ArrayList<>();
+        for (int id : ZaduzeniTipoviTretmana)
+            for (Tretman tretman : new Tretmani().filter(id, null, -1, -1, -1, -1))
+                tretmani.add(tretman.Naziv);
+        return tretmani;
+    }
+
+    public ArrayList<ZakazaniTretman> getZakazaniTretmani() {
+        return new ZakazaniTretmani().getKozmeticar(this, null, null, false);
+    }
+
     public int getBrojTretmana(LocalDateTime from, LocalDateTime to) {
         return new ZakazaniTretmani().getKozmeticar(this, from, to, false).size();
     }

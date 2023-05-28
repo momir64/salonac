@@ -3,8 +3,7 @@ package rs.moma;
 import com.formdev.flatlaf.FlatDarculaLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import rs.moma.entities.Salon;
-import rs.moma.gui.KozmeticarPage;
-import rs.moma.managers.Zaposleni;
+import rs.moma.gui.WelcomePage;
 
 public class Main {
     public static void main(String[] args) {
@@ -12,9 +11,9 @@ public class Main {
         FlatDarculaLaf.install();
 
         Salon salon = new Salon("Salonac", 8, 20, 10000);
-        salon.korisnik  = new Zaposleni().prijava("pero", "perica321");
-        salon.isKlijent = false;
-        new KozmeticarPage(salon);
-//        new WelcomePage(salon);
+//        salon.korisnik  = new Zaposleni().prijava("daccca", "lozinka000");
+//        salon.isKlijent = false;
+//        new KozmeticarPage(salon);
+        new WelcomePage(salon);
     }
 }

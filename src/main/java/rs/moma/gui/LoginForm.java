@@ -37,6 +37,10 @@ public class LoginForm extends JDialog {
                     parent.setVisible(false);
                     parent.dispose();
 
+                    if(zaposlen.TipZaposlenog == ETipZaposlenog.KOZMETICAR)
+                        new KozmeticarPage(parent.Salon);
+
+
                     // USPEŠAN LOGIN
                     // OTVORITI FORMU
 
