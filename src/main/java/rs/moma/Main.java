@@ -10,7 +10,7 @@ public class Main {
         FlatLightLaf.setup();
         FlatDarculaLaf.install();
 
-        Salon salon = new Salon("Salonac", 8, 20, 10000);
+        Salon salon = new Salon();
 //        salon.korisnik  = new Zaposleni().prijava("daccca", "lozinka000");
 //        salon.isKlijent = false;
 //        new KozmeticarPage(salon);

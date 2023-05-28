@@ -20,13 +20,11 @@ public class Zaposlen extends Korisnik {
     public final float          KoeficijentStaz;
     public final float          PlataOsnova;
     public final String         Bonus;
-    public final int            PocetakRadnoVreme;
-    public final int            KrajRadnoVreme;
     public final int[]          ZaduzeniTipoviTretmana;
 
-    public Zaposlen(int id, String ime, String prezime, EPol pol, String telefon, String adresa, String username, String lozinka,
-                    ETipZaposlenog tipZaposlenog, ENivoSpreme sprema, float koeficijentSprema, int godineStaza, float koeficijentStaz,
-                    float plataOsnova, String bonus, int pocetakRadnoVreme, int krajRadnoVreme, int[] zaduzeniTipoviTretmana) {
+    public Zaposlen(int id, String ime, String prezime, EPol pol, String telefon, String adresa, String username,
+                    String lozinka, ETipZaposlenog tipZaposlenog, ENivoSpreme sprema, float koeficijentSprema,
+                    int godineStaza, float koeficijentStaz, float plataOsnova, String bonus, int[] zaduzeniTipoviTretmana) {
         super(id, ime, prezime, pol, telefon, adresa, username, lozinka);
         TipZaposlenog          = tipZaposlenog;
         Sprema                 = sprema;
@@ -35,8 +33,6 @@ public class Zaposlen extends Korisnik {
         KoeficijentStaz        = koeficijentStaz;
         PlataOsnova            = plataOsnova;
         Bonus                  = bonus;
-        PocetakRadnoVreme      = pocetakRadnoVreme;
-        KrajRadnoVreme         = krajRadnoVreme;
         ZaduzeniTipoviTretmana = zaduzeniTipoviTretmana;
     }
 
@@ -50,9 +46,7 @@ public class Zaposlen extends Korisnik {
         KoeficijentStaz        = Float.parseFloat(data[12]);
         PlataOsnova            = Float.parseFloat(data[13]);
         Bonus                  = data[14];
-        PocetakRadnoVreme      = Integer.parseInt(data[15]);
-        KrajRadnoVreme         = Integer.parseInt(data[16]);
-        ZaduzeniTipoviTretmana = Arrays.stream(Arrays.copyOfRange(data, 16, data.length)).mapToInt(Integer::parseInt).toArray();
+        ZaduzeniTipoviTretmana = Arrays.stream(Arrays.copyOfRange(data, 14, data.length)).mapToInt(Integer::parseInt).toArray();
     }
 
     @Override
@@ -65,10 +59,8 @@ public class Zaposlen extends Korisnik {
                 GodineStaza + SP1 +
                 KoeficijentStaz + SP1 +
                 PlataOsnova + SP1 +
-                Bonus + SP1 +
-                PocetakRadnoVreme + SP1 +
-                KrajRadnoVreme);
-        if (ZaduzeniTipoviTretmana == null) str.append(",null");
+                Bonus);
+        if (ZaduzeniTipoviTretmana == null) str.append(SP1).append(-1);
         else for (int tipID : ZaduzeniTipoviTretmana) str.append(SP1).append(tipID);
         return str.toString();
     }

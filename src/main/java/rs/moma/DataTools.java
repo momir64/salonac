@@ -15,6 +15,7 @@ public class DataTools {
     public static String fileTretmani         = "data/tretmani.csv";
     public static String fileKlijenti         = "data/klijenti.csv";
     public static String fileIsplate          = "data/isplate.csv";
+    public static String fileSalon            = "data/salon.csv";
     public static String SP1                  = ";";
     public static String SP2                  = "|";
 
