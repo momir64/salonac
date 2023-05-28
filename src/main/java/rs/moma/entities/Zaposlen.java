@@ -82,7 +82,7 @@ public class Zaposlen extends Korisnik {
     }
 
     public ArrayList<ZakazaniTretman> getZakazaniTretmani() {
-        return new ZakazaniTretmani().getKozmeticar(this, null, null, false);
+        return new ZakazaniTretmani().getKozmeticar(this, null, null, true);
     }
 
     public int getBrojTretmana(LocalDateTime from, LocalDateTime to) {
