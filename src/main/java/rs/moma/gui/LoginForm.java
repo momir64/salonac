@@ -32,13 +32,11 @@ public class LoginForm extends JDialog {
                 if (klijent == null && zaposlen == null)
                     showMessageDialog(this, "Neispravno ime ili šifra!");
                 else {
-                    parent.Salon.korisnik  = klijent == null ? zaposlen : klijent;
-                    parent.Salon.isKlijent = klijent != null;
                     parent.setVisible(false);
                     parent.dispose();
 
                     if(zaposlen.TipZaposlenog == ETipZaposlenog.KOZMETICAR)
-                        new KozmeticarPage(parent.Salon);
+                        new KozmeticarPage(zaposlen);
 
 
                     // USPEŠAN LOGIN

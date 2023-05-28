@@ -9,10 +9,9 @@ public class WelcomePage extends JFrame {
     private JButton loginBtn;
     private JButton registerBtn;
     private JLabel  radnoVremeLabel;
-    public  Salon   Salon;
 
-    public WelcomePage(Salon salon) {
-        this.Salon = salon;
+    public WelcomePage() {
+        Salon salon = new Salon();
         setContentPane(welcomePanel);
         setTitle(salon.Naziv);
         setSize(1000, 700);

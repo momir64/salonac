@@ -2,18 +2,19 @@ package rs.moma;
 
 import com.formdev.flatlaf.FlatDarculaLaf;
 import com.formdev.flatlaf.FlatLightLaf;
-import rs.moma.entities.Salon;
-import rs.moma.gui.WelcomePage;
+import rs.moma.gui.KlijentPage;
+import rs.moma.gui.KozmeticarPage;
+import rs.moma.managers.Klijenti;
+import rs.moma.managers.Zaposleni;
 
 public class Main {
     public static void main(String[] args) {
         FlatLightLaf.setup();
         FlatDarculaLaf.install();
 
-        Salon salon = new Salon();
-//        salon.korisnik  = new Zaposleni().prijava("daccca", "lozinka000");
-//        salon.isKlijent = false;
-//        new KozmeticarPage(salon);
-        new WelcomePage(salon);
+        new KlijentPage(new Klijenti().prijava("marija123", "pass456"));
+//        new KlijentPage(new Klijenti().prijava("mikula", "lozinka123"));
+        new KozmeticarPage(new Zaposleni().prijava("daccca", "lozinka000"));
+//        new WelcomePage();
     }
 }

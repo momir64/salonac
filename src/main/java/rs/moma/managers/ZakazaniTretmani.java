@@ -1,20 +1,21 @@
 package rs.moma.managers;
 
+import rs.moma.DataTools;
+import rs.moma.entities.Klijent;
 import rs.moma.entities.ZakazaniTretman;
 import rs.moma.entities.Zaposlen;
-import rs.moma.entities.Klijent;
-import rs.moma.DataTools;
 
 import java.nio.charset.StandardCharsets;
-import java.time.LocalDateTime;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Optional;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
+import static rs.moma.DataTools.EStanjeTermina.ZAKAZAN;
 import static rs.moma.DataTools.fileZakazaniTretmani;
-import static rs.moma.DataTools.EStanjeTermina.*;
 import static rs.moma.DataTools.toArrayList;
 
 public class ZakazaniTretmani {
@@ -79,13 +80,13 @@ public class ZakazaniTretmani {
         return toArrayList(get().stream().filter(tretman -> tretman.KlijentID == klijent.ID &&
                                                             (from == null || tretman.Vreme.isAfter(from)) &&
                                                             (to == null || tretman.Vreme.isBefore(to)) &&
-                                                            (!samoZakazani || tretman.Stanje == ZAKAZAN)));
+                                                            (!samoZakazani || tretman.Stanje == ZAKAZAN)).sorted(Comparator.comparing(t -> t.Vreme)));
     }
 
     public ArrayList<ZakazaniTretman> getKozmeticar(Zaposlen zaposlen, LocalDateTime from, LocalDateTime to, boolean samoZakazani) {
         return toArrayList(get().stream().filter(tretman -> tretman.KozmeticarID == zaposlen.ID &&
                                                             (from == null || tretman.Vreme.isAfter(from)) &&
                                                             (to == null || tretman.Vreme.isBefore(to)) &&
-                                                            (!samoZakazani || tretman.Stanje == ZAKAZAN)));
+                                                            (!samoZakazani || tretman.Stanje == ZAKAZAN)).sorted(Comparator.comparing(t -> t.Vreme)));
     }
 }

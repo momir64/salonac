@@ -6,6 +6,24 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
 public class MultilineCellRenderer extends DefaultTableCellRenderer {
+    private final boolean ShowDelete;
+    private final boolean ShowEdit;
+
+    public MultilineCellRenderer(boolean showDelete, boolean showEdit) {
+        ShowDelete = showDelete;
+        ShowEdit   = showEdit;
+    }
+
+    public MultilineCellRenderer(boolean showDelete) {
+        ShowDelete = showDelete;
+        ShowEdit   = false;
+    }
+
+    public MultilineCellRenderer() {
+        ShowDelete = false;
+        ShowEdit   = false;
+    }
+
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         JTable cell = new JTable();

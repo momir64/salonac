@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="rs.moma.gui.KozmeticarPage">
-  <grid id="27dc6" binding="kozmeticarPanel" layout-manager="GridBagLayout">
+  <grid id="27dc6" binding="mainPanel" layout-manager="GridBagLayout">
     <constraints>
-      <xy x="20" y="20" width="740" height="800"/>
+      <xy x="20" y="20" width="740" height="570"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -121,7 +121,7 @@
             <properties/>
             <border type="none"/>
             <children>
-              <component id="59c77" class="javax.swing.JTable" binding="rasporedTbl">
+              <component id="59c77" class="javax.swing.JTable" binding="tretmaniTbl">
                 <constraints/>
                 <properties>
                   <focusable value="false"/>

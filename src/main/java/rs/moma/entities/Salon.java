@@ -19,8 +19,6 @@ public class Salon {
     public final int      PocetakRadnogVremena;
     public final int      KrajRadnogVremena;
     public final float    MinIznosLojalnosti;
-    public       boolean  isKlijent;
-    public       Korisnik korisnik;
 
     public Salon(String naziv, int pocetakRadnogVremena, int krajRadnogVremena, float minIznosLojalnosti) {
         Naziv                = naziv;
