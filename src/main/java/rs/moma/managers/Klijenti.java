@@ -70,8 +70,8 @@ public class Klijenti {
     }
 
     // Specijalne get metode
-    public ArrayList<Klijent> getLojalne(float minIznosLojalnosti) {
-        return toArrayList(get().stream().filter(klijent -> klijent.getKarticaLojalnosti(minIznosLojalnosti)));
+    public ArrayList<Klijent> getLojalne() {
+        return toArrayList(get().stream().filter(Klijent::getKarticaLojalnosti));
     }
 
     // Prijava

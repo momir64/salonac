@@ -83,11 +83,11 @@ public class DataTools {
         }
     }
 
-    public static <T> void edit(ArrayList<T> entiteti, String fileName, String tip, T entitet, T newEntitet) {
-        if (entiteti.stream().noneMatch(obj -> obj.equals(entitet)))
+    public static <T> void edit(ArrayList<T> entiteti, String fileName, String tip, T oldEntitet, T newEntitet) {
+        if (entiteti.stream().noneMatch(obj -> obj.equals(oldEntitet)))
             System.err.printf("Dati %s ne postoji!\n", tip);
         else {
-            entiteti.removeIf(obj -> obj.equals(entitet));
+            entiteti.removeIf(obj -> obj.equals(oldEntitet));
             entiteti.add(newEntitet);
             save(entiteti, fileName, tip);
         }

@@ -5,8 +5,7 @@ import rs.moma.managers.ZakazaniTretmani;
 
 import java.time.LocalDateTime;
 
-import static rs.moma.DataTools.EStanjeTermina.OTKAZAO_KLIJENT;
-import static rs.moma.DataTools.EStanjeTermina.OTKAZAO_SALON;
+import static rs.moma.DataTools.EStanjeTermina.*;
 import static rs.moma.DataTools.SP1;
 
 public class ZakazaniTretman {
@@ -15,7 +14,7 @@ public class ZakazaniTretman {
     public final float          Cena;
     public final int            Trajanje;
     public final LocalDateTime  Vreme;
-    public final EStanjeTermina Stanje;
+    public       EStanjeTermina Stanje;
     public final int            KlijentID;
     public final int            KozmeticarID;
     public final boolean        KarticaLojalnosti;
@@ -32,8 +31,8 @@ public class ZakazaniTretman {
         KarticaLojalnosti = karticaLojalnosti;
     }
 
-    public ZakazaniTretman(int tretmanID, float cena, int trajanje, LocalDateTime vreme, EStanjeTermina stanje, int klijentID, int kozmeticarID, boolean karticaLojalnosti) {
-        this(new ZakazaniTretmani().getNewID(), tretmanID, cena, trajanje, vreme, stanje, klijentID, kozmeticarID, karticaLojalnosti);
+    public ZakazaniTretman(Tretman tretman, LocalDateTime vreme, Klijent klijent, Zaposlen kozmeticar) {
+        this(new ZakazaniTretmani().getNewID(), tretman.ID, tretman.Cena, tretman.Trajanje, vreme, ZAKAZAN, klijent.ID, kozmeticar.ID, klijent.getKarticaLojalnosti());
     }
 
     public ZakazaniTretman(String line) {
@@ -51,7 +50,7 @@ public class ZakazaniTretman {
 
     @Override
     public String toString() {
-        return Integer.toString(ID) + SP1 +
+        return ID + SP1 +
                TretmanID + SP1 +
                Cena + SP1 +
                Trajanje + SP1 +
@@ -75,6 +74,6 @@ public class ZakazaniTretman {
     }
 
     public float getPlaceniIznos() {
-        return Stanje == OTKAZAO_SALON ? 0 : Stanje == OTKAZAO_KLIJENT ? Cena * getPopust() * 0.9f : Cena * getPopust();
+        return Stanje == OTKAZAO_SALON ? 0 : Stanje == OTKAZAO_KLIJENT ? Cena * getPopust() * 0.1f : Cena * getPopust();
     }
 }

@@ -20,7 +20,7 @@ public class KozmeticarPage extends KalendarForm {
     private JButton       leftBtn;
 
     public KozmeticarPage(Zaposlen kozmeticar) {
-        super(kozmeticar.getZakazaniTretmani());
+        super(kozmeticar::getZakazaniTretmani, false);
 
         setSize(1050, 1000);
         setContentPane(mainPanel);
@@ -31,7 +31,7 @@ public class KozmeticarPage extends KalendarForm {
 
         tretmaniList.setSelectionModel(new NoSelectionModel());
         tretmaniList.setListData(kozmeticar.getTretmani().stream().sorted().toArray(String[]::new));
-        super.setup(kalendarPane, tretmaniTbl, kalendarTbl, mesecLbl, rightBtn, leftBtn);
+        super.setup(kalendarPane, tretmaniTbl, kalendarTbl, mesecLbl, rightBtn, leftBtn, false, false);
 
         setVisible(true);
     }
@@ -43,6 +43,9 @@ public class KozmeticarPage extends KalendarForm {
                               {"Tretman: ", new Tretmani().get(tretman.TretmanID).Naziv},
                               {"Trajanje: ", tretman.Trajanje + " minuta"}};
     }
+
+    @Override
+    protected void Update() {}
 
     private void createUIComponents() {
         kalendarTbl = super.makeKalendarTable();

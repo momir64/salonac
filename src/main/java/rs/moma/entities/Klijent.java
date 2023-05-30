@@ -28,7 +28,7 @@ public class Klijent extends Korisnik {
         return (float) new ZakazaniTretmani().getKlijent(this, null, null, false).stream().mapToDouble(ZakazaniTretman::getPlaceniIznos).sum();
     }
 
-    public boolean getKarticaLojalnosti(float minIznosLojalnosti) {
-        return getUkupnoPlatio() >= minIznosLojalnosti;
+    public boolean getKarticaLojalnosti() {
+        return getUkupnoPlatio() >= new Salon().MinIznosLojalnosti;
     }
 }

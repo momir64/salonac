@@ -8,9 +8,13 @@ public class TipTretmana {
     public final int    ID;
     public final String Tip;
 
+    public TipTretmana(int id, String tip, boolean newID) {
+        this(newID ? new TipoviTretmana().getNewID() : id, tip);
+    }
+
     public TipTretmana(int id, String tip) {
-        ID  = id == -1 ? new TipoviTretmana().getNewID() : id;
         Tip = tip;
+        ID  = id;
     }
 
     public TipTretmana(String line) {
@@ -21,7 +25,7 @@ public class TipTretmana {
 
     @Override
     public String toString() {
-        return Integer.toString(ID) + SP1 + Tip;
+        return ID + SP1 + Tip;
     }
 
     @Override

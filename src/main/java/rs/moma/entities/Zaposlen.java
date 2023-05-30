@@ -6,11 +6,15 @@ import rs.moma.DataTools.ETipZaposlenog;
 import rs.moma.managers.Tretmani;
 import rs.moma.managers.ZakazaniTretmani;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.stream.IntStream;
 
 import static rs.moma.DataTools.SP1;
+import static rs.moma.DataTools.toArrayList;
 
 public class Zaposlen extends Korisnik {
     public final ETipZaposlenog TipZaposlenog;
@@ -83,6 +87,19 @@ public class Zaposlen extends Korisnik {
 
     public ArrayList<ZakazaniTretman> getZakazaniTretmani() {
         return new ZakazaniTretmani().getKozmeticar(this, null, null, true);
+    }
+
+    public ArrayList<Integer> getSlobodniTermini(LocalDate date) {
+        if (date.isBefore(LocalDate.now())) return new ArrayList<>();
+        Salon salon = new Salon();
+        ArrayList<Integer> termini = toArrayList(IntStream.rangeClosed(date.isEqual(LocalDate.now()) ?
+                                                                       Math.max(LocalDateTime.now().getHour() + 1, salon.PocetakRadnogVremena) : salon.PocetakRadnogVremena,
+                                                                       salon.KrajRadnogVremena - 1).boxed());
+        ArrayList<ZakazaniTretman> tretmani = new ZakazaniTretmani().getKozmeticar(this, date.atStartOfDay(), date.atTime(LocalTime.MAX), true);
+        for (ZakazaniTretman tretman : tretmani)
+            for (int i = 0; i < tretman.Trajanje; i += 60)
+                 termini.remove(new Integer(tretman.Vreme.getHour() + i / 60));
+        return termini;
     }
 
     public int getBrojTretmana(LocalDateTime from, LocalDateTime to) {

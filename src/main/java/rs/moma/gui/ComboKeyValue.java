@@ -1,19 +1,19 @@
 package rs.moma.gui;
 
-public class KeyValue {
-    Object key;
+public class ComboKeyValue {
+    String key;
     Object value;
 
-    public KeyValue(Object key, Object value) {
+    public ComboKeyValue(String key, Object value) {
         this.key   = key;
         this.value = value;
     }
 
-    public Object getKey() {
+    public String getKey() {
         return key;
     }
 
-    public void setKey(Object key) {
+    public void setKey(String key) {
         this.key = key;
     }
 
@@ -27,6 +27,6 @@ public class KeyValue {
 
     @Override
     public String toString() {
-        return key.toString();
+        return key;
     }
 }

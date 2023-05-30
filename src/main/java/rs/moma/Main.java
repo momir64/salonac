@@ -3,9 +3,7 @@ package rs.moma;
 import com.formdev.flatlaf.FlatDarculaLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import rs.moma.gui.KlijentPage;
-import rs.moma.gui.KozmeticarPage;
 import rs.moma.managers.Klijenti;
-import rs.moma.managers.Zaposleni;
 
 public class Main {
     public static void main(String[] args) {
@@ -14,7 +12,7 @@ public class Main {
 
         new KlijentPage(new Klijenti().prijava("marija123", "pass456"));
 //        new KlijentPage(new Klijenti().prijava("mikula", "lozinka123"));
-        new KozmeticarPage(new Zaposleni().prijava("daccca", "lozinka000"));
+//        new KozmeticarPage(new Zaposleni().prijava("daccca", "lozinka000"));
 //        new WelcomePage();
     }
 }

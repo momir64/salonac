@@ -14,7 +14,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
-import static rs.moma.DataTools.EStanjeTermina.ZAKAZAN;
+import static rs.moma.DataTools.EStanjeTermina.*;
 import static rs.moma.DataTools.fileZakazaniTretmani;
 import static rs.moma.DataTools.toArrayList;
 
@@ -88,5 +88,11 @@ public class ZakazaniTretmani {
                                                             (from == null || tretman.Vreme.isAfter(from)) &&
                                                             (to == null || tretman.Vreme.isBefore(to)) &&
                                                             (!samoZakazani || tretman.Stanje == ZAKAZAN)).sorted(Comparator.comparing(t -> t.Vreme)));
+    }
+
+    // Izmena
+    public void otkaziTretman(ZakazaniTretman tretman, boolean otkazaoSalon) {
+        tretman.Stanje = otkazaoSalon ? OTKAZAO_SALON : OTKAZAO_KLIJENT;
+        edit(tretman, tretman);
     }
 }

@@ -27,7 +27,7 @@ public class RegisterForm extends JDialog {
         setContentPane(registerPanel);
         setSize(600, 600);
         setLocationRelativeTo(parent);
-        polBox.setModel(new DefaultComboBoxModel(new Object[]{new KeyValue("Muško", EPol.MALE), new KeyValue("Žensko", EPol.FEMALE), new KeyValue("Ostalo", EPol.OTHER)}));
+        polBox.setModel(new DefaultComboBoxModel(new Object[]{new ComboKeyValue("Muško", EPol.MALE), new ComboKeyValue("Žensko", EPol.FEMALE), new ComboKeyValue("Ostalo", EPol.OTHER)}));
         registracijaBtn.addActionListener(e -> {
             if (!isInputValid(imeTxt, prezimeTxt, telefonTxt, adresaTxt, usernameTxt, passwordTxt))
                 showMessageDialog(this, "Neispravan unos!");
@@ -36,7 +36,7 @@ public class RegisterForm extends JDialog {
             else if (isInputFilled(imeTxt, prezimeTxt, telefonTxt, adresaTxt, usernameTxt, passwordTxt)) {
                 klijenti.add(new Klijent(imeTxt.getText(),
                                          prezimeTxt.getText(),
-                                         (EPol) ((KeyValue) polBox.getSelectedItem()).getValue(),
+                                         (EPol) ((ComboKeyValue) polBox.getSelectedItem()).getValue(),
                                          telefonTxt.getText(),
                                          adresaTxt.getText(),
                                          usernameTxt.getText(),
