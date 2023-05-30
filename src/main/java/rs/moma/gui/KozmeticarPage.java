@@ -8,6 +8,7 @@ import rs.moma.entities.Klijent;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class KozmeticarPage extends KalendarForm {
     private JList<String> tretmaniList;
@@ -17,10 +18,12 @@ public class KozmeticarPage extends KalendarForm {
     private JPanel        mainPanel;
     private JLabel        mesecLbl;
     private JButton       rightBtn;
-    private JButton       leftBtn;
+    private       JButton  leftBtn;
+    private final Zaposlen kozmeticar;
 
     public KozmeticarPage(Zaposlen kozmeticar) {
-        super(kozmeticar::getZakazaniTretmani, false);
+        super(false);
+        this.kozmeticar = kozmeticar;
 
         setSize(1050, 1000);
         setContentPane(mainPanel);
@@ -30,22 +33,26 @@ public class KozmeticarPage extends KalendarForm {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         tretmaniList.setSelectionModel(new NoSelectionModel());
-        tretmaniList.setListData(kozmeticar.getTretmani().stream().sorted().toArray(String[]::new));
-        super.setup(kalendarPane, tretmaniTbl, kalendarTbl, mesecLbl, rightBtn, leftBtn, false, false);
+        tretmaniList.setListData(kozmeticar.getTretmani().stream().map(tretman -> tretman.Naziv).sorted().toArray(String[]::new));
+        super.setup(kalendarPane, tretmaniTbl, 200, kalendarTbl, mesecLbl, rightBtn, leftBtn, false, false);
 
         setVisible(true);
     }
 
-    protected String[][] tretman2list(ZakazaniTretman tretman) {
+    protected ArrayList<ZakazaniTretman> getTretmani() {
+        return kozmeticar.getZakazaniTretmani();
+    }
+
+    protected String[][] tretmanToList(ZakazaniTretman tretman) {
         Klijent klijent = new Klijenti().get(tretman.KlijentID);
         return new String[][]{{}, {"Vreme: ", tretman.Vreme.getHour() + "h"},
-                              {"Klijent: ", klijent.Ime + " " + klijent.Prezime},
+                              {"Klijent: ", klijent.getDisplayName()},
                               {"Tretman: ", new Tretmani().get(tretman.TretmanID).Naziv},
                               {"Trajanje: ", tretman.Trajanje + " minuta"}};
     }
 
     @Override
-    protected void Update() {}
+    protected void updatePage() {}
 
     private void createUIComponents() {
         kalendarTbl = super.makeKalendarTable();

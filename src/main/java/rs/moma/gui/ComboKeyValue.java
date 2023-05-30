@@ -1,5 +1,7 @@
 package rs.moma.gui;
 
+import java.util.Objects;
+
 public class ComboKeyValue {
     String key;
     Object value;
@@ -28,5 +30,17 @@ public class ComboKeyValue {
     @Override
     public String toString() {
         return key;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        return Objects.equals(value, ((ComboKeyValue) obj).value);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
     }
 }

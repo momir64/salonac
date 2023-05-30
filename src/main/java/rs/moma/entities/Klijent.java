@@ -31,4 +31,11 @@ public class Klijent extends Korisnik {
     public boolean getKarticaLojalnosti() {
         return getUkupnoPlatio() >= new Salon().MinIznosLojalnosti;
     }
+
+    public String getDisplayName() {
+        if (new Klijenti().get().stream().filter(klijent -> (klijent.Ime + " " + klijent.Prezime).equals(Ime + " " + Prezime)).count() > 1)
+            return Ime + " " + Prezime + ", " + Username;
+        else
+            return Ime + " " + Prezime;
+    }
 }

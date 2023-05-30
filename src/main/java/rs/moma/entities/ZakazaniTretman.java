@@ -8,8 +8,8 @@ import java.time.LocalDateTime;
 import static rs.moma.DataTools.EStanjeTermina.*;
 import static rs.moma.DataTools.SP1;
 
-public class ZakazaniTretman {
-    public final int            ID;
+public class ZakazaniTretman implements ClassWithID {
+    public       int            ID;
     public final int            TretmanID;
     public final float          Cena;
     public final int            Trajanje;
@@ -66,6 +66,16 @@ public class ZakazaniTretman {
         if (this == zakazaniTretman) return true;
         if (!(zakazaniTretman instanceof ZakazaniTretman)) return false;
         return ID == ((ZakazaniTretman) zakazaniTretman).ID;
+    }
+
+    @Override
+    public void setID(int id) {
+        ID = id;
+    }
+
+    @Override
+    public int getID() {
+        return ID;
     }
 
     // Specijalne get metode

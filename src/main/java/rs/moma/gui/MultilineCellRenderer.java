@@ -1,7 +1,6 @@
 package rs.moma.gui;
 
 import rs.moma.entities.ZakazaniTretman;
-import rs.moma.managers.ZakazaniTretmani;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -62,12 +61,9 @@ public class MultilineCellRenderer extends AbstractCellEditor implements TableCe
             p2.setBackground(new Color(70, 73, 75));
 
             table.setSelectionModel(new NoSelectionModel());
-            deleteBtn.addActionListener(e -> {
-                new ZakazaniTretmani().otkaziTretman((ZakazaniTretman) (data.getValue()), showEdit);
-                delete.accept((ZakazaniTretman) (data.getValue()));
-            });
+            deleteBtn.addActionListener(e -> delete.accept((ZakazaniTretman) (data.getValue())));
+            editBtn.addActionListener(e -> edit.accept((ZakazaniTretman) (data.getValue())));
             deleteBtn.setFocusPainted(false);
-//            editBtn.addActionListener(edit); ///////////////////////////////////////////
             editBtn.setFocusPainted(false);
 
             if (showDelete)

@@ -7,20 +7,19 @@ import rs.moma.managers.Klijenti;
 import javax.swing.*;
 
 import static javax.swing.JOptionPane.showMessageDialog;
-import static rs.moma.DataTools.isInputFilled;
-import static rs.moma.DataTools.isInputValid;
+import static rs.moma.DataTools.*;
 
 public class RegisterForm extends JDialog {
-    final   Klijenti          klijenti = new Klijenti();
-    private JPanel            registerPanel;
-    private JTextField        imeTxt;
-    private JTextField        prezimeTxt;
-    private JComboBox<String> polBox;
-    private JTextField        telefonTxt;
-    private JTextField        adresaTxt;
-    private JTextField        usernameTxt;
-    private JPasswordField    passwordTxt;
-    private JButton           registracijaBtn;
+    final   Klijenti                 klijenti = new Klijenti();
+    private JButton                  registracijaBtn;
+    private JPanel                   registerPanel;
+    private JTextField               usernameTxt;
+    private JPasswordField           passwordTxt;
+    private JTextField               prezimeTxt;
+    private JTextField               telefonTxt;
+    private JTextField               adresaTxt;
+    private JTextField               imeTxt;
+    private JComboBox<ComboKeyValue> polBox;
 
     public RegisterForm(JFrame parent) {
         super(parent, "Registracija", true);
@@ -36,7 +35,7 @@ public class RegisterForm extends JDialog {
             else if (isInputFilled(imeTxt, prezimeTxt, telefonTxt, adresaTxt, usernameTxt, passwordTxt)) {
                 klijenti.add(new Klijent(imeTxt.getText(),
                                          prezimeTxt.getText(),
-                                         (EPol) ((ComboKeyValue) polBox.getSelectedItem()).getValue(),
+                                         (EPol) getSelectedValue(polBox),
                                          telefonTxt.getText(),
                                          adresaTxt.getText(),
                                          usernameTxt.getText(),

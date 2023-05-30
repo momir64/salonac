@@ -3,11 +3,12 @@ package rs.moma.entities;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
 import static rs.moma.DataTools.toArrayList;
 import static rs.moma.DataTools.SP1;
 
-public class Isplata implements Comparable<Isplata>{
+public class Isplata implements Comparable<Isplata>, ClassWithID {
     public final LocalDateTime          Mesec;
     public final ArrayList<RadnikPlata> Plate;
 
@@ -32,7 +33,27 @@ public class Isplata implements Comparable<Isplata>{
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        return Mesec.isEqual(((Isplata) obj).Mesec);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(Mesec);
+    }
+
+    @Override
     public int compareTo(Isplata isplata) {
         return Mesec.compareTo(isplata.Mesec);
+    }
+
+    @Override
+    public void setID(int id) {}
+
+    @Override
+    public int getID() {
+        return Mesec.getYear() * 12 + Mesec.getMonthValue();
     }
 }

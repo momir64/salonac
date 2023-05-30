@@ -4,8 +4,8 @@ import rs.moma.DataTools;
 
 import static rs.moma.DataTools.SP1;
 
-public class Korisnik {
-    public final int            ID;
+public class Korisnik implements ClassWithID {
+    public       int            ID;
     public final String         Ime;
     public final String         Prezime;
     public final DataTools.EPol Pol;
@@ -39,7 +39,7 @@ public class Korisnik {
 
     @Override
     public String toString() {
-        return Integer.toString(ID) + SP1 +
+        return ID + SP1 +
                Ime + SP1 +
                Prezime + SP1 +
                Pol + SP1 +
@@ -54,5 +54,15 @@ public class Korisnik {
         if (this == korisnik) return true;
         if (!(korisnik instanceof Korisnik)) return false;
         return ID == ((Korisnik) korisnik).ID;
+    }
+
+    @Override
+    public void setID(int id) {
+        ID = id;
+    }
+
+    @Override
+    public int getID() {
+        return ID;
     }
 }

@@ -19,6 +19,6 @@ public class RadnikPlata {
 
     @Override
     public String toString() {
-        return Integer.toString(RadnikID) + SP2 + Plata;
+        return RadnikID + SP2 + Plata;
     }
 }

@@ -1,9 +1,7 @@
 package rs.moma.managers;
 
 import rs.moma.DataTools;
-import rs.moma.entities.Klijent;
-import rs.moma.entities.ZakazaniTretman;
-import rs.moma.entities.Zaposlen;
+import rs.moma.entities.*;
 
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -28,6 +26,8 @@ public class ZakazaniTretmani {
             List<String> lines = Files.readAllLines(Paths.get(fileZakazaniTretmani), StandardCharsets.UTF_8);
             for (String line : lines)
                 zakazaniTretmani.add(new ZakazaniTretman(line));
+            for (ZakazaniTretman tretman : updateStanjeTretmana(zakazaniTretmani))
+                DataTools.edit(zakazaniTretmani, fileZakazaniTretmani, poruka, tretman, tretman);
         } catch (Exception e) {
             System.err.println("Desila se greška prilikom čitanja zakazanih tretmana!");
         }
@@ -69,30 +69,43 @@ public class ZakazaniTretmani {
     }
 
     // Pretraga
-    public ArrayList<ZakazaniTretman> filter(String naziv, float minPlaceno, float maxPlaceno) {
-        return toArrayList(get().stream().filter(tretman -> (naziv == null || new Tretmani().get(tretman.TretmanID).Naziv.toLowerCase().contains(naziv.toLowerCase())) &&
-                                                            (minPlaceno == -1 || tretman.getPlaceniIznos() >= minPlaceno) &&
-                                                            (maxPlaceno == -1 || tretman.getPlaceniIznos() <= maxPlaceno)));
+    public ArrayList<ZakazaniTretman> filter(int tipID, int tretmanID, float minPlaceno, float maxPlaceno) {
+        return toArrayList(get().stream().filter(t -> {
+                                    Tretman tr = new Tretmani().get(t.TretmanID);
+                                    return (minPlaceno == -1 || t.getPlaceniIznos() >= minPlaceno) &&
+                                           (maxPlaceno == -1 || t.getPlaceniIznos() <= maxPlaceno) &&
+                                           (tretmanID == -1 || tr.ID == tretmanID) &&
+                                           (tipID == -1 || tr.TipID == tipID);
+                                }).sorted(Comparator.comparing(t -> t.KozmeticarID))
+                                .sorted(Comparator.comparing(t -> t.Vreme)));
     }
 
     // Specijalne get metode
     public ArrayList<ZakazaniTretman> getKlijent(Klijent klijent, LocalDateTime from, LocalDateTime to, boolean samoZakazani) {
-        return toArrayList(get().stream().filter(tretman -> tretman.KlijentID == klijent.ID &&
-                                                            (from == null || tretman.Vreme.isAfter(from)) &&
-                                                            (to == null || tretman.Vreme.isBefore(to)) &&
-                                                            (!samoZakazani || tretman.Stanje == ZAKAZAN)).sorted(Comparator.comparing(t -> t.Vreme)));
+        return getKlijentKozmeticar(klijent, null, from, to, samoZakazani);
     }
 
     public ArrayList<ZakazaniTretman> getKozmeticar(Zaposlen zaposlen, LocalDateTime from, LocalDateTime to, boolean samoZakazani) {
-        return toArrayList(get().stream().filter(tretman -> tretman.KozmeticarID == zaposlen.ID &&
+        return getKlijentKozmeticar(null, zaposlen, from, to, samoZakazani);
+    }
+
+    public ArrayList<ZakazaniTretman> getKlijentKozmeticar(Klijent klijent, Zaposlen zaposlen, LocalDateTime from, LocalDateTime to, boolean samoZakazani) {
+        return toArrayList(get().stream().filter(tretman -> (klijent == null || tretman.KlijentID == klijent.ID) &&
+                                                            (zaposlen == null || tretman.KozmeticarID == zaposlen.ID) &&
                                                             (from == null || tretman.Vreme.isAfter(from)) &&
                                                             (to == null || tretman.Vreme.isBefore(to)) &&
-                                                            (!samoZakazani || tretman.Stanje == ZAKAZAN)).sorted(Comparator.comparing(t -> t.Vreme)));
+                                                            (!samoZakazani || tretman.Stanje == ZAKAZAN))
+                                .sorted(Comparator.comparing(t -> t.KozmeticarID))
+                                .sorted(Comparator.comparing(t -> t.Vreme)));
     }
 
     // Izmena
     public void otkaziTretman(ZakazaniTretman tretman, boolean otkazaoSalon) {
         tretman.Stanje = otkazaoSalon ? OTKAZAO_SALON : OTKAZAO_KLIJENT;
         edit(tretman, tretman);
+    }
+
+    public ArrayList<ZakazaniTretman> updateStanjeTretmana(ArrayList<ZakazaniTretman> tretmani) {
+        return toArrayList(tretmani.stream().filter(tretman -> tretman.Vreme.isBefore(LocalDateTime.now()) && tretman.Stanje == ZAKAZAN).peek(tretman -> tretman.Stanje = IZVRSEN));
     }
 }

@@ -4,8 +4,8 @@ import rs.moma.managers.TipoviTretmana;
 
 import static rs.moma.DataTools.SP1;
 
-public class TipTretmana {
-    public final int    ID;
+public class TipTretmana implements ClassWithID {
+    public       int    ID;
     public final String Tip;
 
     public TipTretmana(int id, String tip, boolean newID) {
@@ -33,5 +33,15 @@ public class TipTretmana {
         if (this == tipTretmana) return true;
         if (!(tipTretmana instanceof TipTretmana)) return false;
         return ID == ((TipTretmana) tipTretmana).ID;
+    }
+
+    @Override
+    public void setID(int id) {
+        ID = id;
+    }
+
+    @Override
+    public int getID() {
+        return ID;
     }
 }

@@ -5,12 +5,14 @@ import rs.moma.DataTools.EPol;
 import rs.moma.DataTools.ETipZaposlenog;
 import rs.moma.managers.Tretmani;
 import rs.moma.managers.ZakazaniTretmani;
+import rs.moma.managers.Zaposleni;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.stream.IntStream;
 
 import static rs.moma.DataTools.SP1;
@@ -24,33 +26,33 @@ public class Zaposlen extends Korisnik {
     public final float          KoeficijentStaz;
     public final float          PlataOsnova;
     public final String         Bonus;
-    public final int[]          ZaduzeniTipoviTretmana;
+    public final int[]          ZaduzeniTretmani;
 
     public Zaposlen(int id, String ime, String prezime, EPol pol, String telefon, String adresa, String username,
                     String lozinka, ETipZaposlenog tipZaposlenog, ENivoSpreme sprema, float koeficijentSprema,
-                    int godineStaza, float koeficijentStaz, float plataOsnova, String bonus, int[] zaduzeniTipoviTretmana) {
+                    int godineStaza, float koeficijentStaz, float plataOsnova, String bonus, int[] zaduzeniTretmani) {
         super(id, ime, prezime, pol, telefon, adresa, username, lozinka);
-        TipZaposlenog          = tipZaposlenog;
-        Sprema                 = sprema;
-        KoeficijentSprema      = koeficijentSprema;
-        GodineStaza            = godineStaza;
-        KoeficijentStaz        = koeficijentStaz;
-        PlataOsnova            = plataOsnova;
-        Bonus                  = bonus;
-        ZaduzeniTipoviTretmana = zaduzeniTipoviTretmana;
+        TipZaposlenog     = tipZaposlenog;
+        Sprema            = sprema;
+        KoeficijentSprema = koeficijentSprema;
+        GodineStaza       = godineStaza;
+        KoeficijentStaz   = koeficijentStaz;
+        PlataOsnova       = plataOsnova;
+        Bonus             = bonus;
+        ZaduzeniTretmani  = zaduzeniTretmani;
     }
 
     public Zaposlen(String line) {
         super(String.join(SP1, Arrays.copyOfRange(line.split(SP1), 0, 8)));
         String[] data = line.split(SP1);
-        TipZaposlenog          = ETipZaposlenog.valueOf(data[8]);
-        Sprema                 = ENivoSpreme.valueOf(data[9]);
-        KoeficijentSprema      = Float.parseFloat(data[10]);
-        GodineStaza            = Integer.parseInt(data[11]);
-        KoeficijentStaz        = Float.parseFloat(data[12]);
-        PlataOsnova            = Float.parseFloat(data[13]);
-        Bonus                  = data[14];
-        ZaduzeniTipoviTretmana = Arrays.stream(Arrays.copyOfRange(data, 15, data.length)).mapToInt(Integer::parseInt).toArray();
+        TipZaposlenog     = ETipZaposlenog.valueOf(data[8]);
+        Sprema            = ENivoSpreme.valueOf(data[9]);
+        KoeficijentSprema = Float.parseFloat(data[10]);
+        GodineStaza       = Integer.parseInt(data[11]);
+        KoeficijentStaz   = Float.parseFloat(data[12]);
+        PlataOsnova       = Float.parseFloat(data[13]);
+        Bonus             = data[14];
+        ZaduzeniTretmani  = Arrays.stream(Arrays.copyOfRange(data, 15, data.length)).mapToInt(Integer::parseInt).toArray();
     }
 
     @Override
@@ -64,8 +66,8 @@ public class Zaposlen extends Korisnik {
                 KoeficijentStaz + SP1 +
                 PlataOsnova + SP1 +
                 Bonus + SP1);
-        if (ZaduzeniTipoviTretmana == null) str.append(-1);
-        else for (int tipID : ZaduzeniTipoviTretmana) str.append(tipID);
+        if (ZaduzeniTretmani == null) str.append(-1);
+        else for (int tipID : ZaduzeniTretmani) str.append(tipID);
         return str.toString();
     }
 
@@ -77,11 +79,11 @@ public class Zaposlen extends Korisnik {
     }
 
     // Specijalne get metode
-    public ArrayList<String> getTretmani() {
-        ArrayList<String> tretmani = new ArrayList<>();
-        for (int id : ZaduzeniTipoviTretmana)
-            for (Tretman tretman : new Tretmani().filter(id, null, -1, -1, -1, -1))
-                tretmani.add(tretman.Naziv);
+    public ArrayList<Tretman> getTretmani() {
+        ArrayList<Tretman> tretmani = new ArrayList<>();
+        for (Tretman tretman : new Tretmani().get())
+            if (Arrays.stream(ZaduzeniTretmani).anyMatch(tretmanID -> tretmanID == tretman.ID))
+                tretmani.add(tretman);
         return tretmani;
     }
 
@@ -89,17 +91,29 @@ public class Zaposlen extends Korisnik {
         return new ZakazaniTretmani().getKozmeticar(this, null, null, true);
     }
 
-    public ArrayList<Integer> getSlobodniTermini(LocalDate date) {
-        if (date.isBefore(LocalDate.now())) return new ArrayList<>();
+    public ArrayList<Integer> getSlobodniTermini(LocalDate date, ZakazaniTretman oldTretman, int potrebnoTrajanjeTermina) {
+        if (date.isBefore(LocalDate.now()))
+            return new ArrayList<>(oldTretman != null ? Collections.singletonList(oldTretman.Vreme.getHour()) : Collections.emptyList());
         Salon salon = new Salon();
         ArrayList<Integer> termini = toArrayList(IntStream.rangeClosed(date.isEqual(LocalDate.now()) ?
                                                                        Math.max(LocalDateTime.now().getHour() + 1, salon.PocetakRadnogVremena) : salon.PocetakRadnogVremena,
-                                                                       salon.KrajRadnogVremena - 1).boxed());
+                                                                       salon.KrajRadnogVremena - (int) Math.ceil(potrebnoTrajanjeTermina / 60.0)).boxed());
         ArrayList<ZakazaniTretman> tretmani = new ZakazaniTretmani().getKozmeticar(this, date.atStartOfDay(), date.atTime(LocalTime.MAX), true);
-        for (ZakazaniTretman tretman : tretmani)
+        if (oldTretman != null) tretmani.remove(oldTretman);
+        for (ZakazaniTretman tretman : tretmani) {
+            for (int i = tretman.Vreme.getHour() - 1; i >= salon.PocetakRadnogVremena && i > tretman.Vreme.getHour() - (int) Math.ceil(potrebnoTrajanjeTermina / 60.0); i--)
+                 termini.remove(new Integer(i));
             for (int i = 0; i < tretman.Trajanje; i += 60)
                  termini.remove(new Integer(tretman.Vreme.getHour() + i / 60));
+        }
         return termini;
+    }
+
+    public String getDisplayName() {
+        if (new Zaposleni().get().stream().filter(zaposlen -> (zaposlen.Ime + " " + zaposlen.Prezime).equals(Ime + " " + Prezime)).count() > 1)
+            return Ime + " " + Prezime + ", " + Username;
+        else
+            return Ime + " " + Prezime;
     }
 
     public int getBrojTretmana(LocalDateTime from, LocalDateTime to) {

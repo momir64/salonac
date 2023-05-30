@@ -8,6 +8,7 @@ import rs.moma.managers.Zaposleni;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class KlijentPage extends KalendarForm {
     private JScrollPane kalendarPane;
@@ -19,11 +20,11 @@ public class KlijentPage extends KalendarForm {
     private JButton     leftBtn;
     private JLabel      karticaLbl;
     private JLabel      ukupnoLbl;
-    private JButton     dodajBtn;
-    private Klijent     klijent;
+    private       JButton dodajBtn;
+    private final Klijent klijent;
 
     public KlijentPage(Klijent klijent) {
-        super(klijent::getSviZakazaniTretmani, true);
+        super(true);
         this.klijent = klijent;
 
         setSize(1000, 988);
@@ -33,25 +34,29 @@ public class KlijentPage extends KalendarForm {
         setTitle(klijent.Ime + " " + klijent.Prezime);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        super.setup(kalendarPane, tretmaniTbl, kalendarTbl, mesecLbl, rightBtn, leftBtn, true, false);
-        Update();
+        super.setup(kalendarPane, tretmaniTbl, 200, kalendarTbl, mesecLbl, rightBtn, leftBtn, true, false);
+        updatePage();
 
-        dodajBtn.addActionListener(e -> new KlijentZakazivanjeForm(this, klijent, cell2date(selectedRow, selectedColumn), this::Update));
+        dodajBtn.addActionListener(e -> new KlijentZakazivanjeForm(this, klijent, cellToDate(selectedRow, selectedColumn), this::updatePage));
 
         setVisible(true);
     }
 
-    public void Update() {
+    public void updatePage() {
         karticaLbl.setText((klijent.getKarticaLojalnosti() ? "I" : "Ne ") + "spunjavate uslov za karticu lojalnosti.");
         ukupnoLbl.setText(klijent.getUkupnoPlatio() + " RSD");
         fillTretmani();
     }
 
-    protected String[][] tretman2list(ZakazaniTretman tretman) {
+    protected ArrayList<ZakazaniTretman> getTretmani() {
+        return klijent.getSviZakazaniTretmani();
+    }
+
+    protected String[][] tretmanToList(ZakazaniTretman tretman) {
         Zaposlen kozmeticar = new Zaposleni().get(tretman.KozmeticarID);
         return new String[][]{{}, {"Vreme: ", tretman.Vreme.getHour() + "h"},
                               {"Stanje: ", tretman.Stanje.toString().replace("_", " ")},
-                              {"Kozmetičar: ", kozmeticar.Ime + " " + kozmeticar.Prezime},
+                              {"Kozmetičar: ", kozmeticar.getDisplayName()},
                               {"Tretman: ", new Tretmani().get(tretman.TretmanID).Naziv},
                               {"Trajanje: ", tretman.Trajanje + " minuta"},
                               {"Plaćeno: ", tretman.getPlaceniIznos() + " RSD"}};

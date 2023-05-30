@@ -1,8 +1,8 @@
 package rs.moma.gui;
 
 public class KeyValue {
-    Object key;
-    Object value;
+    private final Object key;
+    private final Object value;
 
     public KeyValue(Object key, Object value) {
         this.key   = key;
@@ -13,16 +13,8 @@ public class KeyValue {
         return key;
     }
 
-    public void setKey(Object key) {
-        this.key = key;
-    }
-
     public Object getValue() {
         return value;
-    }
-
-    public void setValue(Object value) {
-        this.value = value;
     }
 
     @Override

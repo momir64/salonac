@@ -67,7 +67,7 @@ public class Zaposleni {
 
     // Specijalne get metode
     public ArrayList<Zaposlen> getRadi(Tretman tretman) {
-        return toArrayList(get().stream().filter(kozmeticar -> Arrays.stream(kozmeticar.ZaduzeniTipoviTretmana).anyMatch(tmp -> tmp == tretman.ID)));
+        return toArrayList(get().stream().filter(kozmeticar -> Arrays.stream(kozmeticar.ZaduzeniTretmani).anyMatch(tretmanID -> tretmanID == tretman.ID)));
     }
 
     // Prijava

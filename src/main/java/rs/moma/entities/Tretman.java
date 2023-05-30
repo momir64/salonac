@@ -4,8 +4,8 @@ import rs.moma.managers.Tretmani;
 
 import static rs.moma.DataTools.SP1;
 
-public class Tretman {
-    public final int    ID;
+public class Tretman implements ClassWithID {
+    public       int    ID;
     public final int    TipID;
     public final String Naziv;
     public final float  Cena;
@@ -34,7 +34,7 @@ public class Tretman {
 
     @Override
     public String toString() {
-        return Integer.toString(ID) + SP1 +
+        return ID + SP1 +
                TipID + SP1 +
                Naziv + SP1 +
                Cena + SP1 +
@@ -46,5 +46,15 @@ public class Tretman {
         if (this == tretman) return true;
         if (!(tretman instanceof Tretman)) return false;
         return ID == ((Tretman) tretman).ID;
+    }
+
+    @Override
+    public void setID(int id) {
+        ID = id;
+    }
+
+    @Override
+    public int getID() {
+        return ID;
     }
 }

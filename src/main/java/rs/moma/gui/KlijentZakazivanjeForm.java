@@ -7,17 +7,17 @@ import rs.moma.managers.ZakazaniTretmani;
 import rs.moma.managers.Zaposleni;
 
 import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 
-public class KlijentZakazivanjeForm extends JDialog {
-    private JTextField          minTrajanjeTxt;
+import static rs.moma.DataTools.*;
+
+public class KlijentZakazivanjeForm extends ZakazivanjeForm {
+    private JTextField               minTrajanjeTxt;
     private JTextField               maxTrajanjeTxt;
     private JComboBox<ComboKeyValue> kozmeticarBox;
     private JTextField               minCenaTxt;
@@ -36,102 +36,47 @@ public class KlijentZakazivanjeForm extends JDialog {
         setLocationRelativeTo(parent);
         setMinimumSize(new Dimension(510, 550));
 
-        ArrayList<TipTretmana> tipovi = new TipoviTretmana().get();
+        ArrayList<Zaposlen>    zaposleni = new Zaposleni().get();
+        ArrayList<TipTretmana> tipovi    = new TipoviTretmana().get();
+        tipovi.removeIf(tip -> zaposleni.stream().noneMatch(zaposlen -> Arrays.stream(zaposlen.ZaduzeniTretmani).anyMatch(tretmanID -> tretmanID != -1 && new Tretmani().get(tretmanID).TipID == tip.ID)));
         tipovi.add(new TipTretmana(-1, ""));
         tipovi.sort(Comparator.comparing(tip -> tip.Tip));
         tipBox.setModel(new DefaultComboBoxModel(tipovi.stream().map(tip -> new ComboKeyValue(tip.Tip, tip.ID)).toArray()));
-        tretmanBox.addActionListener(e -> fillKozmeticari());
-        kozmeticarBox.addActionListener(e -> fillTermini());
-        tipBox.addActionListener(e -> fillTretmani());
+        tretmanBox.addActionListener(e -> fillKozmeticariBox(tretmanBox, kozmeticarBox, vremeBox, getDatum(datumTxt), null));
+        kozmeticarBox.addActionListener(e -> fillTerminiBox(kozmeticarBox, tretmanBox, vremeBox, getDatum(datumTxt), null));
+        addOnChangeDo(datumTxt, () -> fillTerminiBox(kozmeticarBox, tretmanBox, vremeBox, getDatum(datumTxt), null));
+        tipBox.addActionListener(e -> fillTretmaniBox());
         if (date == null) date = LocalDate.now();
         datumTxt.setText(date.format(DateTimeFormatter.ofPattern("dd.MM.yyyy.")));
+        addBtn.addActionListener(e -> zakaziTermin(klijent, update));
         datumTxt.addKeyListener(new DateKeyAdapter(this, datumTxt));
         minTrajanjeTxt.addKeyListener(new NumericKeyAdapter(this));
         maxTrajanjeTxt.addKeyListener(new NumericKeyAdapter(this));
         minCenaTxt.addKeyListener(new NumericKeyAdapter(this));
         maxCenaTxt.addKeyListener(new NumericKeyAdapter(this));
-        addBtn.addActionListener(e -> zakaziTermin(klijent, update));
-        addOnChangeFill(minTrajanjeTxt, this::fillTretmani);
-        addOnChangeFill(maxTrajanjeTxt, this::fillTretmani);
-        addOnChangeFill(minCenaTxt, this::fillTretmani);
-        addOnChangeFill(maxCenaTxt, this::fillTretmani);
-        addOnChangeFill(datumTxt, this::fillTermini);
-        fillTretmani();
+        addOnChangeDo(minTrajanjeTxt, this::fillTretmaniBox);
+        addOnChangeDo(maxTrajanjeTxt, this::fillTretmaniBox);
+        addOnChangeDo(minCenaTxt, this::fillTretmaniBox);
+        addOnChangeDo(maxCenaTxt, this::fillTretmaniBox);
+        fillTretmaniBox();
 
         setVisible(true);
     }
 
     public void zakaziTermin(Klijent klijent, Runnable update) {
         if (vremeBox.getItemCount() == 0) return;
-        new ZakazaniTretmani().add(new ZakazaniTretman((Tretman) ((ComboKeyValue) tretmanBox.getSelectedItem()).getValue(),
-                                                       getTermin(), klijent, (Zaposlen) ((ComboKeyValue) kozmeticarBox.getSelectedItem()).getValue()));
-        fillTermini();
+        new ZakazaniTretmani().add(new ZakazaniTretman((Tretman) getSelectedValue(tretmanBox),
+                                                       getTermin(datumTxt, vremeBox), klijent, (Zaposlen) getSelectedValue(kozmeticarBox)));
+        fillTerminiBox(kozmeticarBox, tretmanBox, vremeBox, getDatum(datumTxt), null);
         update.run();
     }
 
-    public void addOnChangeFill(JTextField txt, Runnable what) {
-        txt.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                what.run();
-            }
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                what.run();
-            }
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                what.run();
-            }
-        });
-    }
-
-    public int txt2int(JTextField txt) {
-        return txt.getText().trim().equals("") ? -1 : Integer.parseInt(txt.getText());
-    }
-
-    public void fillTretmani() {
-        ArrayList<Tretman> tretmani = new Tretmani().filter((int) ((ComboKeyValue) tipBox.getSelectedItem()).getValue(), null,
-                                                            txt2int(minTrajanjeTxt), txt2int(maxTrajanjeTxt), txt2int(minCenaTxt), txt2int(maxCenaTxt));
-        tretmani.sort(Comparator.comparing(tip -> tip.Naziv));
-        tretmanBox.setModel(new DefaultComboBoxModel(tretmani.stream().map(t -> new ComboKeyValue(t.Naziv, t)).toArray()));
-        fillKozmeticari();
-    }
-
-    public void fillKozmeticari() {
-        if (tretmanBox.getItemCount() == 0)
-            kozmeticarBox.setModel(new DefaultComboBoxModel<>());
-        else {
-            ArrayList<Zaposlen> kozmeticari = new Zaposleni().getRadi((Tretman) ((ComboKeyValue) tretmanBox.getSelectedItem()).getValue());
-            kozmeticari.sort(Comparator.comparing(tip -> tip.Ime));
-            kozmeticarBox.setModel(new DefaultComboBoxModel(kozmeticari.stream().map(k -> new ComboKeyValue(k.Ime + " " + k.Prezime, k)).toArray()));
-        }
-        fillTermini();
-    }
-
-    public LocalDate str2date(String datum) {
-        String[] data = datum.split("\\.");
-        if (datum.contains("_") || datum.trim().equals("") || data.length < 3) return null;
-        try {
-            return LocalDate.of(Integer.parseInt(data[2]), Integer.parseInt(data[1]), Integer.parseInt(data[0]));
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
-    public LocalDate getDatum() {
-        return str2date(datumTxt.getText());
-    }
-
-    public LocalDateTime getTermin() {
-        return str2date(datumTxt.getText()).atTime((Integer) ((ComboKeyValue) vremeBox.getSelectedItem()).getValue(), 0);
-    }
-
-    public void fillTermini() {
-        if (getDatum() == null || kozmeticarBox.getItemCount() == 0)
-            vremeBox.setModel(new DefaultComboBoxModel<>());
-        else
-            vremeBox.setModel(new DefaultComboBoxModel(((Zaposlen) ((ComboKeyValue) kozmeticarBox.getSelectedItem()).getValue())
-                                                               .getSlobodniTermini(getDatum()).stream().map(i -> new ComboKeyValue(i + "h", i)).toArray()));
+    public void fillTretmaniBox() {
+        ComboKeyValue tretmanOld = (ComboKeyValue) tretmanBox.getSelectedItem();
+        ArrayList<Tretman> tretmani = new Tretmani().filter((int) getSelectedValue(tipBox), null,
+                                                            txtToInt(minTrajanjeTxt), txtToInt(maxTrajanjeTxt), txtToInt(minCenaTxt), txtToInt(maxCenaTxt));
+        fillTretmaniBox(tretmani, tretmanBox, kozmeticarBox, vremeBox, getDatum(datumTxt), null);
+        if (tretmanOld != null && tretmani.stream().anyMatch(tretman -> tretman.ID == ((Tretman) tretmanOld.getValue()).ID))
+            tretmanBox.setSelectedItem(tretmanOld);
     }
 }
