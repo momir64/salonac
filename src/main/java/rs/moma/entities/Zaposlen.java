@@ -128,23 +128,27 @@ public class Zaposlen extends Korisnik {
         return (float) new ZakazaniTretmani().getKozmeticar(this, LocalDateTime.now().minusDays(days), null, false).stream().mapToDouble(ZakazaniTretman::getPlaceniIznos).sum();
     }
 
-    public int getBrojTretmanaMesec() {
-        return new ZakazaniTretmani().getKozmeticar(this, LocalDateTime.now().minusMonths(1), null, false).size();
+    public int getBrojTretmanaMesec(int months) {
+        return new ZakazaniTretmani().getKozmeticar(this, LocalDateTime.now().minusMonths(months), null, false).size();
     }
 
-    public float getVrednostTretmanaMesec() {
-        return (float) new ZakazaniTretmani().getKozmeticar(this, LocalDateTime.now().minusMonths(1), null, false).stream().mapToDouble(ZakazaniTretman::getPlaceniIznos).sum();
+    public float getVrednostTretmanaMesec(int months) {
+        return (float) new ZakazaniTretmani().getKozmeticar(this, LocalDateTime.now().minusMonths(months), null, false).stream().mapToDouble(ZakazaniTretman::getPlaceniIznos).sum();
     }
 
     private float calcBonus() {
         float  bonus     = 0;
         String bonusRule = new Salon().Bonus;
         if (bonusRule != null) for (String rule : bonusRule.split("\\+")) {
-            String[] data = rule.split("-");
-            if (data[0].equalsIgnoreCase("c"))
-                bonus += getBrojTretmanaMesec() * Float.parseFloat(data[1]);
-            else if (data[0].equalsIgnoreCase("v"))
-                bonus += getVrednostTretmanaMesec() * Float.parseFloat(data[1]);
+            String[] data       = rule.split("-");
+            float    bonusParam = 0;
+            if (data[0].equalsIgnoreCase("m"))
+                bonusParam = data[2].equalsIgnoreCase("c") ? getBrojTretmanaMesec(Integer.parseInt(data[1])) : data[2].equalsIgnoreCase("v") ? getVrednostTretmanaMesec(Integer.parseInt(data[1])) : 0;
+            else if (data[0].equalsIgnoreCase("w"))
+                bonusParam = data[2].equalsIgnoreCase("c") ? getBrojTretmana(7 * Integer.parseInt(data[1])) : data[2].equalsIgnoreCase("v") ? getVrednostTretmana(7 * Integer.parseInt(data[1])) : 0;
+            else if (data[0].equalsIgnoreCase("d"))
+                bonusParam = data[2].equalsIgnoreCase("c") ? getBrojTretmana(Integer.parseInt(data[1])) : data[2].equalsIgnoreCase("v") ? getVrednostTretmana(Integer.parseInt(data[1])) : 0;
+            bonus += bonusParam * Float.parseFloat(data[3]);
         }
         return bonus;
     }
