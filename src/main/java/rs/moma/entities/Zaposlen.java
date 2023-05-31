@@ -25,12 +25,11 @@ public class Zaposlen extends Korisnik {
     public final int            GodineStaza;
     public final float          KoeficijentStaz;
     public final float          PlataOsnova;
-    public final String         Bonus;
     public final int[]          ZaduzeniTretmani;
 
     public Zaposlen(int id, String ime, String prezime, EPol pol, String telefon, String adresa, String username,
                     String lozinka, ETipZaposlenog tipZaposlenog, ENivoSpreme sprema, float koeficijentSprema,
-                    int godineStaza, float koeficijentStaz, float plataOsnova, String bonus, int[] zaduzeniTretmani) {
+                    int godineStaza, float koeficijentStaz, float plataOsnova, int[] zaduzeniTretmani) {
         super(id, ime, prezime, pol, telefon, adresa, username, lozinka);
         TipZaposlenog     = tipZaposlenog;
         Sprema            = sprema;
@@ -38,7 +37,6 @@ public class Zaposlen extends Korisnik {
         GodineStaza       = godineStaza;
         KoeficijentStaz   = koeficijentStaz;
         PlataOsnova       = plataOsnova;
-        Bonus             = bonus;
         ZaduzeniTretmani  = zaduzeniTretmani;
     }
 
@@ -51,8 +49,7 @@ public class Zaposlen extends Korisnik {
         GodineStaza       = Integer.parseInt(data[11]);
         KoeficijentStaz   = Float.parseFloat(data[12]);
         PlataOsnova       = Float.parseFloat(data[13]);
-        Bonus             = data[14];
-        ZaduzeniTretmani  = Arrays.stream(Arrays.copyOfRange(data, 15, data.length)).mapToInt(Integer::parseInt).toArray();
+        ZaduzeniTretmani  = Arrays.stream(Arrays.copyOfRange(data, 14, data.length)).mapToInt(Integer::parseInt).toArray();
     }
 
     @Override
@@ -64,8 +61,7 @@ public class Zaposlen extends Korisnik {
                 KoeficijentSprema + SP1 +
                 GodineStaza + SP1 +
                 KoeficijentStaz + SP1 +
-                PlataOsnova + SP1 +
-                Bonus + SP1);
+                PlataOsnova + SP1);
         if (ZaduzeniTretmani == null) str.append(-1);
         else for (int tipID : ZaduzeniTretmani) str.append(tipID);
         return str.toString();
@@ -141,8 +137,9 @@ public class Zaposlen extends Korisnik {
     }
 
     private float calcBonus() {
-        float bonus = 0;
-        if (Bonus != null) for (String rule : Bonus.split("\\+")) {
+        float  bonus     = 0;
+        String bonusRule = new Salon().Bonus;
+        if (bonusRule != null) for (String rule : bonusRule.split("\\+")) {
             String[] data = rule.split("-");
             if (data[0].equalsIgnoreCase("c"))
                 bonus += getBrojTretmanaMesec() * Float.parseFloat(data[1]);

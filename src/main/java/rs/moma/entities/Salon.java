@@ -8,16 +8,18 @@ import static rs.moma.DataTools.SP1;
 import static rs.moma.DataTools.fileSalon;
 
 public class Salon {
-    public final String   Naziv;
-    public final int      PocetakRadnogVremena;
-    public final int      KrajRadnogVremena;
-    public final float    MinIznosLojalnosti;
+    public final String Naziv;
+    public final int    PocetakRadnogVremena;
+    public final int    KrajRadnogVremena;
+    public final float  MinIznosLojalnosti;
+    public final String Bonus;
 
-    public Salon(String naziv, int pocetakRadnogVremena, int krajRadnogVremena, float minIznosLojalnosti) {
+    public Salon(String naziv, int pocetakRadnogVremena, int krajRadnogVremena, float minIznosLojalnosti, String bonus) {
         Naziv                = naziv;
         PocetakRadnogVremena = pocetakRadnogVremena;
         KrajRadnogVremena    = krajRadnogVremena;
         MinIznosLojalnosti   = minIznosLojalnosti;
+        Bonus                = bonus;
         save();
     }
 
@@ -32,6 +34,7 @@ public class Salon {
         PocetakRadnogVremena = Integer.parseInt(data[1]);
         KrajRadnogVremena    = Integer.parseInt(data[2]);
         MinIznosLojalnosti   = Float.parseFloat(data[3]);
+        Bonus                = data[4];
     }
 
     private void save() {
