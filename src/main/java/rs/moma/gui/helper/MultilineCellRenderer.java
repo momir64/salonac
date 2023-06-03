@@ -1,6 +1,7 @@
-package rs.moma.gui;
+package rs.moma.gui.helper;
 
 import rs.moma.entities.ZakazaniTretman;
+import rs.moma.helper.KeyValue;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -61,8 +62,8 @@ public class MultilineCellRenderer extends AbstractCellEditor implements TableCe
             p2.setBackground(new Color(70, 73, 75));
 
             table.setSelectionModel(new NoSelectionModel());
-            deleteBtn.addActionListener(e -> delete.accept((ZakazaniTretman) (data.getValue())));
-            editBtn.addActionListener(e -> edit.accept((ZakazaniTretman) (data.getValue())));
+            deleteBtn.addActionListener(e -> delete.accept((ZakazaniTretman) data.Value));
+            editBtn.addActionListener(e -> edit.accept((ZakazaniTretman) data.Value));
             deleteBtn.setFocusPainted(false);
             editBtn.setFocusPainted(false);
 
@@ -78,7 +79,7 @@ public class MultilineCellRenderer extends AbstractCellEditor implements TableCe
         }
 
         public void setData(KeyValue data) {
-            table.setModel(new DefaultTableModel((String[][]) data.getKey(), new String[]{"", ""}));
+            table.setModel(new DefaultTableModel((String[][]) data.Key, new String[]{"", ""}));
             DefaultTableCellRenderer renderRight = new DefaultTableCellRenderer();
             renderRight.setHorizontalAlignment(SwingConstants.RIGHT);
             table.getColumnModel().getColumn(0).setCellRenderer(renderRight);

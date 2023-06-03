@@ -1,4 +1,4 @@
-package rs.moma.entities;
+package rs.moma.helper;
 
 public interface ClassWithID {
     void setID(int id);

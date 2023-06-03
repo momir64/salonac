@@ -1,8 +1,9 @@
 package rs.moma.entities;
 
+import rs.moma.helper.ClassWithID;
 import rs.moma.managers.TipoviTretmana;
 
-import static rs.moma.DataTools.SP1;
+import static rs.moma.helper.DataTools.SP1;
 
 public class TipTretmana implements ClassWithID {
     public       int    ID;

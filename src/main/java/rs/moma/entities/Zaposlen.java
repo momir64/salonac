@@ -1,8 +1,9 @@
 package rs.moma.entities;
 
-import rs.moma.DataTools.ENivoSpreme;
-import rs.moma.DataTools.EPol;
-import rs.moma.DataTools.ETipZaposlenog;
+import rs.moma.helper.DataTools.ENivoSpreme;
+import rs.moma.helper.DataTools.EPol;
+import rs.moma.helper.DataTools.ETipZaposlenog;
+import rs.moma.helper.Korisnik;
 import rs.moma.managers.Tretmani;
 import rs.moma.managers.ZakazaniTretmani;
 import rs.moma.managers.Zaposleni;
@@ -15,8 +16,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.stream.IntStream;
 
-import static rs.moma.DataTools.SP1;
-import static rs.moma.DataTools.toArrayList;
+import static rs.moma.helper.DataTools.SP1;
+import static rs.moma.helper.DataTools.toArrayList;
 
 public class Zaposlen extends Korisnik {
     public final ETipZaposlenog TipZaposlenog;

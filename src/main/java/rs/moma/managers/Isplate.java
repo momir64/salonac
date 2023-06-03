@@ -1,19 +1,20 @@
 package rs.moma.managers;
 
-import rs.moma.entities.RadnikPlata;
 import rs.moma.entities.Isplata;
-import rs.moma.DataTools;
+import rs.moma.helper.DataTools;
+import rs.moma.helper.NazivVrednostVreme;
+import rs.moma.helper.RadnikPlata;
 
 import java.nio.charset.StandardCharsets;
-import java.time.LocalDateTime;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Optional;
 import java.util.List;
+import java.util.Optional;
 
-import static rs.moma.DataTools.fileIsplate;
-import static rs.moma.DataTools.toArrayList;
+import static rs.moma.helper.DataTools.fileIsplate;
+import static rs.moma.helper.DataTools.toArrayList;
 
 public class Isplate {
     private final String poruka = "isplata";
@@ -41,6 +42,20 @@ public class Isplate {
 
     public void edit(Isplata oldIsplata, Isplata newIsplata) {
         DataTools.edit(get(), fileIsplate, poruka, oldIsplata, newIsplata);
+    }
+
+    // Specijalne get metode
+    public ArrayList<NazivVrednostVreme> getRashodi(LocalDateTime from, LocalDateTime to) {
+        ArrayList<Isplata>            isplate = toArrayList(get().stream().filter(isplata -> (from == null || isplata.Mesec.isAfter(from)) && (to == null || isplata.Mesec.isBefore(to))));
+        ArrayList<NazivVrednostVreme> rashodi = new ArrayList<>();
+        for (Isplata isplata : isplate)
+            for (RadnikPlata radnikPlata : isplata.Plate)
+                rashodi.add(new NazivVrednostVreme("Isplata " + new Zaposleni().get(radnikPlata.RadnikID).getDisplayName(), -radnikPlata.Plata, isplata.Mesec));
+        return rashodi;
+    }
+
+    public double getRashodiVrednost(LocalDateTime from, LocalDateTime to) {
+        return getRashodi(from, to).stream().mapToDouble(nvv -> -nvv.Vrednost).sum();
     }
 
     // Isplate

@@ -1,6 +1,6 @@
 package rs.moma.managers;
 
-import rs.moma.DataTools;
+import rs.moma.helper.DataTools;
 import rs.moma.entities.Klijent;
 
 import java.nio.charset.StandardCharsets;
@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static rs.moma.DataTools.fileKlijenti;
-import static rs.moma.DataTools.toArrayList;
+import static rs.moma.helper.DataTools.fileKlijenti;
+import static rs.moma.helper.DataTools.toArrayList;
 
 public class Klijenti {
     private final String poruka = "klijent";

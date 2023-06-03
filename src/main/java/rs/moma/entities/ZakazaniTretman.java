@@ -1,23 +1,24 @@
 package rs.moma.entities;
 
-import rs.moma.DataTools.EStanjeTermina;
+import rs.moma.helper.DataTools.EStanjeTermina;
+import rs.moma.helper.ClassWithID;
 import rs.moma.managers.ZakazaniTretmani;
 
 import java.time.LocalDateTime;
 
-import static rs.moma.DataTools.EStanjeTermina.*;
-import static rs.moma.DataTools.SP1;
+import static rs.moma.helper.DataTools.EStanjeTermina.*;
+import static rs.moma.helper.DataTools.SP1;
 
 public class ZakazaniTretman implements ClassWithID {
-    public       int            ID;
-    public final int            TretmanID;
-    public final float          Cena;
-    public final int            Trajanje;
-    public final LocalDateTime  Vreme;
-    public       EStanjeTermina Stanje;
-    public final int            KlijentID;
-    public final int            KozmeticarID;
-    public final boolean        KarticaLojalnosti;
+    public        int            ID;
+    public final  int            TretmanID;
+    public final  int            Trajanje;
+    public final  LocalDateTime  Vreme;
+    public        EStanjeTermina Stanje;
+    public final  int            KlijentID;
+    public final  int            KozmeticarID;
+    public final  boolean        KarticaLojalnosti;
+    private final float          Cena;
 
     public ZakazaniTretman(int id, int tretmanID, float cena, int trajanje, LocalDateTime vreme, EStanjeTermina stanje, int klijentID, int kozmeticarID, boolean karticaLojalnosti) {
         ID                = id;

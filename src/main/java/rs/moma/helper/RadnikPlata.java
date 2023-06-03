@@ -1,6 +1,6 @@
-package rs.moma.entities;
+package rs.moma.helper;
 
-import static rs.moma.DataTools.SP2;
+import static rs.moma.helper.DataTools.SP2;
 
 public class RadnikPlata {
     public final int   RadnikID;

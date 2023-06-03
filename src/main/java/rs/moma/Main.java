@@ -3,7 +3,6 @@ package rs.moma;
 import com.formdev.flatlaf.FlatDarculaLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import rs.moma.gui.MenadzerPage;
-import rs.moma.gui.RecepcionerPage;
 import rs.moma.managers.Zaposleni;
 
 public class Main {

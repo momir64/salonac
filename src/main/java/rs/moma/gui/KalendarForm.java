@@ -1,6 +1,10 @@
 package rs.moma.gui;
 
 import rs.moma.entities.ZakazaniTretman;
+import rs.moma.gui.helper.DisabledRenderer;
+import rs.moma.gui.helper.MultilineCellRenderer;
+import rs.moma.gui.helper.NoSelectionModel;
+import rs.moma.helper.KeyValue;
 import rs.moma.managers.ZakazaniTretmani;
 
 import javax.swing.*;
@@ -144,7 +148,7 @@ public abstract class KalendarForm extends JFrame {
 
             public TableCellRenderer getCellRenderer(int row, int column) {
                 if (getValueAt(row, column) == null || !isCellValid(row, column))
-                    return new DisabledDateRenderer();
+                    return new DisabledRenderer();
                 return super.getCellRenderer(row, column);
             }
         };

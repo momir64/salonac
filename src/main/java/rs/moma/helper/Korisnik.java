@@ -1,8 +1,6 @@
-package rs.moma.entities;
+package rs.moma.helper;
 
-import rs.moma.DataTools;
-
-import static rs.moma.DataTools.SP1;
+import static rs.moma.helper.DataTools.SP1;
 
 public class Korisnik implements ClassWithID {
     public       int            ID;

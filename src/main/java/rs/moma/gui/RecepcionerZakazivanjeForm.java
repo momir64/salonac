@@ -1,6 +1,9 @@
 package rs.moma.gui;
 
 import rs.moma.entities.*;
+import rs.moma.gui.helper.NameValue;
+import rs.moma.gui.helper.DateKeyAdapter;
+import rs.moma.helper.ClassWithID;
 import rs.moma.managers.Klijenti;
 import rs.moma.managers.Tretmani;
 import rs.moma.managers.ZakazaniTretmani;
@@ -14,16 +17,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 
-import static rs.moma.DataTools.*;
-import static rs.moma.DataTools.EStanjeTermina.*;
+import static rs.moma.helper.DataTools.*;
+import static rs.moma.helper.DataTools.EStanjeTermina.*;
 
 public class RecepcionerZakazivanjeForm extends ZakazivanjeForm {
-    private JComboBox<ComboKeyValue> kozmeticarBox;
-    private JComboBox<ComboKeyValue> klijentBox;
-    private JComboBox<ComboKeyValue> tretmanBox;
-    private JComboBox<ComboKeyValue> stanjeBox;
-    private JComboBox<ComboKeyValue> vremeBox;
-    private JPanel                   mainPanel;
+    private JComboBox<NameValue> kozmeticarBox;
+    private JComboBox<NameValue> klijentBox;
+    private JComboBox<NameValue> tretmanBox;
+    private JComboBox<NameValue> stanjeBox;
+    private JComboBox<NameValue> vremeBox;
+    private JPanel               mainPanel;
     private JTextField               datumTxt;
     private JButton                  addBtn;
     private       JLabel          stanjeLbl;
@@ -49,8 +52,8 @@ public class RecepcionerZakazivanjeForm extends ZakazivanjeForm {
             else
                 stanja.addAll(Arrays.asList(IZVRSEN, NIJE_SE_POJAVIO));
             stanja.sort(Comparator.comparing(Enum::toString));
-            stanjeBox.setModel(new DefaultComboBoxModel(stanja.stream().map(stanje -> new ComboKeyValue(stanje.toString().replace("_", " "), stanje)).toArray()));
-            stanjeBox.setSelectedItem(new ComboKeyValue("", tretman.Stanje));
+            stanjeBox.setModel(new DefaultComboBoxModel(stanja.stream().map(stanje -> new NameValue(stanje.toString().replace("_", " "), stanje)).toArray()));
+            stanjeBox.setSelectedItem(new NameValue("", tretman.Stanje));
         }
 
         tretmanBox.addActionListener(e -> fillKozmeticariBox(tretmanBox, kozmeticarBox, vremeBox, getDatum(datumTxt), tretman));
@@ -61,7 +64,7 @@ public class RecepcionerZakazivanjeForm extends ZakazivanjeForm {
             if (tretman == null) zakaziTermin(update);
             else editTermin(tretman, update);
         });
-        datumTxt.addKeyListener(new DateKeyAdapter(this, datumTxt));
+        datumTxt.addKeyListener(new DateKeyAdapter());
         addOnChangeDo(datumTxt, () -> fillTerminiBox(kozmeticarBox, tretmanBox, vremeBox, getDatum(datumTxt), tretman));
         fillKlijentiBox();
         fillTretmaniBox();
@@ -93,10 +96,10 @@ public class RecepcionerZakazivanjeForm extends ZakazivanjeForm {
         selectBoxOption(tretmanBox, tretman.TretmanID);
         selectBoxOption(klijentBox, tretman.KlijentID);
         selectBoxOption(kozmeticarBox, tretman.KozmeticarID);
-        vremeBox.setSelectedItem(new ComboKeyValue("", tretman.Vreme.getHour()));
+        vremeBox.setSelectedItem(new NameValue("", tretman.Vreme.getHour()));
     }
 
-    public <T extends ClassWithID> void selectBoxOption(JComboBox<ComboKeyValue> box, int id) {
+    public <T extends ClassWithID> void selectBoxOption(JComboBox<NameValue> box, int id) {
         for (int i = 0; i < box.getItemCount(); i++)
             if (((T) box.getItemAt(i).getValue()).getID() == id) {
                 box.setSelectedIndex(i);
@@ -107,7 +110,7 @@ public class RecepcionerZakazivanjeForm extends ZakazivanjeForm {
     public void fillKlijentiBox() {
         ArrayList<Klijent> klijenti = new Klijenti().get();
         klijenti.sort(Comparator.comparing(tip -> tip.Ime));
-        klijentBox.setModel(new DefaultComboBoxModel(klijenti.stream().map(k -> new ComboKeyValue(k.getDisplayName(), k)).toArray()));
+        klijentBox.setModel(new DefaultComboBoxModel(klijenti.stream().map(k -> new NameValue(k.getDisplayName(), k)).toArray()));
     }
 
     public void fillTretmaniBox() {

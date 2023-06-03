@@ -1,7 +1,8 @@
 package rs.moma.entities;
 
-import rs.moma.DataTools;
+import rs.moma.helper.DataTools;
 import rs.moma.managers.Klijenti;
+import rs.moma.helper.Korisnik;
 import rs.moma.managers.ZakazaniTretmani;
 
 import java.util.ArrayList;

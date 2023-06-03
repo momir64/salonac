@@ -1,20 +1,29 @@
 package rs.moma.managers;
 
-import rs.moma.DataTools;
-import rs.moma.entities.*;
+import rs.moma.entities.Klijent;
+import rs.moma.entities.Tretman;
+import rs.moma.entities.ZakazaniTretman;
+import rs.moma.entities.Zaposlen;
+import rs.moma.helper.BrojVrednost;
+import rs.moma.helper.DataTools.*;
+import rs.moma.helper.DataTools;
+import rs.moma.helper.KeyValue;
+import rs.moma.helper.NazivVrednostVreme;
 
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
-import static rs.moma.DataTools.EStanjeTermina.*;
-import static rs.moma.DataTools.fileZakazaniTretmani;
-import static rs.moma.DataTools.toArrayList;
+import static rs.moma.helper.DataTools.EStanjeTermina.*;
+import static rs.moma.helper.DataTools.ETipZaposlenog.KOZMETICAR;
+import static rs.moma.helper.DataTools.fileZakazaniTretmani;
+import static rs.moma.helper.DataTools.toArrayList;
 
 public class ZakazaniTretmani {
     private final String poruka = "zakazani tretman";
@@ -81,6 +90,48 @@ public class ZakazaniTretmani {
     }
 
     // Specijalne get metode
+    public ArrayList<NazivVrednostVreme> getPrihodi(LocalDateTime from, LocalDateTime to) {
+        return toArrayList(get().stream().filter(tretman -> (from == null || tretman.Vreme.isAfter(from)) && (to == null || tretman.Vreme.isBefore(to)))
+                                .map(tretman -> new NazivVrednostVreme(new Tretmani().get(tretman.TretmanID).Naziv, tretman.getPlaceniIznos(), tretman.Vreme)));
+    }
+
+    public double getPrihodiVrednost(LocalDateTime from, LocalDateTime to) {
+        return getPrihodi(from, to).stream().mapToDouble(nvv -> nvv.Vrednost).sum();
+    }
+
+    public LocalDate getOldestDate() {
+        ArrayList<ZakazaniTretman> tretmani = get();
+        if (tretmani.isEmpty()) return LocalDate.now();
+        return tretmani.stream().min(Comparator.comparing(tretman -> tretman.Vreme)).get().Vreme.toLocalDate();
+    }
+
+    public ArrayList<KeyValue> getKozmeticariIzvestaj(LocalDateTime from, LocalDateTime to) {
+        ArrayList<Zaposlen>        kozmeticari = toArrayList(new Zaposleni().get().stream().filter(zaposlen -> zaposlen.TipZaposlenog == KOZMETICAR));
+        ArrayList<KeyValue>        izvestaji   = new ArrayList<>();
+        ArrayList<ZakazaniTretman> tretmani;
+        for (Zaposlen kozmeticar : kozmeticari) {
+            tretmani = getKozmeticar(kozmeticar, from, to, false);
+            izvestaji.add(new KeyValue(kozmeticar, new BrojVrednost(tretmani.size(), (float) tretmani.stream().mapToDouble(ZakazaniTretman::getPlaceniIznos).sum())));
+        }
+        return toArrayList(izvestaji.stream().sorted(Comparator.comparing(i -> ((Zaposlen) i.Key).Ime)));
+    }
+
+    public ArrayList<KeyValue> getTretmaniIzvestaj(LocalDateTime from, LocalDateTime to) {
+        ArrayList<Tretman>         tretmani         = new Tretmani().get();
+        ArrayList<KeyValue>        izvestaji        = new ArrayList<>();
+        ArrayList<ZakazaniTretman> zakazaniTretmani = get();
+        ArrayList<ZakazaniTretman> tmp;
+        for (Tretman tretman : tretmani) {
+            tmp = toArrayList(zakazaniTretmani.stream().filter(tr -> tr.TretmanID == tretman.ID && (from == null || tr.Vreme.isAfter(from)) && (to == null || tr.Vreme.isBefore(to))));
+            izvestaji.add(new KeyValue(tretman, new BrojVrednost(tmp.size(), (float) tmp.stream().mapToDouble(ZakazaniTretman::getPlaceniIznos).sum())));
+        }
+        return toArrayList(izvestaji.stream().sorted(Comparator.comparing(tr -> ((Tretman) tr.Key).Naziv)));
+    }
+
+    public int countOfStatus(EStanjeTermina status, LocalDateTime from, LocalDateTime to) {
+        return (int) get().stream().filter(tr -> tr.Stanje == status && (from == null || tr.Vreme.isAfter(from)) && (to == null || tr.Vreme.isBefore(to))).count();
+    }
+
     public ArrayList<ZakazaniTretman> getKlijent(Klijent klijent, LocalDateTime from, LocalDateTime to, boolean samoZakazani) {
         return getKlijentKozmeticar(klijent, null, from, to, samoZakazani);
     }

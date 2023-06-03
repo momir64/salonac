@@ -1,6 +1,6 @@
 package rs.moma.managers;
 
-import rs.moma.DataTools;
+import rs.moma.helper.DataTools;
 import rs.moma.entities.Tretman;
 import rs.moma.entities.Zaposlen;
 
@@ -12,8 +12,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import static rs.moma.DataTools.fileZaposleni;
-import static rs.moma.DataTools.toArrayList;
+import static rs.moma.helper.DataTools.fileZaposleni;
+import static rs.moma.helper.DataTools.toArrayList;
 
 public class Zaposleni {
     private final String poruka = "zaposleni";

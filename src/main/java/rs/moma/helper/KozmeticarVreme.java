@@ -1,4 +1,6 @@
-package rs.moma.entities;
+package rs.moma.helper;
+
+import rs.moma.entities.Zaposlen;
 
 import java.time.LocalDateTime;
 

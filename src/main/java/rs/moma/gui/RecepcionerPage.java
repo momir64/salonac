@@ -1,6 +1,8 @@
 package rs.moma.gui;
 
 import rs.moma.entities.*;
+import rs.moma.gui.helper.NameValue;
+import rs.moma.gui.helper.NumericKeyAdapter;
 import rs.moma.managers.*;
 
 import javax.swing.*;
@@ -8,21 +10,21 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-import static rs.moma.DataTools.*;
+import static rs.moma.helper.DataTools.*;
 
 public class RecepcionerPage extends KalendarForm {
     private JScrollPane              kalendarPane;
     private JTable                   kalendarTbl;
     private JTable                   tretmaniTbl;
     private JTextField               minCenaTxt;
-    private JTextField               maxCenaTxt;
-    private JComboBox<ComboKeyValue> tretmanBox;
-    private JPanel                   mainPanel;
+    private JTextField           maxCenaTxt;
+    private JComboBox<NameValue> tretmanBox;
+    private JPanel               mainPanel;
     private JButton                  dodajBtn;
     private JButton                  rightBtn;
     private JLabel                   mesecLbl;
-    private JButton                  leftBtn;
-    private JComboBox<ComboKeyValue> tipBox;
+    private JButton              leftBtn;
+    private JComboBox<NameValue> tipBox;
 
     public RecepcionerPage(Zaposlen recepcioner) {
         super(true);
@@ -34,8 +36,8 @@ public class RecepcionerPage extends KalendarForm {
         setTitle(recepcioner.Ime + " " + recepcioner.Prezime);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        minCenaTxt.addKeyListener(new NumericKeyAdapter(this));
-        maxCenaTxt.addKeyListener(new NumericKeyAdapter(this));
+        minCenaTxt.addKeyListener(new NumericKeyAdapter(true));
+        maxCenaTxt.addKeyListener(new NumericKeyAdapter(true));
         tipBox.addActionListener(e -> fillTretmaniBox());
         tretmanBox.addActionListener(e -> updatePage());
         tipBox.addActionListener(e -> updatePage());
@@ -53,7 +55,7 @@ public class RecepcionerPage extends KalendarForm {
     public ArrayList<ZakazaniTretman> getTretmani() {
         return new ZakazaniTretmani().filter((int) getSelectedValue(tipBox),
                                              (int) getSelectedValue(tretmanBox),
-                                             txtToInt(minCenaTxt), txtToInt(maxCenaTxt));
+                                             txtToFloat(minCenaTxt), txtToFloat(maxCenaTxt));
     }
 
     public void updatePage() {
@@ -64,25 +66,25 @@ public class RecepcionerPage extends KalendarForm {
     }
 
     public void fillTipoviBox() {
-        ComboKeyValue              tipOld   = (ComboKeyValue) tipBox.getSelectedItem();
-        ArrayList<TipTretmana>     tipovi   = new TipoviTretmana().get();
+        NameValue              tipOld = (NameValue) tipBox.getSelectedItem();
+        ArrayList<TipTretmana> tipovi = new TipoviTretmana().get();
         ArrayList<ZakazaniTretman> tretmani = new ZakazaniTretmani().get();
         tipovi.removeIf(tip -> tretmani.stream().noneMatch(tr -> new Tretmani().get(tr.TretmanID).TipID == tip.ID));
         tipovi.add(new TipTretmana(-1, ""));
         tipovi.sort(Comparator.comparing(tip -> tip.Tip));
-        tipBox.setModel(new DefaultComboBoxModel(tipovi.stream().map(tip -> new ComboKeyValue(tip.Tip, tip.ID)).toArray()));
+        tipBox.setModel(new DefaultComboBoxModel(tipovi.stream().map(tip -> new NameValue(tip.Tip, tip.ID)).toArray()));
         if (tipOld != null && tipovi.stream().anyMatch(tip -> tip.ID == (int) tipOld.getValue()))
             tipBox.setSelectedItem(tipOld);
     }
 
     public void fillTretmaniBox() {
-        ComboKeyValue              tretmanOld       = (ComboKeyValue) tretmanBox.getSelectedItem();
+        NameValue                  tretmanOld       = (NameValue) tretmanBox.getSelectedItem();
         ArrayList<ZakazaniTretman> zakazaniTretmeni = new ZakazaniTretmani().get();
         ArrayList<Tretman>         tretmani         = new Tretmani().filter((int) getSelectedValue(tipBox), null, -1, -1, -1, -1);
         tretmani.removeIf(tretman -> zakazaniTretmeni.stream().noneMatch(tr -> tr.TretmanID == tretman.ID));
         tretmani.add(new Tretman(-1, -1, "", -1, -1));
         tretmani.sort(Comparator.comparing(tip -> tip.Naziv));
-        tretmanBox.setModel(new DefaultComboBoxModel(tretmani.stream().map(t -> new ComboKeyValue(t.Naziv, t.ID)).toArray()));
+        tretmanBox.setModel(new DefaultComboBoxModel(tretmani.stream().map(t -> new NameValue(t.Naziv, t.ID)).toArray()));
         if (tretmanOld != null && tretmani.stream().anyMatch(tretman -> tretman.ID == (int) tretmanOld.getValue()))
             tretmanBox.setSelectedItem(tretmanOld);
     }

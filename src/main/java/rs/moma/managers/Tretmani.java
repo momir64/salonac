@@ -1,7 +1,7 @@
 package rs.moma.managers;
 
 import rs.moma.entities.Tretman;
-import rs.moma.DataTools;
+import rs.moma.helper.DataTools;
 
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.List;
 
-import static rs.moma.DataTools.fileTretmani;
-import static rs.moma.DataTools.toArrayList;
+import static rs.moma.helper.DataTools.fileTretmani;
+import static rs.moma.helper.DataTools.toArrayList;
 
 public class Tretmani {
     private final String poruka = "tretman";

@@ -8,7 +8,7 @@ import rs.moma.managers.Zaposleni;
 import javax.swing.*;
 
 import static javax.swing.JOptionPane.showMessageDialog;
-import static rs.moma.DataTools.*;
+import static rs.moma.helper.DataTools.*;
 
 public class LoginForm extends JDialog {
     private JPanel         loginPanel;

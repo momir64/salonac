@@ -1,18 +1,25 @@
 package rs.moma.entities;
 
+import rs.moma.helper.NazivVrednostVreme;
+import rs.moma.managers.Isplate;
+import rs.moma.managers.ZakazaniTretmani;
+
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Comparator;
 
-import static rs.moma.DataTools.SP1;
-import static rs.moma.DataTools.fileSalon;
+import static rs.moma.helper.DataTools.SP1;
+import static rs.moma.helper.DataTools.fileSalon;
 
 public class Salon {
-    public final String Naziv;
-    public final int    PocetakRadnogVremena;
-    public final int    KrajRadnogVremena;
-    public final float  MinIznosLojalnosti;
-    public final String Bonus;
+    public String Naziv;
+    public int    PocetakRadnogVremena;
+    public int    KrajRadnogVremena;
+    public float  MinIznosLojalnosti;
+    public String Bonus;
 
     public Salon(String naziv, int pocetakRadnogVremena, int krajRadnogVremena, float minIznosLojalnosti, String bonus) {
         Naziv                = naziv;
@@ -24,25 +31,48 @@ public class Salon {
     }
 
     public Salon() {
-        String[] data = new String[]{"", "", "", ""};
         try {
-            data = Files.readAllLines(Paths.get(fileSalon), StandardCharsets.UTF_8).get(0).split(SP1);
+            String[] data = Files.readAllLines(Paths.get(fileSalon), StandardCharsets.UTF_8).get(0).split(SP1);
+            Naziv                = data[0];
+            PocetakRadnogVremena = Integer.parseInt(data[1]);
+            KrajRadnogVremena    = Integer.parseInt(data[2]);
+            MinIznosLojalnosti   = Float.parseFloat(data[3]);
+            Bonus                = data[4];
         } catch (Exception e) {
             System.err.println("Desila se greška prilikom čitanja salona!");
         }
-        Naziv                = data[0];
-        PocetakRadnogVremena = Integer.parseInt(data[1]);
-        KrajRadnogVremena    = Integer.parseInt(data[2]);
-        MinIznosLojalnosti   = Float.parseFloat(data[3]);
-        Bonus                = data[4];
+    }
+
+    public void edit(String naziv, int pocetakRadnogVremena, int krajRadnogVremena, float minIznosLojalnosti, String bonus) {
+        if (naziv != null && !naziv.trim().equals("")) Naziv = naziv;
+        if (pocetakRadnogVremena != -1) PocetakRadnogVremena = pocetakRadnogVremena;
+        if (krajRadnogVremena != -1) KrajRadnogVremena = krajRadnogVremena;
+        if (minIznosLojalnosti != -1) MinIznosLojalnosti = minIznosLojalnosti;
+        if (bonus != null && !bonus.trim().equals("")) Bonus = bonus;
+        save();
     }
 
     private void save() {
         try {
-            Files.write(Paths.get(fileSalon), (Naziv + SP1 + PocetakRadnogVremena + SP1 + KrajRadnogVremena + SP1 + MinIznosLojalnosti).getBytes());
+            Files.write(Paths.get(fileSalon), (Naziv + SP1 + PocetakRadnogVremena + SP1 + KrajRadnogVremena + SP1 + MinIznosLojalnosti + SP1 + Bonus).getBytes());
         } catch (Exception e) {
             System.err.println("Desila se greška prilikom čuvanja slaona!");
         }
     }
 
+    // Specijalne get metode
+    public LocalDateTime getOldestPrihodRashod() {
+        ArrayList<NazivVrednostVreme> finansije = getFinansije(null, null);
+        if (finansije.isEmpty()) return LocalDateTime.now();
+        return finansije.stream().min(Comparator.comparing(f -> f.Vreme)).get().Vreme;
+    }
+
+    public ArrayList<NazivVrednostVreme> getFinansije(LocalDateTime from, LocalDateTime to) {
+        ArrayList<NazivVrednostVreme> prihodi   = new ZakazaniTretmani().getPrihodi(from, to);
+        ArrayList<NazivVrednostVreme> rashodi   = new Isplate().getRashodi(from, to);
+        ArrayList<NazivVrednostVreme> finansije = new ArrayList<>(prihodi);
+        finansije.addAll(rashodi);
+        finansije.sort(Comparator.comparing(nazivVrednostVreme -> nazivVrednostVreme.Vreme));
+        return finansije;
+    }
 }

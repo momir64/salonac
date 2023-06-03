@@ -1,7 +1,6 @@
-package rs.moma;
+package rs.moma.helper;
 
-import rs.moma.entities.ClassWithID;
-import rs.moma.gui.ComboKeyValue;
+import rs.moma.gui.helper.NameValue;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -143,6 +142,14 @@ public class DataTools {
         return txt.getText().trim().equals("") ? -1 : Integer.parseInt(txt.getText());
     }
 
+    public static float txtToFloat(JTextField txt) {
+        return txt.getText().trim().equals("") ? -1 : Float.parseFloat(txt.getText());
+    }
+
+    public static LocalDate getDatum(JTextField datumTxt) {
+        return strToDate(datumTxt.getText());
+    }
+
     public static LocalDate strToDate(String datum) {
         String[] data = datum.split("\\.");
         if (datum.contains("_") || datum.trim().equals("") || data.length < 3) return null;
@@ -153,7 +160,12 @@ public class DataTools {
         }
     }
 
-    public static Object getSelectedValue(JComboBox<ComboKeyValue> box) {
-        return ((ComboKeyValue) box.getSelectedItem()).getValue();
+    public static Object getSelectedValue(JComboBox<NameValue> box) {
+        return ((NameValue) box.getSelectedItem()).getValue();
+    }
+
+    public static String simplifyFloatToString(float d) {
+        if (d == (int) d) return String.format("%d", (long) d);
+        else return String.format("%s", d);
     }
 }

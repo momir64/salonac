@@ -1,12 +1,15 @@
 package rs.moma.entities;
 
+import rs.moma.helper.ClassWithID;
+import rs.moma.helper.RadnikPlata;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 
-import static rs.moma.DataTools.toArrayList;
-import static rs.moma.DataTools.SP1;
+import static rs.moma.helper.DataTools.toArrayList;
+import static rs.moma.helper.DataTools.SP1;
 
 public class Isplata implements Comparable<Isplata>, ClassWithID {
     public final LocalDateTime          Mesec;

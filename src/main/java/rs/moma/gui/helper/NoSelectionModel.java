@@ -1,4 +1,4 @@
-package rs.moma.gui;
+package rs.moma.gui.helper;
 
 import javax.swing.*;
 

@@ -2,6 +2,7 @@ package rs.moma.gui;
 
 import rs.moma.entities.ZakazaniTretman;
 import rs.moma.entities.Zaposlen;
+import rs.moma.gui.helper.NoSelectionModel;
 import rs.moma.managers.Klijenti;
 import rs.moma.managers.Tretmani;
 import rs.moma.entities.Klijent;
