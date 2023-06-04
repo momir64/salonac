@@ -64,6 +64,10 @@ public class EditZaposlenForm extends JDialog {
 
         bonusPeriodTxt.addKeyListener(new NumericKeyAdapter(false));
         bonusOfWhatTxt.addKeyListener(new NumericKeyAdapter(true));
+        osnovicaTxt.addKeyListener(new NumericKeyAdapter(true));
+        kSpremaTxt.addKeyListener(new NumericKeyAdapter(true));
+        kStazTxt.addKeyListener(new NumericKeyAdapter(true));
+        stazTxt.addKeyListener(new NumericKeyAdapter(false));
 
         tipBox.addActionListener(e -> enabledKozmeticarPanel());
         removeBonusRuleBtn.addActionListener(e -> removeBonusRule());

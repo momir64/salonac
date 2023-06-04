@@ -70,9 +70,9 @@ public class Zaposlen extends Korisnik {
                 GodineStaza + SP1 +
                 KoeficijentStaz + SP1 +
                 PlataOsnova + SP1 +
-                Bonus);
-        if (ZaduzeniTipoviTretmana == null) str.append(-1);
-        else for (int tipID : ZaduzeniTipoviTretmana) str.append(SP1).append(tipID);
+                Bonus + SP1);
+        if (ZaduzeniTipoviTretmana == null || ZaduzeniTipoviTretmana.length == 0) str.append(-1);
+        else for (int tipID : ZaduzeniTipoviTretmana) str.append(tipID);
         return str.toString();
     }
 
