@@ -49,8 +49,12 @@ public class RecepcionerZakazivanjeForm extends ZakazivanjeForm {
             ArrayList<EStanjeTermina> stanja = new ArrayList<>(Arrays.asList(OTKAZAO_KLIJENT, OTKAZAO_SALON));
             if (tretman.Vreme.isAfter(LocalDateTime.now()))
                 stanja.add(ZAKAZAN);
-            else
-                stanja.addAll(Arrays.asList(IZVRSEN, NIJE_SE_POJAVIO));
+//            ZAKOMETARISANO KAKO BI SE MOGLI IZVRŠITI TERMINI IZ BUDUĆNOSTI
+//            || || || || || || || || || || || || || || || || || || || || ||
+//            \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/
+//            else  // <= POTREBNO SAMO OTKOMENTARISATI ELSE ZA REALNU UPOTREBU
+            stanja.addAll(Arrays.asList(IZVRSEN, NIJE_SE_POJAVIO));
+
             stanja.sort(Comparator.comparing(Enum::toString));
             stanjeBox.setModel(new DefaultComboBoxModel<>(stanja.stream().map(stanje -> new NameValue(getStanjeName(stanje), stanje)).toArray(NameValue[]::new)));
             stanjeBox.setSelectedItem(new NameValue("", tretman.Stanje));
@@ -86,7 +90,8 @@ public class RecepcionerZakazivanjeForm extends ZakazivanjeForm {
         if (vremeBox.getItemCount() == 0) return;
         new ZakazaniTretmani().edit(oldTretman, new ZakazaniTretman((Tretman) getSelectedValue(tretmanBox),
                                                                     getTermin(datumTxt, vremeBox), (Klijent) getSelectedValue(klijentBox),
-                                                                    (Zaposlen) getSelectedValue(kozmeticarBox)));
+                                                                    (Zaposlen) getSelectedValue(kozmeticarBox), (EStanjeTermina) getSelectedValue(stanjeBox),
+                                                                    oldTretman.KarticaLojalnosti));
         fillTerminiBox(kozmeticarBox, tretmanBox, vremeBox, getDatum(datumTxt), tretman);
         update.run();
     }

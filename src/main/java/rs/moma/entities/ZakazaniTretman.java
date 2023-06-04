@@ -36,6 +36,10 @@ public class ZakazaniTretman implements ClassWithID {
         this(new ZakazaniTretmani().getNewID(), tretmanID, cena, trajanje, vreme, stanje, klijentID, kozmeticarID, karticaLojalnosti);
     }
 
+    public ZakazaniTretman(Tretman tretman, LocalDateTime vreme, Klijent klijent, Zaposlen kozmeticar, EStanjeTermina stanje, boolean karticaLojalnosti) {
+        this(new ZakazaniTretmani().getNewID(), tretman.ID, tretman.Cena, tretman.Trajanje, vreme, stanje, klijent.ID, kozmeticar.ID, karticaLojalnosti);
+    }
+
     public ZakazaniTretman(Tretman tretman, LocalDateTime vreme, Klijent klijent, Zaposlen kozmeticar) {
         this(new ZakazaniTretmani().getNewID(), tretman.ID, tretman.Cena, tretman.Trajanje, vreme, ZAKAZAN, klijent.ID, kozmeticar.ID, klijent.getKarticaLojalnosti());
     }

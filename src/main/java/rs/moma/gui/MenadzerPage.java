@@ -138,9 +138,11 @@ public class MenadzerPage extends JFrame {
     }
 
     public void showDijagrami() {
-        prihodiTipoviPanel.add(new XChartPanel<>(makePrihodiTipoviChart()));
-        procenatStatusaPanel.add(new XChartPanel<>(makePieChart("Status kozmetičkih tretmana u poslednjih 30 dana", new ZakazaniTretmani().getStatusiDijagramData())));
-        realizovaniPoKozmeticarimaPanel.add(new XChartPanel<>(makePieChart("Opterećenje kozmetičara u poslednjih 30 dana", new ZakazaniTretmani().getKozmeticariDijagramData())));
+        if (!new ZakazaniTretmani().get().isEmpty()) {
+            prihodiTipoviPanel.add(new XChartPanel<>(makePrihodiTipoviChart()));
+            procenatStatusaPanel.add(new XChartPanel<>(makePieChart("Status kozmetičkih tretmana u poslednjih 30 dana", new ZakazaniTretmani().getStatusiDijagramData())));
+            realizovaniPoKozmeticarimaPanel.add(new XChartPanel<>(makePieChart("Opterećenje kozmetičara u poslednjih 30 dana", new ZakazaniTretmani().getKozmeticariDijagramData())));
+        }
     }
 
     public PieChart makePieChart(String title, ArrayList<NameValue> data) {
