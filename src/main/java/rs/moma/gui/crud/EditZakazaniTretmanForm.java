@@ -1,12 +1,10 @@
 package rs.moma.gui.crud;
 
-import rs.moma.entities.Tretman;
 import rs.moma.entities.ZakazaniTretman;
 import rs.moma.gui.helper.DateKeyAdapter;
 import rs.moma.gui.helper.NameValue;
 import rs.moma.gui.helper.NumericKeyAdapter;
 import rs.moma.gui.helper.TimeKeyAdapter;
-import rs.moma.helper.DataTools;
 import rs.moma.managers.Klijenti;
 import rs.moma.managers.Tretmani;
 import rs.moma.managers.ZakazaniTretmani;

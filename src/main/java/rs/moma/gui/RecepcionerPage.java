@@ -7,6 +7,8 @@ import rs.moma.managers.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -26,7 +28,7 @@ public class RecepcionerPage extends KalendarForm {
     private JButton              leftBtn;
     private JComboBox<NameValue> tipBox;
 
-    public RecepcionerPage(Zaposlen recepcioner) {
+    public RecepcionerPage(Zaposlen recepcioner, WelcomePage homePage) {
         super(true);
 
         setSize(1020, 1108);
@@ -34,7 +36,7 @@ public class RecepcionerPage extends KalendarForm {
         setLocationRelativeTo(null);
         setMinimumSize(new Dimension(950, 801));
         setTitle(recepcioner.Ime + " " + recepcioner.Prezime);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 
         minCenaTxt.addKeyListener(new NumericKeyAdapter(true));
         maxCenaTxt.addKeyListener(new NumericKeyAdapter(true));
@@ -48,6 +50,12 @@ public class RecepcionerPage extends KalendarForm {
         updatePage();
 
         dodajBtn.addActionListener(e -> new RecepcionerZakazivanjeForm(this, null, cellToDate(selectedRow, selectedColumn), this::updatePage));
+
+        this.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                homePage.setVisible(true);
+            }
+        });
 
         setVisible(true);
     }
@@ -66,10 +74,12 @@ public class RecepcionerPage extends KalendarForm {
     }
 
     public void fillTipoviBox() {
-        NameValue                  tipOld   = (NameValue) tipBox.getSelectedItem();
-        ArrayList<TipTretmana>     tipovi   = new TipoviTretmana().get();
-        ArrayList<ZakazaniTretman> tretmani = new ZakazaniTretmani().get();
-        tipovi.removeIf(tip -> tretmani.stream().noneMatch(tr -> new Tretmani().get(tr.TretmanID).TipID == tip.ID));
+        NameValue                  tipOld           = (NameValue) tipBox.getSelectedItem();
+        ArrayList<ZakazaniTretman> zakazaniTretmani = new ZakazaniTretmani().get();
+        ArrayList<TipTretmana>     tipovi           = new TipoviTretmana().get();
+        Tretmani                   tretmani         = new Tretmani();
+
+        tipovi.removeIf(tip -> zakazaniTretmani.stream().noneMatch(tr -> tretmani.get(tr.TretmanID).TipID == tip.ID));
         tipovi.add(new TipTretmana(-1, ""));
         tipovi.sort(Comparator.comparing(tip -> tip.Tip));
         tipBox.setModel(new DefaultComboBoxModel<>(tipovi.stream().map(tip -> new NameValue(tip.Tip, tip.ID)).toArray(NameValue[]::new)));

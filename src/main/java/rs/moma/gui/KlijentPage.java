@@ -8,6 +8,8 @@ import rs.moma.managers.Zaposleni;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 import static rs.moma.helper.DataTools.getStanjeName;
@@ -25,7 +27,7 @@ public class KlijentPage extends KalendarForm {
     private       JButton     dodajBtn;
     private final Klijent     klijent;
 
-    public KlijentPage(Klijent klijent) {
+    public KlijentPage(Klijent klijent, WelcomePage homePage) {
         super(true);
         this.klijent = klijent;
 
@@ -34,12 +36,18 @@ public class KlijentPage extends KalendarForm {
         setLocationRelativeTo(null);
         setMinimumSize(new Dimension(750, 800));
         setTitle(klijent.Ime + " " + klijent.Prezime);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 
         super.setup(kalendarPane, tretmaniTbl, 200, kalendarTbl, mesecLbl, rightBtn, leftBtn, true, false);
         updatePage();
 
         dodajBtn.addActionListener(e -> new KlijentZakazivanjeForm(this, klijent, cellToDate(selectedRow, selectedColumn), this::updatePage));
+
+        this.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                homePage.setVisible(true);
+            }
+        });
 
         setVisible(true);
     }

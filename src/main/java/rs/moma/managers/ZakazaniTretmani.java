@@ -1,11 +1,8 @@
 package rs.moma.managers;
 
-import rs.moma.entities.Klijent;
-import rs.moma.entities.Tretman;
-import rs.moma.entities.ZakazaniTretman;
-import rs.moma.entities.Zaposlen;
+import rs.moma.entities.*;
+import rs.moma.gui.helper.NameValue;
 import rs.moma.helper.BrojVrednost;
-import rs.moma.helper.DataTools.*;
 import rs.moma.helper.DataTools;
 import rs.moma.helper.KeyValue;
 import rs.moma.helper.NazivVrednostVreme;
@@ -15,22 +12,17 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
+import static rs.moma.helper.DataTools.*;
 import static rs.moma.helper.DataTools.EStanjeTermina.*;
 import static rs.moma.helper.DataTools.ETipZaposlenog.KOZMETICAR;
-import static rs.moma.helper.DataTools.fileZakazaniTretmani;
-import static rs.moma.helper.DataTools.toArrayList;
 
 public class ZakazaniTretmani {
-    private final String poruka = "zakazani tretman";
+    private       ArrayList<ZakazaniTretman> zakazaniTretmani = new ArrayList<>();
+    private final String                     poruka           = "zakazani tretman";
 
-    // CRUD
-    public ArrayList<ZakazaniTretman> get() {
-        ArrayList<ZakazaniTretman> zakazaniTretmani = new ArrayList<>();
+    public ZakazaniTretmani() {
         try {
             List<String> lines = Files.readAllLines(Paths.get(fileZakazaniTretmani), StandardCharsets.UTF_8);
             for (String line : lines)
@@ -40,26 +32,46 @@ public class ZakazaniTretmani {
         } catch (Exception e) {
             System.err.println("Desila se greška prilikom čitanja zakazanih tretmana!");
         }
+    }
+
+    // Ažuriranje ključeva
+    public boolean removeTretman(Tretman tretman) {
+        zakazaniTretmani = toArrayList(zakazaniTretmani.stream().filter(zakazaniTretman -> zakazaniTretman.TretmanID != tretman.ID));
+        return DataTools.save(zakazaniTretmani, fileZakazaniTretmani, poruka);
+    }
+
+    public boolean removeKlijent(Klijent klijent) {
+        zakazaniTretmani = toArrayList(zakazaniTretmani.stream().filter(zakazaniTretman -> zakazaniTretman.KlijentID != klijent.ID));
+        return DataTools.save(zakazaniTretmani, fileZakazaniTretmani, poruka);
+    }
+
+    public boolean removeKozmeticar(Zaposlen zaposlen) {
+        zakazaniTretmani = toArrayList(zakazaniTretmani.stream().filter(zakazaniTretman -> zakazaniTretman.KozmeticarID != zaposlen.ID));
+        return DataTools.save(zakazaniTretmani, fileZakazaniTretmani, poruka);
+    }
+
+    // CRUD
+    public ArrayList<ZakazaniTretman> get() {
         return zakazaniTretmani;
     }
 
     public ZakazaniTretman get(int id) {
-        Optional<ZakazaniTretman> zakazaniTretman = get().stream().filter(tmp -> tmp.ID == id).findFirst();
+        Optional<ZakazaniTretman> zakazaniTretman = zakazaniTretmani.stream().filter(tmp -> tmp.ID == id).findFirst();
         if (zakazaniTretman.isPresent()) return zakazaniTretman.get();
         System.err.println("Traženi zakazani tretman ne postoji!");
         return null;
     }
 
     public boolean add(ZakazaniTretman zakazaniTretman) {
-        return DataTools.add(get(), fileZakazaniTretmani, poruka, zakazaniTretman);
+        return DataTools.add(zakazaniTretmani, fileZakazaniTretmani, poruka, zakazaniTretman);
     }
 
     public boolean remove(ZakazaniTretman zakazaniTretman) {
-        return DataTools.remove(get(), fileZakazaniTretmani, poruka, zakazaniTretman);
+        return DataTools.remove(zakazaniTretmani, fileZakazaniTretmani, poruka, zakazaniTretman);
     }
 
     public boolean edit(ZakazaniTretman oldTretman, ZakazaniTretman newTretman) {
-        return DataTools.edit(get(), fileZakazaniTretmani, poruka, oldTretman, newTretman);
+        return DataTools.edit(zakazaniTretmani, fileZakazaniTretmani, poruka, oldTretman, newTretman);
     }
 
     // Pravljenje ključeva
@@ -71,29 +83,58 @@ public class ZakazaniTretmani {
     }
 
     public int getNewID() {
-        ArrayList<ZakazaniTretman> zakazaniTretmani = get();
-        int                        i                = 0;
+        int i = 0;
         while (isTakenID(i, zakazaniTretmani)) i++;
         return i;
     }
 
     // Pretraga
     public ArrayList<ZakazaniTretman> filter(int tipID, int tretmanID, float minPlaceno, float maxPlaceno) {
-        return toArrayList(get().stream().filter(t -> {
-                                    Tretman tr = new Tretmani().get(t.TretmanID);
-                                    return (minPlaceno == -1 || t.getPlaceniIznos() >= minPlaceno) &&
-                                           (maxPlaceno == -1 || t.getPlaceniIznos() <= maxPlaceno) &&
-                                           (tretmanID == -1 || tr.ID == tretmanID) &&
-                                           (tipID == -1 || tr.TipID == tipID);
-                                }).sorted(Comparator.comparing(t -> t.KozmeticarID))
-                                .sorted(Comparator.comparing(t -> t.Vreme)));
+        Tretmani tretmani = new Tretmani();
+        return toArrayList(zakazaniTretmani.stream().filter(t -> (minPlaceno == -1 || t.getPlaceniIznos() >= minPlaceno) &&
+                                                                 (maxPlaceno == -1 || t.getPlaceniIznos() <= maxPlaceno) &&
+                                                                 (tretmanID == -1 || tretmani.get(t.TretmanID).ID == tretmanID) &&
+                                                                 (tipID == -1 || tretmani.get(t.TretmanID).TipID == tipID))
+                                           .sorted(Comparator.comparing(t -> t.KozmeticarID))
+                                           .sorted(Comparator.comparing(t -> t.Vreme)));
+    }
+
+    public ArrayList<ZakazaniTretman> filter(Klijent klijent, Zaposlen zaposlen, LocalDateTime from, LocalDateTime to, EStanjeTermina stanje) {
+        return toArrayList(zakazaniTretmani.stream().filter(tretman -> (klijent == null || tretman.KlijentID == klijent.ID) &&
+                                                                       (zaposlen == null || tretman.KozmeticarID == zaposlen.ID) &&
+                                                                       (from == null || tretman.Vreme.isAfter(from) || tretman.Vreme.isEqual(from)) &&
+                                                                       (to == null || tretman.Vreme.isBefore(to) || tretman.Vreme.isEqual(to)) &&
+                                                                       (stanje == null || tretman.Stanje == stanje))
+                                           .sorted(Comparator.comparing(t -> t.KozmeticarID))
+                                           .sorted(Comparator.comparing(t -> t.Vreme)));
+    }
+
+    public ArrayList<ZakazaniTretman> filter(int tipID, LocalDateTime from, LocalDateTime to) {
+        Tretmani tretmani = new Tretmani();
+        return toArrayList(zakazaniTretmani.stream().filter(tretman -> (tipID == -1 || tretmani.get(tretman.TretmanID).TipID == tipID) &&
+                                                                       (from == null || tretman.Vreme.isAfter(from) || tretman.Vreme.isEqual(from)) &&
+                                                                       (to == null || tretman.Vreme.isBefore(to)))
+                                           .sorted(Comparator.comparing(t -> t.Vreme)));
+    }
+
+    public ArrayList<ZakazaniTretman> getForKozmeticar(Zaposlen zaposlen, LocalDateTime from, LocalDateTime to, EStanjeTermina stanje) {
+        return filter(null, zaposlen, from, to, stanje);
+    }
+
+    public ArrayList<ZakazaniTretman> getForKlijent(Klijent klijent, LocalDateTime from, LocalDateTime to) {
+        return filter(klijent, null, from, to, null);
+    }
+
+    public ArrayList<ZakazaniTretman> getForKozmeticar(Zaposlen zaposlen, LocalDateTime from, LocalDateTime to) {
+        return filter(null, zaposlen, from, to, null);
     }
 
     // Specijalne get metode
     public ArrayList<NazivVrednostVreme> getPrihodi(LocalDateTime from, LocalDateTime to) {
-        return toArrayList(get().stream().filter(tretman -> (from == null || tretman.Vreme.isAfter(from) || tretman.Vreme.isEqual(from))
-                                                            && (to == null || tretman.Vreme.isBefore(to) || tretman.Vreme.isEqual(to)))
-                                .map(tretman -> new NazivVrednostVreme(new Tretmani().get(tretman.TretmanID).Naziv, tretman.getPlaceniIznos(), tretman.Vreme)));
+        Tretmani tretmani = new Tretmani();
+        return toArrayList(zakazaniTretmani.stream().filter(tretman -> (from == null || tretman.Vreme.isAfter(from) || tretman.Vreme.isEqual(from))
+                                                                       && (to == null || tretman.Vreme.isBefore(to) || tretman.Vreme.isEqual(to)))
+                                           .map(tretman -> new NazivVrednostVreme(tretmani.get(tretman.TretmanID).Naziv, tretman.getPlaceniIznos(), tretman.Vreme)));
     }
 
     public double getPrihodiVrednost(LocalDateTime from, LocalDateTime to) {
@@ -101,9 +142,39 @@ public class ZakazaniTretmani {
     }
 
     public LocalDate getOldestDate() {
-        ArrayList<ZakazaniTretman> tretmani = get();
-        if (tretmani.isEmpty()) return LocalDate.now();
-        return tretmani.stream().min(Comparator.comparing(tretman -> tretman.Vreme)).get().Vreme.toLocalDate();
+        if (zakazaniTretmani.isEmpty()) return LocalDate.now();
+        return zakazaniTretmani.stream().min(Comparator.comparing(tretman -> tretman.Vreme)).get().Vreme.toLocalDate();
+    }
+
+    public ArrayList<NameValue> getKozmeticariDijagramData() {
+        ArrayList<Zaposlen>        kozmeticari = toArrayList(new Zaposleni().get().stream().filter(zaposlen -> zaposlen.TipZaposlenog == KOZMETICAR));
+        ArrayList<NameValue>       izvestaji   = new ArrayList<>();
+        ArrayList<ZakazaniTretman> tretmani;
+        for (Zaposlen kozmeticar : kozmeticari) {
+            tretmani = getForKozmeticar(kozmeticar, LocalDateTime.now().minusDays(30), null, IZVRSEN);
+            izvestaji.add(new NameValue(kozmeticar.getDisplayName(), tretmani.size()));
+        }
+        return izvestaji;
+    }
+
+    public ArrayList<NameValue> getStatusiDijagramData() {
+        return toArrayList(Arrays.stream(values()).map(status -> new NameValue(getStanjeName(status), countOfStatus(status, LocalDateTime.now().minusDays(30), null))));
+    }
+
+    public ArrayList<NameValue> getPrihodiTipDijagramData() {
+        ArrayList<NameValue> izvestaji = new ArrayList<>();
+        for (TipTretmana tip : new TipoviTretmana().get()) {
+            ArrayList<KeyValue> meseci = new ArrayList<>();
+            for (int i = 1; i <= 12; i++)
+                 meseci.add(new KeyValue(LocalDateTime.now().minusMonths(i).getMonthValue(), filter(tip.ID, LocalDateTime.now().minusMonths(i), LocalDateTime.now().minusMonths(i - 1))
+                         .stream().mapToDouble(ZakazaniTretman::getPlaceniIznos).sum()));
+            izvestaji.add(new NameValue(tip.Tip, meseci));
+        }
+        ArrayList<KeyValue> meseci = new ArrayList<>();
+        for (int i = 1; i <= 12; i++)
+             meseci.add(new KeyValue(LocalDateTime.now().minusMonths(i).getMonthValue(), getPrihodiVrednost(LocalDateTime.now().minusMonths(i), LocalDateTime.now().minusMonths(i - 1))));
+        izvestaji.add(new NameValue("Ukupno", meseci));
+        return izvestaji;
     }
 
     public ArrayList<KeyValue> getKozmeticariIzvestaj(LocalDateTime from, LocalDateTime to) {
@@ -111,16 +182,15 @@ public class ZakazaniTretmani {
         ArrayList<KeyValue>        izvestaji   = new ArrayList<>();
         ArrayList<ZakazaniTretman> tretmani;
         for (Zaposlen kozmeticar : kozmeticari) {
-            tretmani = getKozmeticar(kozmeticar, from, to, false);
+            tretmani = getForKozmeticar(kozmeticar, from, to);
             izvestaji.add(new KeyValue(kozmeticar, new BrojVrednost(tretmani.size(), (float) tretmani.stream().mapToDouble(ZakazaniTretman::getPlaceniIznos).sum())));
         }
         return toArrayList(izvestaji.stream().sorted(Comparator.comparing(i -> ((Zaposlen) i.Key).Ime)));
     }
 
     public ArrayList<KeyValue> getTretmaniIzvestaj(LocalDateTime from, LocalDateTime to) {
-        ArrayList<Tretman>         tretmani         = new Tretmani().get();
-        ArrayList<KeyValue>        izvestaji        = new ArrayList<>();
-        ArrayList<ZakazaniTretman> zakazaniTretmani = get();
+        ArrayList<Tretman>         tretmani  = new Tretmani().get();
+        ArrayList<KeyValue>        izvestaji = new ArrayList<>();
         ArrayList<ZakazaniTretman> tmp;
         for (Tretman tretman : tretmani) {
             tmp = toArrayList(zakazaniTretmani.stream().filter(tr -> tr.TretmanID == tretman.ID
@@ -132,26 +202,8 @@ public class ZakazaniTretmani {
     }
 
     public int countOfStatus(EStanjeTermina status, LocalDateTime from, LocalDateTime to) {
-        return (int) get().stream().filter(tr -> tr.Stanje == status && (from == null || tr.Vreme.isAfter(from) || tr.Vreme.isEqual(from))
-                                                 && (to == null || tr.Vreme.isBefore(to) || tr.Vreme.isEqual(to))).count();
-    }
-
-    public ArrayList<ZakazaniTretman> getKlijent(Klijent klijent, LocalDateTime from, LocalDateTime to, boolean samoZakazani) {
-        return getKlijentKozmeticar(klijent, null, from, to, samoZakazani);
-    }
-
-    public ArrayList<ZakazaniTretman> getKozmeticar(Zaposlen zaposlen, LocalDateTime from, LocalDateTime to, boolean samoZakazani) {
-        return getKlijentKozmeticar(null, zaposlen, from, to, samoZakazani);
-    }
-
-    public ArrayList<ZakazaniTretman> getKlijentKozmeticar(Klijent klijent, Zaposlen zaposlen, LocalDateTime from, LocalDateTime to, boolean samoZakazani) {
-        return toArrayList(get().stream().filter(tretman -> (klijent == null || tretman.KlijentID == klijent.ID) &&
-                                                            (zaposlen == null || tretman.KozmeticarID == zaposlen.ID) &&
-                                                            (from == null || tretman.Vreme.isAfter(from) || tretman.Vreme.isEqual(from)) &&
-                                                            (to == null || tretman.Vreme.isBefore(to) || tretman.Vreme.isEqual(to)) &&
-                                                            (!samoZakazani || tretman.Stanje == ZAKAZAN))
-                                .sorted(Comparator.comparing(t -> t.KozmeticarID))
-                                .sorted(Comparator.comparing(t -> t.Vreme)));
+        return (int) zakazaniTretmani.stream().filter(tr -> tr.Stanje == status && (from == null || tr.Vreme.isAfter(from) || tr.Vreme.isEqual(from))
+                                                            && (to == null || tr.Vreme.isBefore(to) || tr.Vreme.isEqual(to))).count();
     }
 
     // Izmena

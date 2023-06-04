@@ -1,8 +1,5 @@
 package rs.moma.entities;
 
-import rs.moma.helper.DataTools.ENivoSpreme;
-import rs.moma.helper.DataTools.EPol;
-import rs.moma.helper.DataTools.ETipZaposlenog;
 import rs.moma.helper.Korisnik;
 import rs.moma.managers.Tretmani;
 import rs.moma.managers.ZakazaniTretmani;
@@ -17,6 +14,7 @@ import java.util.Collections;
 import java.util.stream.IntStream;
 
 import static rs.moma.helper.DataTools.*;
+import static rs.moma.helper.DataTools.EStanjeTermina.ZAKAZAN;
 
 public class Zaposlen extends Korisnik {
     public final ETipZaposlenog TipZaposlenog;
@@ -95,7 +93,7 @@ public class Zaposlen extends Korisnik {
     }
 
     public ArrayList<ZakazaniTretman> getZakazaniTretmani() {
-        return new ZakazaniTretmani().getKozmeticar(this, null, null, true);
+        return new ZakazaniTretmani().getForKozmeticar(this, null, null, ZAKAZAN);
     }
 
     public ArrayList<Integer> getSlobodniTermini(LocalDate date, ZakazaniTretman oldTretman, int potrebnoTrajanjeTermina) {
@@ -105,7 +103,7 @@ public class Zaposlen extends Korisnik {
         ArrayList<Integer> termini = toArrayList(IntStream.rangeClosed(date.isEqual(LocalDate.now()) ?
                                                                        Math.max(LocalDateTime.now().getHour() + 1, salon.PocetakRadnogVremena) : salon.PocetakRadnogVremena,
                                                                        salon.KrajRadnogVremena - (int) Math.ceil(potrebnoTrajanjeTermina / 60.0)).boxed());
-        ArrayList<ZakazaniTretman> tretmani = new ZakazaniTretmani().getKozmeticar(this, date.atStartOfDay(), date.atTime(LocalTime.MAX), true);
+        ArrayList<ZakazaniTretman> tretmani = new ZakazaniTretmani().getForKozmeticar(this, date.atStartOfDay(), date.atTime(LocalTime.MAX), ZAKAZAN);
         if (oldTretman != null) tretmani.remove(oldTretman);
         for (ZakazaniTretman tretman : tretmani) {
             for (int i = tretman.Vreme.getHour() - 1; i >= salon.PocetakRadnogVremena && i > tretman.Vreme.getHour() - (int) Math.ceil(potrebnoTrajanjeTermina / 60.0); i--)
@@ -124,27 +122,27 @@ public class Zaposlen extends Korisnik {
     }
 
     public int getBrojTretmana(LocalDateTime from, LocalDateTime to) {
-        return new ZakazaniTretmani().getKozmeticar(this, from, to, false).size();
+        return new ZakazaniTretmani().getForKozmeticar(this, from, to).size();
     }
 
     public float getVrednostTretmana(LocalDateTime from, LocalDateTime to) {
-        return (float) new ZakazaniTretmani().getKozmeticar(this, from, to, false).stream().mapToDouble(ZakazaniTretman::getPlaceniIznos).sum();
+        return (float) new ZakazaniTretmani().getForKozmeticar(this, from, to).stream().mapToDouble(ZakazaniTretman::getPlaceniIznos).sum();
     }
 
     public int getBrojTretmana(int days) {
-        return new ZakazaniTretmani().getKozmeticar(this, LocalDateTime.now().minusDays(days), null, false).size();
+        return new ZakazaniTretmani().getForKozmeticar(this, LocalDateTime.now().minusDays(days), null).size();
     }
 
     public float getVrednostTretmana(int days) {
-        return (float) new ZakazaniTretmani().getKozmeticar(this, LocalDateTime.now().minusDays(days), null, false).stream().mapToDouble(ZakazaniTretman::getPlaceniIznos).sum();
+        return (float) new ZakazaniTretmani().getForKozmeticar(this, LocalDateTime.now().minusDays(days), null).stream().mapToDouble(ZakazaniTretman::getPlaceniIznos).sum();
     }
 
     public int getBrojTretmanaMesec(int months) {
-        return new ZakazaniTretmani().getKozmeticar(this, LocalDateTime.now().minusMonths(months), null, false).size();
+        return new ZakazaniTretmani().getForKozmeticar(this, LocalDateTime.now().minusMonths(months), null).size();
     }
 
     public float getVrednostTretmanaMesec(int months) {
-        return (float) new ZakazaniTretmani().getKozmeticar(this, LocalDateTime.now().minusMonths(months), null, false).stream().mapToDouble(ZakazaniTretman::getPlaceniIznos).sum();
+        return (float) new ZakazaniTretmani().getForKozmeticar(this, LocalDateTime.now().minusMonths(months), null).stream().mapToDouble(ZakazaniTretman::getPlaceniIznos).sum();
     }
 
     private float calcBonus() {

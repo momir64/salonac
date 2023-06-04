@@ -89,7 +89,7 @@ public class DataTools {
         return new ArrayList<>(Arrays.asList(array));
     }
 
-    protected static <T> boolean save(ArrayList<T> entiteti, String fileName, String tip) {
+    public static <T> boolean save(ArrayList<T> entiteti, String fileName, String tip) {
         try {
             StringBuilder data = new StringBuilder();
             for (T entiet : entiteti)
@@ -222,5 +222,10 @@ public class DataTools {
 
     public static void fillPolBox(JComboBox<NameValue> polBox) {
         polBox.setModel(new DefaultComboBoxModel<>(new NameValue[]{new NameValue("Muško", EPol.MALE), new NameValue("Žensko", EPol.FEMALE), new NameValue("Ostalo", EPol.OTHER)}));
+    }
+
+    public static String getMonthName(int month) {
+        String[] monthNames = {"", "Januar", "Februar", "Mart", "April", "Maj", "Jun", "Jul", "Avgust", "Septembar", "Oktobar", "Novembar", "Decembar"};
+        return monthNames[month];
     }
 }

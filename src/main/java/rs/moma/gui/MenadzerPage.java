@@ -1,5 +1,7 @@
 package rs.moma.gui;
 
+import org.knowm.xchart.*;
+import org.knowm.xchart.style.Styler;
 import rs.moma.entities.*;
 import rs.moma.gui.crud.*;
 import rs.moma.helper.NazivVrednostVreme;
@@ -13,13 +15,13 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
+import java.util.*;
 
 import static javax.swing.JOptionPane.showMessageDialog;
 import static rs.moma.helper.DataTools.EStanjeTermina.*;
@@ -56,14 +58,17 @@ public class MenadzerPage extends JFrame {
     private JLabel               rashodiLbl;
     private JPanel               mainPanel;
     private JLabel               saldoLbl;
+    private JPanel               prihodiTipoviPanel;
+    private JPanel               realizovaniPoKozmeticarimaPanel;
+    private JPanel               procenatStatusaPanel;
 
-    public MenadzerPage(Zaposlen menadzer) {
+    public MenadzerPage(Zaposlen menadzer, WelcomePage homePage) {
         setSize(1500, 950);
         setContentPane(mainPanel);
         setLocationRelativeTo(null);
         setMinimumSize(new Dimension(1300, 801));
         setTitle(menadzer.Ime + " " + menadzer.Prezime);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 
         Salon salon = new Salon();
         nazivSalonaTxt.setText(String.valueOf(salon.Naziv));
@@ -118,11 +123,54 @@ public class MenadzerPage extends JFrame {
         editEntitetBtn.addActionListener(e -> editEntiet());
         addEntitetBtn.addActionListener(e -> addEntitet());
 
+        this.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                homePage.setVisible(true);
+            }
+        });
+
         setVisible(true);
+        showDijagrami();
         makeIzvestaji();
         showEntiteti();
         showPrihodi();
         makeLojalne();
+    }
+
+    public void showDijagrami() {
+        prihodiTipoviPanel.add(new XChartPanel<>(makePrihodiTipoviChart()));
+        procenatStatusaPanel.add(new XChartPanel<>(makePieChart("Status kozmetičkih tretmana u poslednjih 30 dana", new ZakazaniTretmani().getStatusiDijagramData())));
+        realizovaniPoKozmeticarimaPanel.add(new XChartPanel<>(makePieChart("Opterećenje kozmetičara u poslednjih 30 dana", new ZakazaniTretmani().getKozmeticariDijagramData())));
+    }
+
+    public PieChart makePieChart(String title, ArrayList<NameValue> data) {
+        PieChart chart = new PieChartBuilder().theme(Styler.ChartTheme.GGPlot2).width(getMinimumSize().width / 3 - 10).height(getMinimumSize().height - 100).title(title).build();
+        chart.getStyler().setLabelsVisible(false);
+        chart.getStyler().setChartBackgroundColor(new Color(60, 63, 65));
+        chart.getStyler().setLegendPosition(Styler.LegendPosition.OutsideS);
+        for (NameValue nv : data) if ((int) nv.Value > 0) chart.addSeries(nv.Name, (int) nv.Value);
+        return chart;
+    }
+
+    public XYChart makePrihodiTipoviChart() {
+        XYChart chart = new XYChartBuilder().theme(Styler.ChartTheme.GGPlot2).width(getMinimumSize().width / 3 - 10).height(getMinimumSize().height - 100).title("Prihodi po tipu kozmetičkog tretmana").build();
+        chart.getStyler().setChartBackgroundColor(new Color(60, 63, 65));
+        chart.getStyler().setLegendPosition(Styler.LegendPosition.OutsideS);
+
+        for (NameValue nv : new ZakazaniTretmani().getPrihodiTipDijagramData()) {
+            ArrayList<Integer> xData = new ArrayList<>();
+            ArrayList<Double>  yData = new ArrayList<>();
+            for (KeyValue mesecIznos : (ArrayList<KeyValue>) nv.Value)
+                if ((Double) mesecIznos.Value > 0) {
+                    xData.add((int) mesecIznos.Key);
+                    yData.add((Double) mesecIznos.Value);
+                }
+            if (!xData.isEmpty()) chart.addSeries(nv.Name, xData, yData);
+        }
+
+        chart.getStyler().setxAxisTickLabelsFormattingFunction(x -> getMonthName((int) x.longValue()));
+
+        return chart;
     }
 
     public void addEntitet() {
@@ -207,19 +255,23 @@ public class MenadzerPage extends JFrame {
             columnModel.removeColumn(columnModel.getColumn(0));
 
         } else if (((NameValue) entitetTypeBox.getSelectedItem()).Value == Tretman.class) {
-            ArrayList<Tretman> tretmani = new Tretmani().get();
+            TipoviTretmana     tipoviTretmana = new TipoviTretmana();
+            ArrayList<Tretman> tretmani       = new Tretmani().get();
             for (Tretman tretman : tretmani)
-                values.add(new Object[]{tretman, tretman.Naziv, new TipoviTretmana().get(tretman.TipID).Tip, tretman.Cena, padLeft(String.valueOf(tretman.Trajanje), 3) + " min"});
+                values.add(new Object[]{tretman, tretman.Naziv, tipoviTretmana.get(tretman.TipID).Tip, tretman.Cena, padLeft(String.valueOf(tretman.Trajanje), 3) + " min"});
             entitetiTbl.setModel(new DefaultTableModel(values.toArray(new Object[][]{}), new String[]{"", "Naziv", "Tip", "Cena", "Trajanje"}));
             columnModel.removeColumn(columnModel.getColumn(0));
             columnModel.getColumn(2).setCellRenderer(new NumberRenderer(false));
 
         } else if (((NameValue) entitetTypeBox.getSelectedItem()).Value == ZakazaniTretman.class) {
-            ArrayList<ZakazaniTretman> tretmani = new ZakazaniTretmani().get();
-            for (ZakazaniTretman tretman : tretmani)
-                values.add(new Object[]{tretman, new Tretmani().get(tretman.TretmanID).Naziv, tretman.Vreme.format(DateTimeFormatter.ofPattern("HH:mm dd.MM.yyyy.")),
-                                        getStanjeName(tretman.Stanje), new Klijenti().get(tretman.KlijentID).getDisplayName(),
-                                        new Zaposleni().get(tretman.KozmeticarID).getDisplayName(),
+            ArrayList<ZakazaniTretman> zakazaniTretmani = new ZakazaniTretmani().get();
+            Zaposleni                  zaposleni        = new Zaposleni();
+            Klijenti                   klijenti         = new Klijenti();
+            Tretmani                   tretmani         = new Tretmani();
+            for (ZakazaniTretman tretman : zakazaniTretmani)
+                values.add(new Object[]{tretman, tretmani.get(tretman.TretmanID).Naziv, tretman.Vreme.format(DateTimeFormatter.ofPattern("HH:mm dd.MM.yyyy.")),
+                                        getStanjeName(tretman.Stanje), klijenti.get(tretman.KlijentID).getDisplayName(),
+                                        zaposleni.get(tretman.KozmeticarID).getDisplayName(),
                                         tretman.getPlaceniIznos(), padLeft(String.valueOf(tretman.Trajanje), 3) + " min"});
             entitetiTbl.setModel(new DefaultTableModel(values.toArray(new Object[][]{}), new String[]{"", "Tretman", "Vreme", "Stanje", "Klijent",
                                                                                                       "Kozmetičar", "Cena", "Trajanje"}));

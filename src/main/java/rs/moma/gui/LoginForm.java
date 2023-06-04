@@ -32,23 +32,23 @@ public class LoginForm extends JDialog {
                 if (klijent == null && zaposlen == null)
                     showMessageDialog(this, "Neispravno ime ili šifra!");
                 else {
-                    parent.setVisible(false);
-                    parent.dispose();
-
-                    if (zaposlen.TipZaposlenog == ETipZaposlenog.KOZMETICAR)
-                        new KozmeticarPage(zaposlen);
-
-
-                    // USPEŠAN LOGIN
-                    // OTVORITI FORMU
-
                     setVisible(false);
                     dispose();
+                    parent.setVisible(false);
+                }
+                if (zaposlen != null) {
+                    if (zaposlen.TipZaposlenog == ETipZaposlenog.KOZMETICAR)
+                        new KozmeticarPage(zaposlen, parent);
+                    else if (zaposlen.TipZaposlenog == ETipZaposlenog.MENADZER)
+                        new MenadzerPage(zaposlen, parent);
+                    else if (zaposlen.TipZaposlenog == ETipZaposlenog.RECEPCIONER)
+                        new RecepcionerPage(zaposlen, parent);
+                } else if (klijent != null) {
+                    new KlijentPage(klijent, parent);
                 }
             }
         });
         setVisible(true);
     }
-
 }
 

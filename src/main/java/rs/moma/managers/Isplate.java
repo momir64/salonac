@@ -17,11 +17,10 @@ import static rs.moma.helper.DataTools.fileIsplate;
 import static rs.moma.helper.DataTools.toArrayList;
 
 public class Isplate {
-    private final String poruka = "isplata";
+    private final ArrayList<Isplata> isplate = new ArrayList<>();
+    private final String             poruka  = "isplata";
 
-    // CRUD
-    public ArrayList<Isplata> get() {
-        ArrayList<Isplata> isplate = new ArrayList<>();
+    public Isplate() {
         try {
             List<String> lines = Files.readAllLines(Paths.get(fileIsplate), StandardCharsets.UTF_8);
             for (String line : lines)
@@ -29,29 +28,34 @@ public class Isplate {
         } catch (Exception e) {
             System.err.println("Desila se greška prilikom čitanja isplata!");
         }
+    }
+
+    // CRUD
+    public ArrayList<Isplata> get() {
         return isplate;
     }
 
-    public void add(Isplata isplata) {
-        DataTools.add(get(), fileIsplate, poruka, isplata);
+    public boolean add(Isplata isplata) {
+        return DataTools.add(isplate, fileIsplate, poruka, isplata);
     }
 
-    public void remove(Isplata isplata) {
-        DataTools.remove(get(), fileIsplate, poruka, isplata);
+    public boolean remove(Isplata isplata) {
+        return DataTools.remove(isplate, fileIsplate, poruka, isplata);
     }
 
-    public void edit(Isplata oldIsplata, Isplata newIsplata) {
-        DataTools.edit(get(), fileIsplate, poruka, oldIsplata, newIsplata);
+    public boolean edit(Isplata oldIsplata, Isplata newIsplata) {
+        return DataTools.edit(isplate, fileIsplate, poruka, oldIsplata, newIsplata);
     }
 
     // Specijalne get metode
     public ArrayList<NazivVrednostVreme> getRashodi(LocalDateTime from, LocalDateTime to) {
-        ArrayList<Isplata> isplate = toArrayList(get().stream().filter(isplata -> (from == null || isplata.Mesec.isAfter(from) || isplata.Mesec.isEqual(from))
-                                                                                  && (to == null || isplata.Mesec.isBefore(to) || isplata.Mesec.isEqual(to))));
+        ArrayList<Isplata> filterIsplate = toArrayList(isplate.stream().filter(isplata -> (from == null || isplata.Mesec.isAfter(from) || isplata.Mesec.isEqual(from))
+                                                                                          && (to == null || isplata.Mesec.isBefore(to) || isplata.Mesec.isEqual(to))));
         ArrayList<NazivVrednostVreme> rashodi = new ArrayList<>();
-        for (Isplata isplata : isplate)
+        Zaposleni zaposleni = new Zaposleni();
+        for (Isplata isplata : filterIsplate)
             for (RadnikPlata radnikPlata : isplata.Plate)
-                rashodi.add(new NazivVrednostVreme("Isplata " + new Zaposleni().get(radnikPlata.RadnikID).getDisplayName(), -radnikPlata.Plata, isplata.Mesec));
+                rashodi.add(new NazivVrednostVreme("Isplata " + zaposleni.get(radnikPlata.RadnikID).getDisplayName(), -radnikPlata.Plata, isplata.Mesec));
         return rashodi;
     }
 
@@ -65,7 +69,7 @@ public class Isplate {
     }
 
     public void isplati() {
-        Optional<Isplata> poslednjaIsplata = get().stream().max(Isplata::compareTo);
+        Optional<Isplata> poslednjaIsplata = isplate.stream().max(Isplata::compareTo);
         LocalDateTime     trenutniMesec    = LocalDateTime.now().withDayOfMonth(1).withHour(0).withMinute(0).withSecond(0).withNano(0);
         if (!poslednjaIsplata.isPresent())
             add(new Isplata(trenutniMesec, generatePlate()));

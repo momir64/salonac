@@ -1,6 +1,5 @@
 package rs.moma.gui.crud;
 
-import rs.moma.entities.TipTretmana;
 import rs.moma.entities.Tretman;
 import rs.moma.gui.helper.NameValue;
 import rs.moma.gui.helper.NumericKeyAdapter;

@@ -17,11 +17,10 @@ import static rs.moma.helper.DataTools.fileZaposleni;
 import static rs.moma.helper.DataTools.toArrayList;
 
 public class Zaposleni {
-    private final String poruka = "zaposleni";
+    private final ArrayList<Zaposlen> zaposleni = new ArrayList<>();
+    private final String              poruka    = "zaposleni";
 
-    // CRUD
-    public ArrayList<Zaposlen> get() {
-        ArrayList<Zaposlen> zaposleni = new ArrayList<>();
+    public Zaposleni() {
         try {
             List<String> lines = Files.readAllLines(Paths.get(fileZaposleni), StandardCharsets.UTF_8);
             for (String line : lines)
@@ -29,26 +28,30 @@ public class Zaposleni {
         } catch (Exception e) {
             System.err.println("Desila se greška prilikom čitanja zaposlenih!");
         }
+    }
+
+    // CRUD
+    public ArrayList<Zaposlen> get() {
         return zaposleni;
     }
 
     public Zaposlen get(int id) {
-        Optional<Zaposlen> zaposlen = get().stream().filter(tmp -> tmp.ID == id).findFirst();
+        Optional<Zaposlen> zaposlen = zaposleni.stream().filter(tmp -> tmp.ID == id).findFirst();
         if (zaposlen.isPresent()) return zaposlen.get();
         System.err.println("Traženi zaposleni ne postoji!");
         return null;
     }
 
     public boolean add(Zaposlen zaposlen) {
-        return DataTools.add(get(), fileZaposleni, poruka, zaposlen);
+        return DataTools.add(zaposleni, fileZaposleni, poruka, zaposlen);
     }
 
     public boolean remove(Zaposlen zaposlen) {
-        return DataTools.remove(get(), fileZaposleni, poruka, zaposlen);
+        return DataTools.remove(zaposleni, fileZaposleni, poruka, zaposlen) && new ZakazaniTretmani().removeKozmeticar(zaposlen);
     }
 
     public boolean edit(Zaposlen oldZaposlen, Zaposlen newZaposlen) {
-        return DataTools.edit(get(), fileZaposleni, poruka, oldZaposlen, newZaposlen);
+        return DataTools.edit(zaposleni, fileZaposleni, poruka, oldZaposlen, newZaposlen);
     }
 
     // Pravljenje ključeva
@@ -60,23 +63,22 @@ public class Zaposleni {
     }
 
     public int getNewID() {
-        ArrayList<Zaposlen> zaposleni = get();
-        int                 i         = 0;
+        int i = 0;
         while (isTakenID(i, zaposleni)) i++;
         return i;
     }
 
     // Specijalne get metode
     public ArrayList<Zaposlen> getRadi(Tretman tretman) {
-        return toArrayList(get().stream().filter(kozmeticar -> Arrays.stream(kozmeticar.ZaduzeniTipoviTretmana).anyMatch(tipID -> tipID == tretman.TipID)));
+        return toArrayList(zaposleni.stream().filter(kozmeticar -> Arrays.stream(kozmeticar.ZaduzeniTipoviTretmana).anyMatch(tipID -> tipID == tretman.TipID)));
     }
 
     public ArrayList<Zaposlen> getKozmeticari() {
-        return toArrayList(get().stream().filter(kozmeticar -> kozmeticar.TipZaposlenog == KOZMETICAR));
+        return toArrayList(zaposleni.stream().filter(kozmeticar -> kozmeticar.TipZaposlenog == KOZMETICAR));
     }
 
     // Prijava
     public Zaposlen prijava(String username, String password) {
-        return get().stream().filter(zaposlen -> zaposlen.Username.equalsIgnoreCase(username) && zaposlen.Lozinka.equals(password)).findFirst().orElse(null);
+        return zaposleni.stream().filter(zaposlen -> zaposlen.Username.equalsIgnoreCase(username) && zaposlen.Lozinka.equals(password)).findFirst().orElse(null);
     }
 }

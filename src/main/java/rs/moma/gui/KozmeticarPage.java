@@ -9,6 +9,8 @@ import rs.moma.entities.Klijent;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 public class KozmeticarPage extends KalendarForm {
@@ -22,7 +24,7 @@ public class KozmeticarPage extends KalendarForm {
     private       JButton       leftBtn;
     private final Zaposlen      kozmeticar;
 
-    public KozmeticarPage(Zaposlen kozmeticar) {
+    public KozmeticarPage(Zaposlen kozmeticar, WelcomePage homePage) {
         super(false);
         this.kozmeticar = kozmeticar;
 
@@ -31,11 +33,17 @@ public class KozmeticarPage extends KalendarForm {
         setLocationRelativeTo(null);
         setMinimumSize(new Dimension(750, 800));
         setTitle(kozmeticar.Ime + " " + kozmeticar.Prezime);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 
         tretmaniList.setSelectionModel(new NoSelectionModel());
         tretmaniList.setListData(kozmeticar.getTretmani().stream().map(tretman -> tretman.Naziv).sorted().toArray(String[]::new));
         super.setup(kalendarPane, tretmaniTbl, 200, kalendarTbl, mesecLbl, rightBtn, leftBtn, false, false);
+
+        this.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                homePage.setVisible(true);
+            }
+        });
 
         setVisible(true);
     }

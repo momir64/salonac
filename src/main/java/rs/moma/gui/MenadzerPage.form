@@ -17,113 +17,6 @@
         <properties/>
         <border type="none"/>
         <children>
-          <grid id="82a68" layout-manager="GridBagLayout">
-            <constraints>
-              <tabbedpane title="Baza podataka"/>
-            </constraints>
-            <properties/>
-            <border type="none"/>
-            <children>
-              <hspacer id="70348">
-                <constraints>
-                  <grid row="1" column="0" row-span="5" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="0.0" weighty="0.0" ipadx="60"/>
-                </constraints>
-              </hspacer>
-              <hspacer id="3184f">
-                <constraints>
-                  <grid row="1" column="6" row-span="5" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="0.0" weighty="0.0" ipadx="60"/>
-                </constraints>
-              </hspacer>
-              <vspacer id="84cf1">
-                <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="7" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="0.0" weighty="0.0" ipady="60"/>
-                </constraints>
-              </vspacer>
-              <vspacer id="b74c9">
-                <constraints>
-                  <grid row="6" column="0" row-span="1" col-span="7" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="0.0" weighty="0.0" ipady="60"/>
-                </constraints>
-              </vspacer>
-              <component id="e7b8b" class="javax.swing.JComboBox" binding="entitetTypeBox">
-                <constraints>
-                  <grid row="1" column="1" row-span="1" col-span="5" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="0.0" weighty="0.0" ipady="8"/>
-                </constraints>
-                <properties/>
-              </component>
-              <vspacer id="74b12">
-                <constraints>
-                  <grid row="4" column="1" row-span="1" col-span="5" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="0.0" weighty="0.0" ipady="20"/>
-                </constraints>
-              </vspacer>
-              <component id="95b87" class="javax.swing.JButton" binding="addEntitetBtn">
-                <constraints>
-                  <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="1.0" weighty="0.0" ipady="15"/>
-                </constraints>
-                <properties>
-                  <text value="Dodaj"/>
-                </properties>
-              </component>
-              <component id="d8906" class="javax.swing.JButton" binding="editEntitetBtn">
-                <constraints>
-                  <grid row="5" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="1.0" weighty="0.0" ipady="15"/>
-                </constraints>
-                <properties>
-                  <text value="Izmeni"/>
-                </properties>
-              </component>
-              <component id="a9313" class="javax.swing.JButton" binding="removeEntitetBtn">
-                <constraints>
-                  <grid row="5" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="1.0" weighty="0.0" ipady="15"/>
-                </constraints>
-                <properties>
-                  <text value="Obriši"/>
-                </properties>
-              </component>
-              <hspacer id="255af">
-                <constraints>
-                  <grid row="5" column="2" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="0.0" weighty="0.0" ipadx="10" ipady="15"/>
-                </constraints>
-              </hspacer>
-              <hspacer id="5fd4b">
-                <constraints>
-                  <grid row="5" column="4" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="0.0" weighty="0.0" ipadx="10" ipady="15"/>
-                </constraints>
-              </hspacer>
-              <vspacer id="f6253">
-                <constraints>
-                  <grid row="2" column="1" row-span="1" col-span="5" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="0.0" weighty="0.0" ipady="20"/>
-                </constraints>
-              </vspacer>
-              <scrollpane id="9a17e">
-                <constraints>
-                  <grid row="3" column="1" row-span="1" col-span="5" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="1.0" weighty="1.0"/>
-                </constraints>
-                <properties/>
-                <border type="none"/>
-                <children>
-                  <component id="b754" class="javax.swing.JTable" binding="entitetiTbl" custom-create="true">
-                    <constraints/>
-                    <properties>
-                      <font name="Consolas" size="15"/>
-                    </properties>
-                  </component>
-                </children>
-              </scrollpane>
-            </children>
-          </grid>
           <grid id="245d6" layout-manager="GridBagLayout">
             <constraints>
               <tabbedpane title="Salon"/>
@@ -520,6 +413,113 @@
               </scrollpane>
             </children>
           </grid>
+          <grid id="82a68" layout-manager="GridBagLayout">
+            <constraints>
+              <tabbedpane title="Baza podataka"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <hspacer id="70348">
+                <constraints>
+                  <grid row="1" column="0" row-span="5" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="0.0" weighty="0.0" ipadx="60"/>
+                </constraints>
+              </hspacer>
+              <hspacer id="3184f">
+                <constraints>
+                  <grid row="1" column="6" row-span="5" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="0.0" weighty="0.0" ipadx="60"/>
+                </constraints>
+              </hspacer>
+              <vspacer id="84cf1">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="7" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="0.0" weighty="0.0" ipady="60"/>
+                </constraints>
+              </vspacer>
+              <vspacer id="b74c9">
+                <constraints>
+                  <grid row="6" column="0" row-span="1" col-span="7" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="0.0" weighty="0.0" ipady="60"/>
+                </constraints>
+              </vspacer>
+              <component id="e7b8b" class="javax.swing.JComboBox" binding="entitetTypeBox">
+                <constraints>
+                  <grid row="1" column="1" row-span="1" col-span="5" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="0.0" weighty="0.0" ipady="8"/>
+                </constraints>
+                <properties/>
+              </component>
+              <vspacer id="74b12">
+                <constraints>
+                  <grid row="4" column="1" row-span="1" col-span="5" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="0.0" weighty="0.0" ipady="20"/>
+                </constraints>
+              </vspacer>
+              <component id="95b87" class="javax.swing.JButton" binding="addEntitetBtn">
+                <constraints>
+                  <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="1.0" weighty="0.0" ipady="15"/>
+                </constraints>
+                <properties>
+                  <text value="Dodaj"/>
+                </properties>
+              </component>
+              <component id="d8906" class="javax.swing.JButton" binding="editEntitetBtn">
+                <constraints>
+                  <grid row="5" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="1.0" weighty="0.0" ipady="15"/>
+                </constraints>
+                <properties>
+                  <text value="Izmeni"/>
+                </properties>
+              </component>
+              <component id="a9313" class="javax.swing.JButton" binding="removeEntitetBtn">
+                <constraints>
+                  <grid row="5" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="1.0" weighty="0.0" ipady="15"/>
+                </constraints>
+                <properties>
+                  <text value="Obriši"/>
+                </properties>
+              </component>
+              <hspacer id="255af">
+                <constraints>
+                  <grid row="5" column="2" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="0.0" weighty="0.0" ipadx="10" ipady="15"/>
+                </constraints>
+              </hspacer>
+              <hspacer id="5fd4b">
+                <constraints>
+                  <grid row="5" column="4" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="0.0" weighty="0.0" ipadx="10" ipady="15"/>
+                </constraints>
+              </hspacer>
+              <vspacer id="f6253">
+                <constraints>
+                  <grid row="2" column="1" row-span="1" col-span="5" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="0.0" weighty="0.0" ipady="20"/>
+                </constraints>
+              </vspacer>
+              <scrollpane id="9a17e">
+                <constraints>
+                  <grid row="3" column="1" row-span="1" col-span="5" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="1.0" weighty="1.0"/>
+                </constraints>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <component id="b754" class="javax.swing.JTable" binding="entitetiTbl" custom-create="true">
+                    <constraints/>
+                    <properties>
+                      <font name="Consolas" size="15"/>
+                    </properties>
+                  </component>
+                </children>
+              </scrollpane>
+            </children>
+          </grid>
           <grid id="e05e6" layout-manager="GridBagLayout">
             <constraints>
               <tabbedpane title="Izveštaji"/>
@@ -745,7 +745,35 @@
             </constraints>
             <properties/>
             <border type="none"/>
-            <children/>
+            <children>
+              <grid id="5ea95" binding="prihodiTipoviPanel" layout-manager="GridBagLayout">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="1.0" weighty="1.0"/>
+                </constraints>
+                <properties/>
+                <border type="none"/>
+                <children/>
+              </grid>
+              <grid id="3a98e" binding="realizovaniPoKozmeticarimaPanel" layout-manager="GridBagLayout">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="1.0" weighty="1.0"/>
+                </constraints>
+                <properties/>
+                <border type="none"/>
+                <children/>
+              </grid>
+              <grid id="d017c" binding="procenatStatusaPanel" layout-manager="GridBagLayout">
+                <constraints>
+                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="1.0" weighty="1.0"/>
+                </constraints>
+                <properties/>
+                <border type="none"/>
+                <children/>
+              </grid>
+            </children>
           </grid>
         </children>
       </tabbedpane>

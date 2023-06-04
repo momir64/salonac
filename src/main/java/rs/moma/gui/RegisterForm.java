@@ -12,7 +12,6 @@ import static javax.swing.JOptionPane.showMessageDialog;
 import static rs.moma.helper.DataTools.*;
 
 public class RegisterForm extends JDialog {
-    final   Klijenti             klijenti = new Klijenti();
     private JButton              registracijaBtn;
     private JPanel               registerPanel;
     private JTextField           usernameTxt;
@@ -31,6 +30,7 @@ public class RegisterForm extends JDialog {
         setLocationRelativeTo(parent);
         fillPolBox(polBox);
         registracijaBtn.addActionListener(e -> {
+            Klijenti klijenti = new Klijenti();
             if (!isInputValid(imeTxt, prezimeTxt, telefonTxt, adresaTxt, usernameTxt, passwordTxt))
                 showMessageDialog(this, "Neispravan unos!");
             else if (!klijenti.isUsernameFree(usernameTxt.getText()))

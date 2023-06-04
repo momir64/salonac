@@ -22,11 +22,11 @@ public class Klijent extends Korisnik {
 
     // Specijalne get metode
     public ArrayList<ZakazaniTretman> getSviZakazaniTretmani() {
-        return new ZakazaniTretmani().getKlijent(this, null, null, false);
+        return new ZakazaniTretmani().getForKlijent(this, null, null);
     }
 
     public float getUkupnoPlatio() {
-        return (float) new ZakazaniTretmani().getKlijent(this, null, null, false).stream().mapToDouble(ZakazaniTretman::getPlaceniIznos).sum();
+        return (float) new ZakazaniTretmani().getForKlijent(this, null, null).stream().mapToDouble(ZakazaniTretman::getPlaceniIznos).sum();
     }
 
     public boolean getKarticaLojalnosti() {

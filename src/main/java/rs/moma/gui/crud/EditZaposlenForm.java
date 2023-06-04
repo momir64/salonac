@@ -1,14 +1,11 @@
 package rs.moma.gui.crud;
 
-import rs.moma.entities.Klijent;
 import rs.moma.entities.TipTretmana;
-import rs.moma.entities.Tretman;
 import rs.moma.entities.Zaposlen;
 import rs.moma.gui.crud.helper.CheckBoxListRenderer;
 import rs.moma.gui.crud.helper.CheckListTip;
 import rs.moma.gui.helper.NameValue;
 import rs.moma.gui.helper.NumericKeyAdapter;
-import rs.moma.managers.Klijenti;
 import rs.moma.managers.TipoviTretmana;
 import rs.moma.managers.Zaposleni;
 

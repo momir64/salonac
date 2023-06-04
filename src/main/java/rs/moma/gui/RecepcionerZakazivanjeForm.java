@@ -99,12 +99,14 @@ public class RecepcionerZakazivanjeForm extends ZakazivanjeForm {
         vremeBox.setSelectedItem(new NameValue("", tretman.Vreme.getHour()));
     }
 
-    public <T extends ClassWithID> void selectBoxOption(JComboBox<NameValue> box, int id) {
-        for (int i = 0; i < box.getItemCount(); i++)
-            if (((T) box.getItemAt(i).getValue()).getID() == id) {
+    public void selectBoxOption(JComboBox<NameValue> box, int id) {
+        for (int i = 0; i < box.getItemCount(); i++) {
+            Object value = box.getItemAt(i).getValue();
+            if (value instanceof ClassWithID && ((ClassWithID) value).getID() == id) {
                 box.setSelectedIndex(i);
                 break;
             }
+        }
     }
 
     public void fillKlijentiBox() {
