@@ -22,9 +22,9 @@ public abstract class KalendarForm extends JFrame {
     protected final String[]          meseci         = {"Januar", "Februar", "Mart", "April", "Maj", "Jun", "Jul", "Avgust", "Septembar", "Oktobar", "Novembar", "Decembar"};
     protected final DefaultTableModel kalendarModel  = new DefaultTableModel(null, new String[]{"Pon", "Uto", "Sre", "Čet", "Pet", "Sub", "Ned"});
     protected final Calendar          kalendar       = new GregorianCalendar();
+    protected final boolean           isEmptyDateSelectable;
     protected       int               selectedRow    = -1;
     protected       int               selectedColumn = -1;
-    protected       boolean           isEmptyDateSelectable;
     private         JTable            tretmaniTbl;
     private         boolean           showDelete;
     private         boolean           showEdit;

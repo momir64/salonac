@@ -10,15 +10,15 @@ import static rs.moma.helper.DataTools.EStanjeTermina.*;
 import static rs.moma.helper.DataTools.SP1;
 
 public class ZakazaniTretman implements ClassWithID {
-    public        int            ID;
-    public final  int            TretmanID;
-    public final  int            Trajanje;
-    public final  LocalDateTime  Vreme;
-    public        EStanjeTermina Stanje;
-    public final  int            KlijentID;
-    public final  int            KozmeticarID;
-    public final  boolean        KarticaLojalnosti;
-    private final float          Cena;
+    public       int            ID;
+    public final int            TretmanID;
+    public final int            Trajanje;
+    public final LocalDateTime  Vreme;
+    public       EStanjeTermina Stanje;
+    public final int            KlijentID;
+    public final int            KozmeticarID;
+    public final boolean        KarticaLojalnosti;
+    public final float          Cena;
 
     public ZakazaniTretman(int id, int tretmanID, float cena, int trajanje, LocalDateTime vreme, EStanjeTermina stanje, int klijentID, int kozmeticarID, boolean karticaLojalnosti) {
         ID                = id;
@@ -30,6 +30,10 @@ public class ZakazaniTretman implements ClassWithID {
         KlijentID         = klijentID;
         KozmeticarID      = kozmeticarID;
         KarticaLojalnosti = karticaLojalnosti;
+    }
+
+    public ZakazaniTretman(int tretmanID, float cena, int trajanje, LocalDateTime vreme, EStanjeTermina stanje, int klijentID, int kozmeticarID, boolean karticaLojalnosti) {
+        this(new ZakazaniTretmani().getNewID(), tretmanID, cena, trajanje, vreme, stanje, klijentID, kozmeticarID, karticaLojalnosti);
     }
 
     public ZakazaniTretman(Tretman tretman, LocalDateTime vreme, Klijent klijent, Zaposlen kozmeticar) {

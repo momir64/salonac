@@ -36,16 +36,16 @@ public class Tretmani {
         return null;
     }
 
-    public void add(Tretman tretman) {
-        DataTools.add(get(), fileTretmani, poruka, tretman);
+    public boolean add(Tretman tretman) {
+        return DataTools.add(get(), fileTretmani, poruka, tretman);
     }
 
-    public void remove(Tretman tretman) {
-        DataTools.remove(get(), fileTretmani, poruka, tretman);
+    public boolean remove(Tretman tretman) {
+        return DataTools.remove(get(), fileTretmani, poruka, tretman);
     }
 
-    public void edit(Tretman oldTretman, Tretman newTretman) {
-        DataTools.edit(get(), fileTretmani, poruka, oldTretman, newTretman);
+    public boolean edit(Tretman oldTretman, Tretman newTretman) {
+        return DataTools.edit(get(), fileTretmani, poruka, oldTretman, newTretman);
     }
 
     // Pravljenje ključeva

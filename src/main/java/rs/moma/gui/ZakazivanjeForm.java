@@ -22,9 +22,9 @@ public class ZakazivanjeForm extends JDialog {
 
     public void fillTretmaniBox(ArrayList<Tretman> tretmani, JComboBox<NameValue> tretmanBox, JComboBox<NameValue> kozmeticarBox, JComboBox<NameValue> vremeBox, LocalDate datum, ZakazaniTretman oldTretman) {
         ArrayList<Zaposlen> zaposleni = new Zaposleni().get();
-        tretmani.removeIf(tretman -> zaposleni.stream().noneMatch(zaposlen -> Arrays.stream(zaposlen.ZaduzeniTretmani).anyMatch(tretmanID -> tretmanID == tretman.ID)));
+        tretmani.removeIf(tretman -> zaposleni.stream().noneMatch(zaposlen -> Arrays.stream(zaposlen.ZaduzeniTipoviTretmana).anyMatch(tipID -> tipID == tretman.TipID)));
         tretmani.sort(Comparator.comparing(tip -> tip.Naziv));
-        tretmanBox.setModel(new DefaultComboBoxModel(tretmani.stream().map(t -> new NameValue(t.Naziv, t)).toArray()));
+        tretmanBox.setModel(new DefaultComboBoxModel<>(tretmani.stream().map(t -> new NameValue(t.Naziv, t)).toArray(NameValue[]::new)));
         fillKozmeticariBox(tretmanBox, kozmeticarBox, vremeBox, datum, oldTretman);
     }
 
@@ -35,7 +35,7 @@ public class ZakazivanjeForm extends JDialog {
             NameValue           oldKozmeticar = (NameValue) kozmeticarBox.getSelectedItem();
             ArrayList<Zaposlen> kozmeticari   = new Zaposleni().getRadi((Tretman) getSelectedValue(tretmanBox));
             kozmeticari.sort(Comparator.comparing(tip -> tip.Ime));
-            kozmeticarBox.setModel(new DefaultComboBoxModel(kozmeticari.stream().map(k -> new NameValue(k.getDisplayName(), k)).toArray()));
+            kozmeticarBox.setModel(new DefaultComboBoxModel<>(kozmeticari.stream().map(k -> new NameValue(k.getDisplayName(), k)).toArray(NameValue[]::new)));
             if (oldKozmeticar != null && kozmeticari.stream().anyMatch(kozmeticar -> kozmeticar.ID == ((Zaposlen) oldKozmeticar.getValue()).ID))
                 kozmeticarBox.setSelectedItem(oldKozmeticar);
         }
@@ -49,13 +49,9 @@ public class ZakazivanjeForm extends JDialog {
             NameValue oldTermin = (NameValue) vremeBox.getSelectedItem();
             ArrayList<Integer> termini = ((Zaposlen) getSelectedValue(kozmeticarBox))
                     .getSlobodniTermini(datum, oldTretman, ((Tretman) getSelectedValue(tretmanBox)).Trajanje);
-            vremeBox.setModel(new DefaultComboBoxModel(termini.stream().map(i -> new NameValue(i + "h", i)).toArray()));
+            vremeBox.setModel(new DefaultComboBoxModel<>(termini.stream().map(i -> new NameValue(i + "h", i)).toArray(NameValue[]::new)));
             if (oldTermin != null && termini.contains((Integer) oldTermin.getValue()))
                 vremeBox.setSelectedItem(oldTermin);
         }
-    }
-
-    public LocalDateTime getTermin(JTextField datumTxt, JComboBox<NameValue> vremeBox) {
-        return getDatum(datumTxt).atTime((Integer) getSelectedValue(vremeBox), 0);
     }
 }

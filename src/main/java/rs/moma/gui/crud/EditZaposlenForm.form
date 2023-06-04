@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="rs.moma.gui.crud.EditZaposlenForm">
+  <grid id="27dc6" binding="mainPanel" layout-manager="GridBagLayout">
+    <constraints>
+      <xy x="20" y="20" width="960" height="705"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <vspacer id="3787f">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="9" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="1.0"/>
+        </constraints>
+      </vspacer>
+      <component id="ed97b" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="2" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.5" weighty="0.0" ipady="30"/>
+        </constraints>
+        <properties>
+          <labelFor value="db762"/>
+          <text value="Ime:"/>
+        </properties>
+      </component>
+      <hspacer id="ca39e">
+        <constraints>
+          <grid row="1" column="1" row-span="11" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="0.0" ipadx="20"/>
+        </constraints>
+      </hspacer>
+      <component id="db762" class="javax.swing.JTextField" binding="imeTxt">
+        <constraints>
+          <grid row="1" column="2" row-span="1" col-span="5" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+          <gridbag weightx="3.0" weighty="0.0"/>
+        </constraints>
+        <properties/>
+      </component>
+      <hspacer id="632df">
+        <constraints>
+          <grid row="1" column="8" row-span="13" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="3.0" weighty="0.0"/>
+        </constraints>
+      </hspacer>
+      <component id="6ce23" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="2" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.5" weighty="0.0" ipady="30"/>
+        </constraints>
+        <properties>
+          <labelFor value="e6e1"/>
+          <text value="Prezime:"/>
+        </properties>
+      </component>
+      <component id="e6e1" class="javax.swing.JTextField" binding="prezimeTxt">
+        <constraints>
+          <grid row="2" column="2" row-span="1" col-span="5" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+          <gridbag weightx="0.0" weighty="0.0"/>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="26ed3" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="2" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.5" weighty="0.0" ipady="30"/>
+        </constraints>
+        <properties>
+          <labelFor value="3d2ee"/>
+          <text value="Pol:"/>
+        </properties>
+      </component>
+      <component id="3d2ee" class="javax.swing.JComboBox" binding="polBox">
+        <constraints>
+          <grid row="3" column="2" row-span="1" col-span="5" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="3.0" weighty="0.0"/>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="c2bee" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="2" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.5" weighty="0.0" ipady="30"/>
+        </constraints>
+        <properties>
+          <labelFor value="92fc7"/>
+          <text value="Telefon:"/>
+        </properties>
+      </component>
+      <component id="92fc7" class="javax.swing.JTextField" binding="telefonTxt">
+        <constraints>
+          <grid row="4" column="2" row-span="1" col-span="5" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+          <gridbag weightx="0.0" weighty="0.0"/>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="9d4fb" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="2" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.5" weighty="0.0" ipady="30"/>
+        </constraints>
+        <properties>
+          <labelFor value="89af9"/>
+          <text value="Adresa:"/>
+        </properties>
+      </component>
+      <component id="89af9" class="javax.swing.JTextField" binding="adresaTxt">
+        <constraints>
+          <grid row="5" column="2" row-span="1" col-span="5" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+          <gridbag weightx="0.0" weighty="0.0"/>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="92fd" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="2" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.5" weighty="0.0" ipady="30"/>
+        </constraints>
+        <properties>
+          <labelFor value="f8c9c"/>
+          <text value="Korisničko ime:"/>
+        </properties>
+      </component>
+      <component id="f8c9c" class="javax.swing.JTextField" binding="usernameTxt">
+        <constraints>
+          <grid row="6" column="2" row-span="1" col-span="5" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+          <gridbag weightx="0.0" weighty="0.0"/>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="7a26a" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="2" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.5" weighty="0.0" ipady="30"/>
+        </constraints>
+        <properties>
+          <labelFor value="138ce"/>
+          <text value="Lozinka:"/>
+        </properties>
+      </component>
+      <component id="138ce" class="javax.swing.JTextField" binding="lozinkaTxt">
+        <constraints>
+          <grid row="7" column="2" row-span="1" col-span="5" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+          <gridbag weightx="0.0" weighty="0.0"/>
+        </constraints>
+        <properties/>
+      </component>
+      <hspacer id="e14dc">
+        <constraints>
+          <grid row="13" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="2.0" weighty="0.0"/>
+        </constraints>
+      </hspacer>
+      <component id="b84b1" class="javax.swing.JButton" binding="saveBtn">
+        <constraints>
+          <grid row="13" column="2" row-span="1" col-span="6" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="0.0" ipadx="300"/>
+        </constraints>
+        <properties>
+          <maximumSize width="78" height="50"/>
+          <minimumSize width="78" height="50"/>
+          <preferredSize width="78" height="50"/>
+          <text value="Sačuvaj"/>
+        </properties>
+      </component>
+      <vspacer id="8a093">
+        <constraints>
+          <grid row="14" column="0" row-span="1" col-span="9" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="1.0"/>
+        </constraints>
+      </vspacer>
+      <vspacer id="c5703">
+        <constraints>
+          <grid row="12" column="0" row-span="1" col-span="8" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="0.0" ipady="20"/>
+        </constraints>
+      </vspacer>
+      <component id="cb8f5" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="2" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.5" weighty="0.0" ipady="30"/>
+        </constraints>
+        <properties>
+          <labelFor value="60383"/>
+          <text value="Staž:"/>
+        </properties>
+      </component>
+      <component id="60383" class="javax.swing.JTextField" binding="stazTxt">
+        <constraints>
+          <grid row="10" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+          <gridbag weightx="0.0" weighty="0.0"/>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="4c2f0" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="2" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.5" weighty="0.0" ipady="30"/>
+        </constraints>
+        <properties>
+          <labelFor value="efc0d"/>
+          <text value="Tip zaposlenog:"/>
+        </properties>
+      </component>
+      <component id="efc0d" class="javax.swing.JComboBox" binding="tipBox">
+        <constraints>
+          <grid row="8" column="2" row-span="1" col-span="5" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="3.0" weighty="0.0"/>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="6195c" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="2" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.5" weighty="0.0" ipady="30"/>
+        </constraints>
+        <properties>
+          <labelFor value="b879e"/>
+          <text value="Sprema:"/>
+        </properties>
+      </component>
+      <component id="b879e" class="javax.swing.JComboBox" binding="spremaBox">
+        <constraints>
+          <grid row="9" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.5" weighty="0.0"/>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="cf940" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="11" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="2" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.5" weighty="0.0" ipady="30"/>
+        </constraints>
+        <properties>
+          <labelFor value="aabd0"/>
+          <text value="Plata osnova:"/>
+        </properties>
+      </component>
+      <component id="aabd0" class="javax.swing.JTextField" binding="osnovicaTxt">
+        <constraints>
+          <grid row="11" column="2" row-span="1" col-span="5" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+          <gridbag weightx="0.0" weighty="0.0"/>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="fbb7" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="9" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="2" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.1" weighty="0.0" ipady="30"/>
+        </constraints>
+        <properties>
+          <labelFor value="98c4b"/>
+          <text value="Koeficijent:"/>
+        </properties>
+      </component>
+      <component id="98c4b" class="javax.swing.JTextField" binding="kSpremaTxt">
+        <constraints>
+          <grid row="9" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+          <gridbag weightx="0.5" weighty="0.0"/>
+        </constraints>
+        <properties/>
+      </component>
+      <hspacer id="90a97">
+        <constraints>
+          <grid row="9" column="5" row-span="2" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="0.0"/>
+        </constraints>
+      </hspacer>
+      <component id="edde7" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="10" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="2" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.1" weighty="0.0" ipady="30"/>
+        </constraints>
+        <properties>
+          <labelFor value="1441f"/>
+          <text value="Koeficijent:"/>
+        </properties>
+      </component>
+      <component id="1441f" class="javax.swing.JTextField" binding="kStazTxt">
+        <constraints>
+          <grid row="10" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+          <gridbag weightx="0.0" weighty="0.0"/>
+        </constraints>
+        <properties/>
+      </component>
+      <grid id="cf2b" binding="kozmeticarPanel" layout-manager="GridBagLayout">
+        <constraints>
+          <grid row="1" column="7" row-span="11" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="2.0" weighty="0.0"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <hspacer id="45086">
+            <constraints>
+              <grid row="0" column="0" row-span="6" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="0.0" weighty="0.0" ipadx="40"/>
+            </constraints>
+          </hspacer>
+          <component id="50569" class="javax.swing.JButton" binding="removeBonusRuleBtn">
+            <constraints>
+              <grid row="3" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <gridbag top="8" left="0" bottom="8" right="0" weightx="1.0" weighty="0.0"/>
+            </constraints>
+            <properties>
+              <text value="Obriši pravilo"/>
+            </properties>
+          </component>
+          <component id="92acc" class="javax.swing.JButton" binding="saveBonusRuleBtn">
+            <constraints>
+              <grid row="3" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <gridbag top="8" left="0" bottom="8" right="0" weightx="1.0" weighty="0.0"/>
+            </constraints>
+            <properties>
+              <text value="Sačuvaj pravilo"/>
+            </properties>
+          </component>
+          <component id="47744" class="javax.swing.JComboBox" binding="bonusRuleBox">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="4" vsize-policy="0" hsize-policy="2" anchor="8" fill="3" indent="0" use-parent-layout="false"/>
+              <gridbag top="8" left="0" bottom="8" right="0" weightx="4.0" weighty="0.0"/>
+            </constraints>
+            <properties/>
+          </component>
+          <component id="5d1af" class="javax.swing.JTextField" binding="bonusOfWhatTxt">
+            <constraints>
+              <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="3" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+              <gridbag top="8" left="0" bottom="8" right="0" weightx="1.0" weighty="0.0"/>
+            </constraints>
+            <properties/>
+          </component>
+          <component id="2e551" class="javax.swing.JComboBox" binding="bonusOfWhatBox">
+            <constraints>
+              <grid row="2" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="3" indent="0" use-parent-layout="false"/>
+              <gridbag top="8" left="0" bottom="8" right="0" weightx="1.0" weighty="0.0"/>
+            </constraints>
+            <properties/>
+          </component>
+          <component id="82e42" class="javax.swing.JTextField" binding="bonusPeriodTxt">
+            <constraints>
+              <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="3" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+              <gridbag top="8" left="0" bottom="8" right="0" weightx="1.0" weighty="0.0"/>
+            </constraints>
+            <properties>
+              <text value=""/>
+            </properties>
+          </component>
+          <component id="e56bf" class="javax.swing.JComboBox" binding="bonusPeriodBox">
+            <constraints>
+              <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="3" indent="0" use-parent-layout="false"/>
+              <gridbag top="8" left="0" bottom="8" right="0" weightx="1.0" weighty="0.0"/>
+            </constraints>
+            <properties/>
+          </component>
+          <hspacer id="5fff5">
+            <constraints>
+              <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <gridbag top="8" left="0" bottom="8" right="0" weightx="0.0" weighty="0.0"/>
+            </constraints>
+          </hspacer>
+          <vspacer id="639e3">
+            <constraints>
+              <grid row="4" column="1" row-span="1" col-span="4" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="0.0" weighty="0.0" ipady="20"/>
+            </constraints>
+          </vspacer>
+          <scrollpane id="4e632">
+            <constraints>
+              <grid row="5" column="1" row-span="1" col-span="4" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="1.0" weighty="1.0"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="b241c" class="javax.swing.JList" binding="tipoviTretmanaLst" custom-create="true">
+                <constraints/>
+                <properties/>
+              </component>
+            </children>
+          </scrollpane>
+          <component id="bf6fd" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <gridbag top="0" left="0" bottom="0" right="10" weightx="0.0" weighty="0.0"/>
+            </constraints>
+            <properties>
+              <horizontalAlignment value="4"/>
+              <horizontalTextPosition value="4"/>
+              <text value="Za"/>
+            </properties>
+          </component>
+          <component id="3a0cf" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <gridbag top="0" left="0" bottom="0" right="10" weightx="0.0" weighty="0.0"/>
+            </constraints>
+            <properties>
+              <horizontalAlignment value="4"/>
+              <horizontalTextPosition value="4"/>
+              <text value="Puta"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <hspacer id="e298a">
+        <constraints>
+          <grid row="9" column="3" row-span="2" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="0.0" ipadx="5"/>
+        </constraints>
+      </hspacer>
+    </children>
+  </grid>
+</form>

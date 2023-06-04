@@ -50,16 +50,16 @@ public class ZakazaniTretmani {
         return null;
     }
 
-    public void add(ZakazaniTretman zakazaniTretman) {
-        DataTools.add(get(), fileZakazaniTretmani, poruka, zakazaniTretman);
+    public boolean add(ZakazaniTretman zakazaniTretman) {
+        return DataTools.add(get(), fileZakazaniTretmani, poruka, zakazaniTretman);
     }
 
-    public void remove(ZakazaniTretman zakazaniTretman) {
-        DataTools.remove(get(), fileZakazaniTretmani, poruka, zakazaniTretman);
+    public boolean remove(ZakazaniTretman zakazaniTretman) {
+        return DataTools.remove(get(), fileZakazaniTretmani, poruka, zakazaniTretman);
     }
 
-    public void edit(ZakazaniTretman oldTretman, ZakazaniTretman newTretman) {
-        DataTools.edit(get(), fileZakazaniTretmani, poruka, oldTretman, newTretman);
+    public boolean edit(ZakazaniTretman oldTretman, ZakazaniTretman newTretman) {
+        return DataTools.edit(get(), fileZakazaniTretmani, poruka, oldTretman, newTretman);
     }
 
     // Pravljenje ključeva
@@ -91,7 +91,8 @@ public class ZakazaniTretmani {
 
     // Specijalne get metode
     public ArrayList<NazivVrednostVreme> getPrihodi(LocalDateTime from, LocalDateTime to) {
-        return toArrayList(get().stream().filter(tretman -> (from == null || tretman.Vreme.isAfter(from)) && (to == null || tretman.Vreme.isBefore(to)))
+        return toArrayList(get().stream().filter(tretman -> (from == null || tretman.Vreme.isAfter(from) || tretman.Vreme.isEqual(from))
+                                                            && (to == null || tretman.Vreme.isBefore(to) || tretman.Vreme.isEqual(to)))
                                 .map(tretman -> new NazivVrednostVreme(new Tretmani().get(tretman.TretmanID).Naziv, tretman.getPlaceniIznos(), tretman.Vreme)));
     }
 
@@ -122,14 +123,17 @@ public class ZakazaniTretmani {
         ArrayList<ZakazaniTretman> zakazaniTretmani = get();
         ArrayList<ZakazaniTretman> tmp;
         for (Tretman tretman : tretmani) {
-            tmp = toArrayList(zakazaniTretmani.stream().filter(tr -> tr.TretmanID == tretman.ID && (from == null || tr.Vreme.isAfter(from)) && (to == null || tr.Vreme.isBefore(to))));
+            tmp = toArrayList(zakazaniTretmani.stream().filter(tr -> tr.TretmanID == tretman.ID
+                                                                     && (from == null || tr.Vreme.isAfter(from) || tr.Vreme.isEqual(from))
+                                                                     && (to == null || tr.Vreme.isBefore(to) || tr.Vreme.isEqual(to))));
             izvestaji.add(new KeyValue(tretman, new BrojVrednost(tmp.size(), (float) tmp.stream().mapToDouble(ZakazaniTretman::getPlaceniIznos).sum())));
         }
         return toArrayList(izvestaji.stream().sorted(Comparator.comparing(tr -> ((Tretman) tr.Key).Naziv)));
     }
 
     public int countOfStatus(EStanjeTermina status, LocalDateTime from, LocalDateTime to) {
-        return (int) get().stream().filter(tr -> tr.Stanje == status && (from == null || tr.Vreme.isAfter(from)) && (to == null || tr.Vreme.isBefore(to))).count();
+        return (int) get().stream().filter(tr -> tr.Stanje == status && (from == null || tr.Vreme.isAfter(from) || tr.Vreme.isEqual(from))
+                                                 && (to == null || tr.Vreme.isBefore(to) || tr.Vreme.isEqual(to))).count();
     }
 
     public ArrayList<ZakazaniTretman> getKlijent(Klijent klijent, LocalDateTime from, LocalDateTime to, boolean samoZakazani) {
@@ -143,8 +147,8 @@ public class ZakazaniTretmani {
     public ArrayList<ZakazaniTretman> getKlijentKozmeticar(Klijent klijent, Zaposlen zaposlen, LocalDateTime from, LocalDateTime to, boolean samoZakazani) {
         return toArrayList(get().stream().filter(tretman -> (klijent == null || tretman.KlijentID == klijent.ID) &&
                                                             (zaposlen == null || tretman.KozmeticarID == zaposlen.ID) &&
-                                                            (from == null || tretman.Vreme.isAfter(from)) &&
-                                                            (to == null || tretman.Vreme.isBefore(to)) &&
+                                                            (from == null || tretman.Vreme.isAfter(from) || tretman.Vreme.isEqual(from)) &&
+                                                            (to == null || tretman.Vreme.isBefore(to) || tretman.Vreme.isEqual(to)) &&
                                                             (!samoZakazani || tretman.Stanje == ZAKAZAN))
                                 .sorted(Comparator.comparing(t -> t.KozmeticarID))
                                 .sorted(Comparator.comparing(t -> t.Vreme)));

@@ -35,16 +35,16 @@ public class TipoviTretmana {
         return null;
     }
 
-    public void add(TipTretmana tipTretmana) {
-        DataTools.add(get(), fileTipoviTretmana, poruka, tipTretmana);
+    public boolean add(TipTretmana tipTretmana) {
+        return DataTools.add(get(), fileTipoviTretmana, poruka, tipTretmana);
     }
 
-    public void remove(TipTretmana tipTretmana) {
-        DataTools.remove(get(), fileTipoviTretmana, poruka, tipTretmana);
+    public boolean remove(TipTretmana tipTretmana) {
+        return DataTools.remove(get(), fileTipoviTretmana, poruka, tipTretmana);
     }
 
-    public void edit(TipTretmana oldtipTretmana, TipTretmana newtipTretmana) {
-        DataTools.edit(get(), fileTipoviTretmana, poruka, oldtipTretmana, newtipTretmana);
+    public boolean edit(TipTretmana oldtipTretmana, TipTretmana newtipTretmana) {
+        return DataTools.edit(get(), fileTipoviTretmana, poruka, oldtipTretmana, newtipTretmana);
     }
 
     // Pravljenje ključeva

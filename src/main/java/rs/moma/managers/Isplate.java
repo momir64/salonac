@@ -46,7 +46,8 @@ public class Isplate {
 
     // Specijalne get metode
     public ArrayList<NazivVrednostVreme> getRashodi(LocalDateTime from, LocalDateTime to) {
-        ArrayList<Isplata>            isplate = toArrayList(get().stream().filter(isplata -> (from == null || isplata.Mesec.isAfter(from)) && (to == null || isplata.Mesec.isBefore(to))));
+        ArrayList<Isplata> isplate = toArrayList(get().stream().filter(isplata -> (from == null || isplata.Mesec.isAfter(from) || isplata.Mesec.isEqual(from))
+                                                                                  && (to == null || isplata.Mesec.isBefore(to) || isplata.Mesec.isEqual(to))));
         ArrayList<NazivVrednostVreme> rashodi = new ArrayList<>();
         for (Isplata isplata : isplate)
             for (RadnikPlata radnikPlata : isplata.Plate)

@@ -24,7 +24,7 @@
         </constraints>
         <properties>
           <labelFor value="f75f6"/>
-          <text value="Šifra:"/>
+          <text value="Lozinka:"/>
         </properties>
       </component>
       <component id="4a94e" class="javax.swing.JTextField" binding="usernameTxt">

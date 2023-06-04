@@ -33,7 +33,7 @@ public class TipTretmana implements ClassWithID {
     public boolean equals(Object tipTretmana) {
         if (this == tipTretmana) return true;
         if (!(tipTretmana instanceof TipTretmana)) return false;
-        return ID == ((TipTretmana) tipTretmana).ID;
+        return ID == ((TipTretmana) tipTretmana).ID || Tip.equals(((TipTretmana) tipTretmana).Tip);
     }
 
     @Override

@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import static rs.moma.helper.DataTools.ETipZaposlenog.KOZMETICAR;
 import static rs.moma.helper.DataTools.fileZaposleni;
 import static rs.moma.helper.DataTools.toArrayList;
 
@@ -38,16 +39,16 @@ public class Zaposleni {
         return null;
     }
 
-    public void add(Zaposlen zaposlen) {
-        DataTools.add(get(), fileZaposleni, poruka, zaposlen);
+    public boolean add(Zaposlen zaposlen) {
+        return DataTools.add(get(), fileZaposleni, poruka, zaposlen);
     }
 
-    public void remove(Zaposlen zaposlen) {
-        DataTools.remove(get(), fileZaposleni, poruka, zaposlen);
+    public boolean remove(Zaposlen zaposlen) {
+        return DataTools.remove(get(), fileZaposleni, poruka, zaposlen);
     }
 
-    public void edit(Zaposlen oldZaposlen, Zaposlen newZaposlen) {
-        DataTools.edit(get(), fileZaposleni, poruka, oldZaposlen, newZaposlen);
+    public boolean edit(Zaposlen oldZaposlen, Zaposlen newZaposlen) {
+        return DataTools.edit(get(), fileZaposleni, poruka, oldZaposlen, newZaposlen);
     }
 
     // Pravljenje ključeva
@@ -67,7 +68,11 @@ public class Zaposleni {
 
     // Specijalne get metode
     public ArrayList<Zaposlen> getRadi(Tretman tretman) {
-        return toArrayList(get().stream().filter(kozmeticar -> Arrays.stream(kozmeticar.ZaduzeniTretmani).anyMatch(tretmanID -> tretmanID == tretman.ID)));
+        return toArrayList(get().stream().filter(kozmeticar -> Arrays.stream(kozmeticar.ZaduzeniTipoviTretmana).anyMatch(tipID -> tipID == tretman.TipID)));
+    }
+
+    public ArrayList<Zaposlen> getKozmeticari() {
+        return toArrayList(get().stream().filter(kozmeticar -> kozmeticar.TipZaposlenog == KOZMETICAR));
     }
 
     // Prijava

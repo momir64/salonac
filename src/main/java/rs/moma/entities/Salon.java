@@ -19,14 +19,12 @@ public class Salon {
     public int    PocetakRadnogVremena;
     public int    KrajRadnogVremena;
     public float  MinIznosLojalnosti;
-    public String Bonus;
 
-    public Salon(String naziv, int pocetakRadnogVremena, int krajRadnogVremena, float minIznosLojalnosti, String bonus) {
+    public Salon(String naziv, int pocetakRadnogVremena, int krajRadnogVremena, float minIznosLojalnosti) {
         Naziv                = naziv;
         PocetakRadnogVremena = pocetakRadnogVremena;
         KrajRadnogVremena    = krajRadnogVremena;
         MinIznosLojalnosti   = minIznosLojalnosti;
-        Bonus                = bonus;
         save();
     }
 
@@ -37,24 +35,22 @@ public class Salon {
             PocetakRadnogVremena = Integer.parseInt(data[1]);
             KrajRadnogVremena    = Integer.parseInt(data[2]);
             MinIznosLojalnosti   = Float.parseFloat(data[3]);
-            Bonus                = data[4];
         } catch (Exception e) {
             System.err.println("Desila se greška prilikom čitanja salona!");
         }
     }
 
-    public void edit(String naziv, int pocetakRadnogVremena, int krajRadnogVremena, float minIznosLojalnosti, String bonus) {
+    public void edit(String naziv, int pocetakRadnogVremena, int krajRadnogVremena, float minIznosLojalnosti) {
         if (naziv != null && !naziv.trim().equals("")) Naziv = naziv;
         if (pocetakRadnogVremena != -1) PocetakRadnogVremena = pocetakRadnogVremena;
         if (krajRadnogVremena != -1) KrajRadnogVremena = krajRadnogVremena;
         if (minIznosLojalnosti != -1) MinIznosLojalnosti = minIznosLojalnosti;
-        if (bonus != null && !bonus.trim().equals("")) Bonus = bonus;
         save();
     }
 
     private void save() {
         try {
-            Files.write(Paths.get(fileSalon), (Naziv + SP1 + PocetakRadnogVremena + SP1 + KrajRadnogVremena + SP1 + MinIznosLojalnosti + SP1 + Bonus).getBytes());
+            Files.write(Paths.get(fileSalon), (Naziv + SP1 + PocetakRadnogVremena + SP1 + KrajRadnogVremena + SP1 + MinIznosLojalnosti).getBytes());
         } catch (Exception e) {
             System.err.println("Desila se greška prilikom čuvanja slaona!");
         }

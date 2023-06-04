@@ -36,16 +36,16 @@ public class Klijenti {
         return null;
     }
 
-    public void add(Klijent klijent) {
-        DataTools.add(get(), fileKlijenti, poruka, klijent);
+    public boolean add(Klijent klijent) {
+        return DataTools.add(get(), fileKlijenti, poruka, klijent);
     }
 
-    public void remove(Klijent klijent) {
-        DataTools.remove(get(), fileKlijenti, poruka, klijent);
+    public boolean remove(Klijent klijent) {
+        return DataTools.remove(get(), fileKlijenti, poruka, klijent);
     }
 
-    public void edit(Klijent oldKlijent, Klijent newKlijent) {
-        DataTools.edit(get(), fileKlijenti, poruka, oldKlijent, newKlijent);
+    public boolean edit(Klijent oldKlijent, Klijent newKlijent) {
+        return DataTools.edit(get(), fileKlijenti, poruka, oldKlijent, newKlijent);
     }
 
     // Pravljenje ključeva

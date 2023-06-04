@@ -16,8 +16,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.stream.IntStream;
 
-import static rs.moma.helper.DataTools.SP1;
-import static rs.moma.helper.DataTools.toArrayList;
+import static rs.moma.helper.DataTools.*;
 
 public class Zaposlen extends Korisnik {
     public final ETipZaposlenog TipZaposlenog;
@@ -26,31 +25,41 @@ public class Zaposlen extends Korisnik {
     public final int            GodineStaza;
     public final float          KoeficijentStaz;
     public final float          PlataOsnova;
-    public final int[]          ZaduzeniTretmani;
+    public final String         Bonus;
+    public final int[]          ZaduzeniTipoviTretmana;
 
     public Zaposlen(int id, String ime, String prezime, EPol pol, String telefon, String adresa, String username,
                     String lozinka, ETipZaposlenog tipZaposlenog, ENivoSpreme sprema, float koeficijentSprema,
-                    int godineStaza, float koeficijentStaz, float plataOsnova, int[] zaduzeniTretmani) {
+                    int godineStaza, float koeficijentStaz, float plataOsnova, String bonus, int[] zaduzeniTipoviTretmana) {
         super(id, ime, prezime, pol, telefon, adresa, username, lozinka);
-        TipZaposlenog     = tipZaposlenog;
-        Sprema            = sprema;
-        KoeficijentSprema = koeficijentSprema;
-        GodineStaza       = godineStaza;
-        KoeficijentStaz   = koeficijentStaz;
-        PlataOsnova       = plataOsnova;
-        ZaduzeniTretmani  = zaduzeniTretmani;
+        TipZaposlenog          = tipZaposlenog;
+        Sprema                 = sprema;
+        KoeficijentSprema      = koeficijentSprema;
+        GodineStaza            = godineStaza;
+        KoeficijentStaz        = koeficijentStaz;
+        PlataOsnova            = plataOsnova;
+        Bonus                  = bonus;
+        ZaduzeniTipoviTretmana = zaduzeniTipoviTretmana;
+    }
+
+    public Zaposlen(String ime, String prezime, EPol pol, String telefon, String adresa, String username,
+                    String lozinka, ETipZaposlenog tipZaposlenog, ENivoSpreme sprema, float koeficijentSprema,
+                    int godineStaza, float koeficijentStaz, float plataOsnova, String bonus, int[] zaduzeniTipoviTretmana) {
+        this(new Zaposleni().getNewID(), ime, prezime, pol, telefon, adresa, username, lozinka, tipZaposlenog, sprema,
+             koeficijentSprema, godineStaza, koeficijentStaz, plataOsnova, bonus, zaduzeniTipoviTretmana);
     }
 
     public Zaposlen(String line) {
         super(String.join(SP1, Arrays.copyOfRange(line.split(SP1), 0, 8)));
         String[] data = line.split(SP1);
-        TipZaposlenog     = ETipZaposlenog.valueOf(data[8]);
-        Sprema            = ENivoSpreme.valueOf(data[9]);
-        KoeficijentSprema = Float.parseFloat(data[10]);
-        GodineStaza       = Integer.parseInt(data[11]);
-        KoeficijentStaz   = Float.parseFloat(data[12]);
-        PlataOsnova       = Float.parseFloat(data[13]);
-        ZaduzeniTretmani  = Arrays.stream(Arrays.copyOfRange(data, 14, data.length)).mapToInt(Integer::parseInt).toArray();
+        TipZaposlenog          = ETipZaposlenog.valueOf(data[8]);
+        Sprema                 = ENivoSpreme.valueOf(data[9]);
+        KoeficijentSprema      = Float.parseFloat(data[10]);
+        GodineStaza            = Integer.parseInt(data[11]);
+        KoeficijentStaz        = Float.parseFloat(data[12]);
+        PlataOsnova            = Float.parseFloat(data[13]);
+        Bonus                  = data[14];
+        ZaduzeniTipoviTretmana = Arrays.stream(Arrays.copyOfRange(data, 15, data.length)).mapToInt(Integer::parseInt).toArray();
     }
 
     @Override
@@ -62,9 +71,10 @@ public class Zaposlen extends Korisnik {
                 KoeficijentSprema + SP1 +
                 GodineStaza + SP1 +
                 KoeficijentStaz + SP1 +
-                PlataOsnova + SP1);
-        if (ZaduzeniTretmani == null) str.append(-1);
-        else for (int tipID : ZaduzeniTretmani) str.append(tipID);
+                PlataOsnova + SP1 +
+                Bonus);
+        if (ZaduzeniTipoviTretmana == null) str.append(-1);
+        else for (int tipID : ZaduzeniTipoviTretmana) str.append(SP1).append(tipID);
         return str.toString();
     }
 
@@ -79,7 +89,7 @@ public class Zaposlen extends Korisnik {
     public ArrayList<Tretman> getTretmani() {
         ArrayList<Tretman> tretmani = new ArrayList<>();
         for (Tretman tretman : new Tretmani().get())
-            if (Arrays.stream(ZaduzeniTretmani).anyMatch(tretmanID -> tretmanID == tretman.ID))
+            if (Arrays.stream(ZaduzeniTipoviTretmana).anyMatch(tipID -> tipID == tretman.TipID))
                 tretmani.add(tretman);
         return tretmani;
     }
@@ -138,10 +148,9 @@ public class Zaposlen extends Korisnik {
     }
 
     private float calcBonus() {
-        float  bonus     = 0;
-        String bonusRule = new Salon().Bonus;
-        if (bonusRule != null) for (String rule : bonusRule.split("\\+")) {
-            String[] data       = rule.split("-");
+        float bonus = 0;
+        if (!Bonus.isEmpty()) for (String rule : Bonus.split(SP3)) {
+            String[] data       = rule.split(SP4);
             float    bonusParam = 0;
             if (data[0].equalsIgnoreCase("m"))
                 bonusParam = data[2].equalsIgnoreCase("c") ? getBrojTretmanaMesec(Integer.parseInt(data[1])) : data[2].equalsIgnoreCase("v") ? getVrednostTretmanaMesec(Integer.parseInt(data[1])) : 0;

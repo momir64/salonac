@@ -8,21 +8,24 @@ import javax.swing.event.DocumentListener;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class DataTools {
-    public static String fileZakazaniTretmani = "data/zakazani_tretmani.csv";
-    public static String fileTipoviTretmana   = "data/tipovi_tretmana.csv";
-    public static String fileZaposleni        = "data/zaposleni.csv";
-    public static String fileTretmani         = "data/tretmani.csv";
-    public static String fileKlijenti         = "data/klijenti.csv";
-    public static String fileIsplate          = "data/isplate.csv";
-    public static String fileSalon            = "data/salon.csv";
-    public static String SP1                  = ";";
-    public static String SP2                  = "|";
+    public static final String fileZakazaniTretmani = "data/zakazani_tretmani.csv";
+    public static final String fileTipoviTretmana   = "data/tipovi_tretmana.csv";
+    public static final String fileZaposleni        = "data/zaposleni.csv";
+    public static final String fileTretmani         = "data/tretmani.csv";
+    public static final String fileKlijenti         = "data/klijenti.csv";
+    public static final String fileIsplate          = "data/isplate.csv";
+    public static final String fileSalon            = "data/salon.csv";
+    public static final String SP1                  = ";";
+    public static final String SP2                  = "║";
+    public static final String SP3                  = "┼";
+    public static final String SP4                  = "─";
 
     public enum ETipZaposlenog {
         KOZMETICAR,
@@ -51,6 +54,33 @@ public class DataTools {
         OTHER
     }
 
+    public static String getPolName(EPol pol) {
+        if (pol == EPol.MALE) return "Muško";
+        if (pol == EPol.FEMALE) return "Žensko";
+        return "Ostalo";
+    }
+
+    public static String getTipZaposlenogName(ETipZaposlenog tip) {
+        if (tip == ETipZaposlenog.RECEPCIONER) return "Recepcioner";
+        if (tip == ETipZaposlenog.KOZMETICAR) return "Kozmetičar";
+        return "Menadžer";
+    }
+
+    public static String getSpremaName(ENivoSpreme sprema) {
+        if (sprema == ENivoSpreme.AKADEMSKA) return "Akademska";
+        if (sprema == ENivoSpreme.STRUKOVNA) return "Strukovna";
+        if (sprema == ENivoSpreme.STRUCNA) return "Stručna";
+        return "Opšta";
+    }
+
+    public static String getStanjeName(EStanjeTermina stanje) {
+        if (stanje == EStanjeTermina.IZVRSEN) return "Izvršen";
+        if (stanje == EStanjeTermina.ZAKAZAN) return "Zakazan";
+        if (stanje == EStanjeTermina.OTKAZAO_SALON) return "Otkazao salon";
+        if (stanje == EStanjeTermina.OTKAZAO_KLIJENT) return "Otkazao klijent";
+        return "Nije se pojavio";
+    }
+
     public static <T> ArrayList<T> toArrayList(Stream<T> stream) {
         return stream.collect(Collectors.toCollection(ArrayList::new));
     }
@@ -59,50 +89,59 @@ public class DataTools {
         return new ArrayList<>(Arrays.asList(array));
     }
 
-    protected static <T> void save(ArrayList<T> entiteti, String fileName, String tip) {
+    protected static <T> boolean save(ArrayList<T> entiteti, String fileName, String tip) {
         try {
             StringBuilder data = new StringBuilder();
             for (T entiet : entiteti)
                 data.append(entiet).append('\n');
             Files.write(Paths.get(fileName), data.toString().getBytes());
+            return true;
         } catch (Exception e) {
             System.err.printf("Desila se greška dok se čuvao dati %s!\n", tip);
+            return false;
         }
     }
 
-    public static <T> void add(ArrayList<T> entiteti, String fileName, String tip, T entitet) {
-        if (entiteti.stream().anyMatch(obj -> obj.equals(entitet)))
+    public static <T> boolean add(ArrayList<T> entiteti, String fileName, String tip, T entitet) {
+        if (entiteti.stream().anyMatch(obj -> obj.equals(entitet))) {
             System.err.printf("Dati %s već postoji!\n", tip);
-        else {
+            return false;
+        } else {
             entiteti.add(entitet);
-            save(entiteti, fileName, tip);
+            return save(entiteti, fileName, tip);
         }
     }
 
-    public static <T> void remove(ArrayList<T> entiteti, String fileName, String tip, T entitet) {
-        if (entiteti.stream().noneMatch(obj -> obj.equals(entitet)))
+    public static <T> boolean remove(ArrayList<T> entiteti, String fileName, String tip, T entitet) {
+        if (entiteti.stream().noneMatch(obj -> obj.equals(entitet))) {
             System.err.printf("Dati %s ne postoji!\n", tip);
-        else {
+            return false;
+        } else {
             entiteti.removeIf(obj -> obj.equals(entitet));
-            save(entiteti, fileName, tip);
+            return save(entiteti, fileName, tip);
         }
     }
 
-    public static <T extends ClassWithID> void edit(ArrayList<T> entiteti, String fileName, String tip, T oldEntitet, T newEntitet) {
-        if (entiteti.stream().noneMatch(obj -> obj.equals(oldEntitet)))
+    public static <T extends ClassWithID> boolean edit(ArrayList<T> entiteti, String fileName, String tip, T oldEntitet, T newEntitet) {
+        if (entiteti.stream().noneMatch(obj -> obj.equals(oldEntitet))) {
             System.err.printf("Dati %s ne postoji!\n", tip);
-        else {
+            return false;
+        } else {
             newEntitet.setID(oldEntitet.getID());
             entiteti.removeIf(obj -> obj.equals(oldEntitet));
             entiteti.add(newEntitet);
-            save(entiteti, fileName, tip);
+            return save(entiteti, fileName, tip);
         }
     }
 
-    public static boolean isInputValid(JTextField... inputs) {
-        for (JTextField input : inputs)
-            if (input.getText().contains(SP1) || input.getText().contains(SP2))
-                return false;
+    public static boolean isInputValid(JComponent... inputs) {
+        for (JComponent input : inputs)
+            if (input instanceof JTextField && (((JTextField) input).getText().trim().equals("")
+                                                || ((JTextField) input).getText().contains(SP1)
+                                                || ((JTextField) input).getText().contains(SP2)
+                                                || ((JTextField) input).getText().contains(SP3)
+                                                || ((JTextField) input).getText().contains(SP4))) return false;
+            else if (input instanceof JComboBox && ((JComboBox<?>) input).getSelectedItem() == null) return false;
         return true;
     }
 
@@ -160,6 +199,18 @@ public class DataTools {
         }
     }
 
+    public static int getTime(JTextField txt) {
+        return Integer.parseInt(txt.getText().replace("h", ""));
+    }
+
+    public static LocalDateTime getTermin(JTextField datumTxt, JComboBox<NameValue> vremeBox) {
+        return getDatum(datumTxt).atTime((Integer) getSelectedValue(vremeBox), 0);
+    }
+
+    public static LocalDateTime getTermin(JTextField datumTxt, JTextField vremeBox) {
+        return getDatum(datumTxt).atTime(getTime(vremeBox), 0);
+    }
+
     public static Object getSelectedValue(JComboBox<NameValue> box) {
         return ((NameValue) box.getSelectedItem()).getValue();
     }
@@ -167,5 +218,9 @@ public class DataTools {
     public static String simplifyFloatToString(float d) {
         if (d == (int) d) return String.format("%d", (long) d);
         else return String.format("%s", d);
+    }
+
+    public static void fillPolBox(JComboBox<NameValue> polBox) {
+        polBox.setModel(new DefaultComboBoxModel<>(new NameValue[]{new NameValue("Muško", EPol.MALE), new NameValue("Žensko", EPol.FEMALE), new NameValue("Ostalo", EPol.OTHER)}));
     }
 }

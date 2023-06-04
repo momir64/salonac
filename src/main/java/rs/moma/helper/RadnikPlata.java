@@ -12,7 +12,7 @@ public class RadnikPlata {
     }
 
     public RadnikPlata(String line) {
-        String[] data = line.split("\\|");
+        String[] data = line.split(SP2);
         RadnikID = Integer.parseInt(data[0]);
         Plata    = Float.parseFloat(data[1]);
     }

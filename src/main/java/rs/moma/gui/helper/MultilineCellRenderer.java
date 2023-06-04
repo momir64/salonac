@@ -14,8 +14,8 @@ import java.io.IOException;
 import java.util.function.Consumer;
 
 public class MultilineCellRenderer extends AbstractCellEditor implements TableCellRenderer, TableCellEditor {
-    static        ImageIcon deleteIcon;
-    static        ImageIcon editIcon;
+    static final  ImageIcon deleteIcon;
+    static final  ImageIcon editIcon;
     private final CellPanel cell;
 
     static {
@@ -50,9 +50,9 @@ public class MultilineCellRenderer extends AbstractCellEditor implements TableCe
     }
 
     static class CellPanel extends JPanel {
-        JButton  deleteBtn = new JButton(deleteIcon);
-        JButton  editBtn   = new JButton(editIcon);
-        JTable   table     = new JTable();
+        final JButton deleteBtn = new JButton(deleteIcon);
+        final JButton editBtn   = new JButton(editIcon);
+        final JTable  table     = new JTable();
         KeyValue data;
 
         CellPanel(boolean showDelete, boolean showEdit, Consumer<ZakazaniTretman> delete, Consumer<ZakazaniTretman> edit) {
