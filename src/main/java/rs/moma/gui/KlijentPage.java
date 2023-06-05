@@ -54,7 +54,7 @@ public class KlijentPage extends KalendarForm {
     }
 
     public void updatePage() {
-        karticaLbl.setText((klijent.getKarticaLojalnosti() ? "I" : "Ne ") + "spunjavate uslov za karticu lojalnosti.");
+        karticaLbl.setText((klijent.getKarticaLojalnosti() ? "I" : "Ne i") + "spunjavate uslov za karticu lojalnosti.");
         ukupnoLbl.setText(klijent.getUkupnoPlatio() + " RSD");
         fillTretmani();
     }
