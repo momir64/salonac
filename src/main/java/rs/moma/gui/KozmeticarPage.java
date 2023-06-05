@@ -38,7 +38,7 @@ public class KozmeticarPage extends KalendarForm {
 
         tretmaniList.setSelectionModel(new NoSelectionModel());
         tretmaniList.setListData(kozmeticar.getTretmani().stream().map(tretman -> tretman.Naziv).sorted().toArray(String[]::new));
-        super.setup(kalendarPane, tretmaniTbl, 200, kalendarTbl, mesecLbl, rightBtn, leftBtn, false, false);
+        super.setup(kalendarPane, tretmaniTbl, 162, kalendarTbl, mesecLbl, rightBtn, leftBtn, false, false);
 
         this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {

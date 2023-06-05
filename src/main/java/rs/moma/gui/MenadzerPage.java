@@ -143,7 +143,8 @@ public class MenadzerPage extends JFrame {
 
     public void showDijagrami() {
         if (!new ZakazaniTretmani().get().isEmpty()) {
-            prihodiTipoviPanel.add(new XChartPanel<>(makePrihodiTipoviChart()));
+            XYChart chart = makePrihodiTipoviChart();
+            if (chart != null) prihodiTipoviPanel.add(new XChartPanel<>(chart));
             procenatStatusaPanel.add(new XChartPanel<>(makePieChart("Status kozmetičkih tretmana u poslednjih 30 dana", new ZakazaniTretmani().getStatusiDijagramData())));
             realizovaniPoKozmeticarimaPanel.add(new XChartPanel<>(makePieChart("Opterećenje kozmetičara u poslednjih 30 dana", new ZakazaniTretmani().getKozmeticariDijagramData())));
         }
@@ -176,7 +177,7 @@ public class MenadzerPage extends JFrame {
 
         chart.getStyler().setxAxisTickLabelsFormattingFunction(x -> getMonthName((int) x.longValue()));
 
-        return chart;
+        return chart.getSeriesMap().size() > 0 ? chart : null;
     }
 
     public void addEntitet() {
