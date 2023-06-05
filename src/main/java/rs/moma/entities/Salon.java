@@ -66,7 +66,7 @@ public class Salon {
     public LocalDateTime getNewestPrihodRashod() {
         ArrayList<NazivVrednostVreme> finansije = getFinansije(null, null);
         if (finansije.isEmpty()) return LocalDateTime.now();
-        LocalDateTime newest = finansije.stream().min(Comparator.comparing(f -> f.Vreme)).get().Vreme;
+        LocalDateTime newest = finansije.stream().max(Comparator.comparing(f -> f.Vreme)).get().Vreme;
         if (newest.isBefore(LocalDateTime.now())) return LocalDateTime.now();
         return newest;
     }
