@@ -141,6 +141,13 @@ public class ZakazaniTretmani {
         return getPrihodi(from, to).stream().mapToDouble(nvv -> nvv.Vrednost).sum();
     }
 
+    public LocalDate getNewestDate() {
+        if (zakazaniTretmani.isEmpty()) return LocalDate.now();
+        LocalDate newest = zakazaniTretmani.stream().max(Comparator.comparing(tretman -> tretman.Vreme)).get().Vreme.toLocalDate();
+        if (newest.isBefore(LocalDate.now())) return LocalDate.now();
+        return newest;
+    }
+
     public LocalDate getOldestDate() {
         if (zakazaniTretmani.isEmpty()) return LocalDate.now();
         return zakazaniTretmani.stream().min(Comparator.comparing(tretman -> tretman.Vreme)).get().Vreme.toLocalDate();

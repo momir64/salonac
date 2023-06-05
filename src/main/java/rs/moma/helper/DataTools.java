@@ -226,6 +226,6 @@ public class DataTools {
 
     public static String getMonthName(int month) {
         String[] monthNames = {"", "Januar", "Februar", "Mart", "April", "Maj", "Jun", "Jul", "Avgust", "Septembar", "Oktobar", "Novembar", "Decembar"};
-        return monthNames[month];
+        return monthNames[month < 1 || month > 12 ? 0 : month];
     }
 }

@@ -103,10 +103,11 @@ public class MenadzerPage extends JFrame {
         prihodiRashodiTbl.setAutoCreateRowSorter(true);
         entitetiTbl.setAutoCreateRowSorter(true);
 
-        odPeriodIzvestajiTxt.setText(new ZakazaniTretmani().getOldestDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy.")));
-        odPeriodPrihodiTxt.setText(new Salon().getOldestPrihodRashod().format(DateTimeFormatter.ofPattern("dd.MM.yyyy.")));
-        doPeriodIzvestajiTxt.setText(LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy.")));
-        doPeriodPrihodiTxt.setText(LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy.")));
+        ZakazaniTretmani zakazaniTretmani = new ZakazaniTretmani();
+        odPeriodIzvestajiTxt.setText(zakazaniTretmani.getOldestDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy.")));
+        odPeriodPrihodiTxt.setText(salon.getOldestPrihodRashod().format(DateTimeFormatter.ofPattern("dd.MM.yyyy.")));
+        doPeriodIzvestajiTxt.setText(zakazaniTretmani.getNewestDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy.")));
+        doPeriodPrihodiTxt.setText(salon.getNewestPrihodRashod().format(DateTimeFormatter.ofPattern("dd.MM.yyyy.")));
 
         minLojalnostTxt.addKeyListener(new NumericKeyAdapter(true));
         odPeriodIzvestajiTxt.addKeyListener(new DateKeyAdapter());
@@ -304,9 +305,10 @@ public class MenadzerPage extends JFrame {
             setPrihodiWidth();
         } else {
             showMessageDialog(this, "Neispravan period!");
+            Salon salon = new Salon();
             if (!finansije.isEmpty())
-                odPeriodPrihodiTxt.setText(new Salon().getOldestPrihodRashod().format(DateTimeFormatter.ofPattern("dd.MM.yyyy.")));
-            doPeriodPrihodiTxt.setText(LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy.")));
+                odPeriodPrihodiTxt.setText(salon.getOldestPrihodRashod().format(DateTimeFormatter.ofPattern("dd.MM.yyyy.")));
+            doPeriodPrihodiTxt.setText(salon.getNewestPrihodRashod().format(DateTimeFormatter.ofPattern("dd.MM.yyyy.")));
         }
     }
 
@@ -374,8 +376,9 @@ public class MenadzerPage extends JFrame {
             setIzvestajiWidth();
         } else {
             showMessageDialog(this, "Neispravan period!");
-            odPeriodIzvestajiTxt.setText(new ZakazaniTretmani().getOldestDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy.")));
-            doPeriodIzvestajiTxt.setText(LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy.")));
+            ZakazaniTretmani zakazaniTretmani = new ZakazaniTretmani();
+            odPeriodIzvestajiTxt.setText(zakazaniTretmani.getOldestDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy.")));
+            doPeriodIzvestajiTxt.setText(zakazaniTretmani.getNewestDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy.")));
         }
     }
 

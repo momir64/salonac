@@ -63,6 +63,14 @@ public class Salon {
         return finansije.stream().min(Comparator.comparing(f -> f.Vreme)).get().Vreme;
     }
 
+    public LocalDateTime getNewestPrihodRashod() {
+        ArrayList<NazivVrednostVreme> finansije = getFinansije(null, null);
+        if (finansije.isEmpty()) return LocalDateTime.now();
+        LocalDateTime newest = finansije.stream().min(Comparator.comparing(f -> f.Vreme)).get().Vreme;
+        if (newest.isBefore(LocalDateTime.now())) return LocalDateTime.now();
+        return newest;
+    }
+
     public ArrayList<NazivVrednostVreme> getFinansije(LocalDateTime from, LocalDateTime to) {
         ArrayList<NazivVrednostVreme> prihodi   = new ZakazaniTretmani().getPrihodi(from, to);
         ArrayList<NazivVrednostVreme> rashodi   = new Isplate().getRashodi(from, to);
