@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact build-on-make="true" name="data">
+    <output-path>$PROJECT_DIR$/out/artifacts/salonac_jar</output-path>
+    <root id="root">
+      <element id="directory" name="data">
+        <element id="dir-copy" path="$PROJECT_DIR$/data" />
+      </element>
+    </root>
+  </artifact>
+</component>
