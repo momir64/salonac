@@ -19,7 +19,6 @@ import javax.swing.text.StyleContext;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -167,11 +166,12 @@ public class MenadzerPage extends JFrame {
         for (NameValue nv : new ZakazaniTretmani().getPrihodiTipDijagramData()) {
             ArrayList<Integer> xData = new ArrayList<>();
             ArrayList<Double>  yData = new ArrayList<>();
-            for (KeyValue mesecIznos : (ArrayList<KeyValue>) nv.Value)
-                if ((Double) mesecIznos.Value > 0) {
-                    xData.add((int) mesecIznos.Key);
-                    yData.add((Double) mesecIznos.Value);
-                }
+            if (nv.Value instanceof ArrayList)
+                for (Object mesecIznos : (ArrayList<?>) nv.Value)
+                    if (mesecIznos instanceof KeyValue && (Double) ((KeyValue) mesecIznos).Value > 0) {
+                        xData.add((int) ((KeyValue) mesecIznos).Key);
+                        yData.add((Double) ((KeyValue) mesecIznos).Value);
+                    }
             if (!xData.isEmpty()) chart.addSeries(nv.Name, xData, yData);
         }
 

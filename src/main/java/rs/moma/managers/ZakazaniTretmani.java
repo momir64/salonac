@@ -173,13 +173,13 @@ public class ZakazaniTretmani {
         for (TipTretmana tip : new TipoviTretmana().get()) {
             ArrayList<KeyValue> meseci = new ArrayList<>();
             for (int i = 1; i <= 12; i++)
-                 meseci.add(new KeyValue(LocalDateTime.now().minusMonths(i).getMonthValue(), filter(tip.ID, LocalDateTime.now().minusMonths(i), LocalDateTime.now().minusMonths(i - 1))
+                 meseci.add(new KeyValue(LocalDateTime.now().getMonthValue() - i, filter(tip.ID, LocalDateTime.now().minusMonths(i), LocalDateTime.now().minusMonths(i - 1))
                          .stream().mapToDouble(ZakazaniTretman::getPlaceniIznos).sum()));
             izvestaji.add(new NameValue(tip.Tip, meseci));
         }
         ArrayList<KeyValue> meseci = new ArrayList<>();
         for (int i = 1; i <= 12; i++)
-             meseci.add(new KeyValue(LocalDateTime.now().minusMonths(i).getMonthValue(), getPrihodiVrednost(LocalDateTime.now().minusMonths(i), LocalDateTime.now().minusMonths(i - 1))));
+             meseci.add(new KeyValue(LocalDateTime.now().getMonthValue() - i, getPrihodiVrednost(LocalDateTime.now().minusMonths(i), LocalDateTime.now().minusMonths(i - 1))));
         izvestaji.add(new NameValue("Ukupno", meseci));
         return izvestaji;
     }
