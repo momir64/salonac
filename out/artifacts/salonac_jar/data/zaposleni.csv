@@ -1,14 +1,14 @@
-0;Nikola;Nikolić;MALE;0641214343;Petra Markovića 18;nikimiki;nikilica123;MENADZER;AKADEMSKA;1.2;20;1.5;50000.0;-1
-1;Pera;Perić;MALE;0667354318;Marka Petrovića 81;pero;perica321;RECEPCIONER;OPSTA;1.1;10;1.3;35000.0;-1
+0;Nikola;Nikolić;MALE;0641214343;Petra Markovića 18;nikimiki;nikilica123;MENADZER;AKADEMSKA;1.2;20;1.5;50000.0;;-1
+1;Pera;Perić;MALE;0667354318;Marka Petrovića 81;pero;perica321;RECEPCIONER;OPSTA;1.1;10;1.3;35000.0;;-1
 2;Sima;Simić;MALE;06259802765;Stojanova 58;simkela;simimimi123;KOZMETICAR;STRUKOVNA;1.2;3;1.3;40000.0;m─1─c─50┼w─1─v─0.04;1;4;3
 3;Jovana;Jovanović;FEMALE;06723462990;Opalog lišća bb;jocika;jocagomboca;KOZMETICAR;OPSTA;1.1;8;1.6;45000.0;d─20─c─125┼w─2─v─0.02;1;3
 4;Marko;Marković;MALE;0651227567;Bulevar Mihajla Pupina 10;marko123;sifra123;KOZMETICAR;OPSTA;1.5;5;1.2;50000.0;m─3─v─0.05;6;0;9
-5;Darko;Darković;MALE;0623451267;Marka Kraljevića 10;darko.darkovic;lozinka123;MENADZER;STRUKOVNA;1.2;20;1.5;35000.0;-1
+5;Darko;Darković;MALE;0623451267;Marka Kraljevića 10;darko.darkovic;lozinka123;MENADZER;STRUKOVNA;1.2;20;1.5;35000.0;;-1
 6;Jovana;Petković;FEMALE;0641234825;Futoška 20;jovana.p;novasifra123;KOZMETICAR;OPSTA;1.6;10;1.3;40000.0;w─1─v─0.03┼m─1─c─50;0;6;4;11
-7;Maja;Ivanović;FEMALE;+381641344297;Bulevar oslobođenja 15;majaivanovic;sifra123;RECEPCIONER;AKADEMSKA;1.7;4;1.1;30000.0;-1
+7;Maja;Ivanović;FEMALE;+381641344297;Bulevar oslobođenja 15;majaivanovic;sifra123;RECEPCIONER;AKADEMSKA;1.7;4;1.1;30000.0;;-1
 8;Jovana;Stojanović;FEMALE;065111222;Bulevar Oslobodjenja 22;jovanas;jovanas123;KOZMETICAR;STRUCNA;1.7;3;1.5;35000.0;w─4─c─50┼d─20─v─0.1;12;5;1;10;4
 9;Petar;Petrovic;MALE;+381641937767;Bulevar Mihajla Pupina 123;ppetrovic;pass123;KOZMETICAR;OPSTA;1.2;3;1.5;30000.0;;0;2;7
-10;Žarko;Novakovic;MALE;065/555-123;Bulevar Oslobodjenja 22;zarko123;lozinka123;RECEPCIONER;OPSTA;1.2;3;1.1;2000.0;-1
-11;Ana;Janković;FEMALE;065/123-456;Narodnog fronta 1;anajankovic;lozinka123;MENADZER;AKADEMSKA;1.5;5;0.2;35000.0;-1
+10;Žarko;Novakovic;MALE;065/555-123;Bulevar Oslobodjenja 22;zarko123;lozinka123;RECEPCIONER;OPSTA;1.2;3;1.1;2000.0;;-1
+11;Ana;Janković;FEMALE;065/123-456;Narodnog fronta 1;admin;admin;MENADZER;AKADEMSKA;1.5;5;0.2;35000.0;;-1
 13;Nikola;Petrović;MALE;0631234571;Bulevar Oslobođenja 22;nikolapetrovic;sifra123;KOZMETICAR;OPSTA;1.2;3;1.1;40000.0;m─3─c─200;0;2;10;12;4
 12;Danilo;Dinčić;MALE;0641335745;Ulica Marka Markovica 12;daccca;lozinka000;KOZMETICAR;STRUKOVNA;1.2;3;1.3;50000.0;d─6─c─50┼m─2─v─0.02;1;4;9
