@@ -50,10 +50,10 @@ public class EditTretmanForm extends JDialog {
     public void Save(Tretman tretman, Runnable update) {
         if (!isInputValid(nazivTxt, tipBox, cenaTxt, trajanjeTxt)) showMessageDialog(this, "Neispravan unos!");
         else if (tretman == null) {
-            if (!new Tretmani().add(getData())) showMessageDialog(this, "Greška sa čuvanjem tipa!");
+            if (!new Tretmani().add(getData())) showMessageDialog(this, "Greška sa dodavanjem tretmana!");
             else Close(update);
         } else {
-            if (!new Tretmani().edit(tretman, getData())) showMessageDialog(this, "Greška sa čuvanjem tipa!");
+            if (!new Tretmani().edit(tretman, getData())) showMessageDialog(this, "Greška sa izmenom tretmana!");
             else Close(update);
         }
     }

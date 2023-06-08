@@ -52,7 +52,7 @@ public class Klijenti {
     }
 
     // Pravljenje ključeva
-    private boolean isTakenID(int id, ArrayList<Klijent> klijenti) {
+    private boolean isTakenID(int id) {
         for (Klijent klijent : klijenti)
             if (klijent.ID == id)
                 return true;
@@ -61,14 +61,14 @@ public class Klijenti {
 
     public int getNewID() {
         int i = 0;
-        while (isTakenID(i, klijenti)) i++;
+        while (isTakenID(i)) i++;
         return i;
     }
 
     // Jedinstvenost
-    public boolean isUsernameFree(String username) {
-        return klijenti.stream().noneMatch(klijent -> klijent.Username.equalsIgnoreCase(username)) &&
-               new Zaposleni().get().stream().noneMatch(zaposlen -> zaposlen.Username.equalsIgnoreCase(username));
+    public boolean isUsernameTaken(String username) {
+        return klijenti.stream().anyMatch(klijent -> klijent.Username.equalsIgnoreCase(username)) ||
+               new Zaposleni().get().stream().anyMatch(zaposlen -> zaposlen.Username.equalsIgnoreCase(username));
     }
 
     // Specijalne get metode

@@ -75,7 +75,7 @@ public class ZakazaniTretmani {
     }
 
     // Pravljenje ključeva
-    private boolean isTakenID(int id, ArrayList<ZakazaniTretman> zakazaniTretmani) {
+    private boolean isTakenID(int id) {
         for (ZakazaniTretman zakazaniTretman : zakazaniTretmani)
             if (zakazaniTretman.ID == id)
                 return true;
@@ -84,7 +84,7 @@ public class ZakazaniTretmani {
 
     public int getNewID() {
         int i = 0;
-        while (isTakenID(i, zakazaniTretmani)) i++;
+        while (isTakenID(i)) i++;
         return i;
     }
 
@@ -172,14 +172,16 @@ public class ZakazaniTretmani {
         ArrayList<NameValue> izvestaji = new ArrayList<>();
         for (TipTretmana tip : new TipoviTretmana().get()) {
             ArrayList<KeyValue> meseci = new ArrayList<>();
-            for (int i = 1; i <= 12; i++)
-                 meseci.add(new KeyValue(LocalDateTime.now().getMonthValue() - i, filter(tip.ID, LocalDateTime.now().minusMonths(i), LocalDateTime.now().minusMonths(i - 1))
+            for (int i = 0; i < 12; i++)
+                 meseci.add(new KeyValue(LocalDateTime.now().getMonthValue() - i - 1, filter(tip.ID, LocalDate.now().withDayOfMonth(1).atTime(0, 0).minusMonths(i),
+                                                                                             LocalDate.now().withDayOfMonth(1).atTime(0, 0).minusMonths(i - 1))
                          .stream().mapToDouble(ZakazaniTretman::getPlaceniIznos).sum()));
             izvestaji.add(new NameValue(tip.Tip, meseci));
         }
         ArrayList<KeyValue> meseci = new ArrayList<>();
-        for (int i = 1; i <= 12; i++)
-             meseci.add(new KeyValue(LocalDateTime.now().getMonthValue() - i, getPrihodiVrednost(LocalDateTime.now().minusMonths(i), LocalDateTime.now().minusMonths(i - 1))));
+        for (int i = 0; i < 12; i++)
+             meseci.add(new KeyValue(LocalDateTime.now().getMonthValue() - i - 1, getPrihodiVrednost(LocalDate.now().withDayOfMonth(1).atTime(0, 0).minusMonths(i),
+                                                                                                     LocalDate.now().withDayOfMonth(1).atTime(0, 0).minusMonths(i - 1))));
         izvestaji.add(new NameValue("Ukupno", meseci));
         return izvestaji;
     }
@@ -209,7 +211,8 @@ public class ZakazaniTretmani {
     }
 
     public int countOfStatus(EStanjeTermina status, LocalDateTime from, LocalDateTime to) {
-        return (int) zakazaniTretmani.stream().filter(tr -> tr.Stanje == status && (from == null || tr.Vreme.isAfter(from) || tr.Vreme.isEqual(from))
+        return (int) zakazaniTretmani.stream().filter(tr -> tr.Stanje == status
+                                                            && (from == null || tr.Vreme.isAfter(from) || tr.Vreme.isEqual(from))
                                                             && (to == null || tr.Vreme.isBefore(to) || tr.Vreme.isEqual(to))).count();
     }
 

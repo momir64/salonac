@@ -55,7 +55,7 @@ public class Zaposleni {
     }
 
     // Pravljenje ključeva
-    private boolean isTakenID(int id, ArrayList<Zaposlen> zaposleni) {
+    private boolean isTakenID(int id) {
         for (Zaposlen zaposlen : zaposleni)
             if (zaposlen.ID == id)
                 return true;
@@ -64,7 +64,7 @@ public class Zaposleni {
 
     public int getNewID() {
         int i = 0;
-        while (isTakenID(i, zaposleni)) i++;
+        while (isTakenID(i)) i++;
         return i;
     }
 

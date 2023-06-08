@@ -178,11 +178,11 @@ public class DataTools {
     }
 
     public static int txtToInt(JTextField txt) {
-        return txt.getText().trim().equals("") ? -1 : Integer.parseInt(txt.getText());
+        return txt.getText().trim().equals("") ? -1 : txt.getText().trim().equals(".") ? 0 : Integer.parseInt(txt.getText());
     }
 
     public static float txtToFloat(JTextField txt) {
-        return txt.getText().trim().equals("") ? -1 : Float.parseFloat(txt.getText());
+        return txt.getText().trim().equals("") ? -1 : txt.getText().trim().equals(".") ? 0 : Float.parseFloat(txt.getText());
     }
 
     public static LocalDate getDatum(JTextField datumTxt) {
@@ -225,7 +225,7 @@ public class DataTools {
     }
 
     public static String getMonthName(int month) {
-        String[] monthNames = {"", "Januar", "Februar", "Mart", "April", "Maj", "Jun", "Jul", "Avgust", "Septembar", "Oktobar", "Novembar", "Decembar"};
-        return new String(monthNames[((month % 12) + 12) % 12 + 1]);
+        String[] monthNames = {"Januar", "Februar", "Mart", "April", "Maj", "Jun", "Jul", "Avgust", "Septembar", "Oktobar", "Novembar", "Decembar"};
+        return new String(monthNames[((month % 12) + 12) % 12]);
     }
 }

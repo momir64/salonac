@@ -41,8 +41,8 @@ public class EditZakazaniTretmanForm extends JDialog {
 
         tretmanBox.setModel(new DefaultComboBoxModel<>(new Tretmani().get().stream().map(tr -> new NameValue(tr.Naziv, tr.ID)).toArray(NameValue[]::new)));
         stanjeBox.setModel(new DefaultComboBoxModel<>(Arrays.stream(values()).map(stanje -> new NameValue(getStanjeName(stanje), stanje)).toArray(NameValue[]::new)));
-        klijentBox.setModel(new DefaultComboBoxModel<>(new Klijenti().get().stream().map(klijent -> new NameValue(klijent.Ime, klijent.ID)).toArray(NameValue[]::new)));
-        kozmeticarBox.setModel(new DefaultComboBoxModel<>(new Zaposleni().getKozmeticari().stream().map(kozmeticar -> new NameValue(kozmeticar.Ime, kozmeticar.ID)).toArray(NameValue[]::new)));
+        klijentBox.setModel(new DefaultComboBoxModel<>(new Klijenti().get().stream().map(klijent -> new NameValue(klijent.getDisplayName(), klijent.ID)).toArray(NameValue[]::new)));
+        kozmeticarBox.setModel(new DefaultComboBoxModel<>(new Zaposleni().getKozmeticari().stream().map(kozmeticar -> new NameValue(kozmeticar.getDisplayName(), kozmeticar.ID)).toArray(NameValue[]::new)));
         trajanjeTxt.addKeyListener(new NumericKeyAdapter(false));
         cenaTxt.addKeyListener(new NumericKeyAdapter(true));
         datumTxt.addKeyListener(new DateKeyAdapter());
@@ -66,12 +66,13 @@ public class EditZakazaniTretmanForm extends JDialog {
     }
 
     public void Save(ZakazaniTretman tretman, Runnable update) {
-        if (!isInputValid(tretmanBox, klijentBox, kozmeticarBox, stanjeBox, trajanjeTxt, cenaTxt, datumTxt, vremeTxt)) showMessageDialog(this, "Neispravan unos!");
+        if (!isInputValid(tretmanBox, klijentBox, kozmeticarBox, stanjeBox, trajanjeTxt, cenaTxt, datumTxt, vremeTxt) || datumTxt.getText().contains("_"))
+            showMessageDialog(this, "Neispravan unos!");
         else if (tretman == null) {
-            if (!new ZakazaniTretmani().add(getData())) showMessageDialog(this, "Greška sa čuvanjem tipa!");
+            if (!new ZakazaniTretmani().add(getData())) showMessageDialog(this, "Greška sa dodavanjem zakazanog tretmana!");
             else Close(update);
         } else {
-            if (!new ZakazaniTretmani().edit(tretman, getData())) showMessageDialog(this, "Greška sa čuvanjem tipa!");
+            if (!new ZakazaniTretmani().edit(tretman, getData())) showMessageDialog(this, "Greška sa izmenom zakazanog tretmana!");
             else Close(update);
         }
     }

@@ -29,7 +29,7 @@ public class KozmeticarPage extends KalendarForm {
         this.kozmeticar = kozmeticar;
 
         $$$setupUI$$$();
-        setSize(1050, 1000);
+        setSize(1050, 998);
         setContentPane(mainPanel);
         setLocationRelativeTo(null);
         setMinimumSize(new Dimension(750, 800));

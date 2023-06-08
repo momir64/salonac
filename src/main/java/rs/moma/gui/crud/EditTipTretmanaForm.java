@@ -37,10 +37,10 @@ public class EditTipTretmanaForm extends JDialog {
     public void Save(TipTretmana tip, Runnable update) {
         if (!isInputValid(nazivTxt)) showMessageDialog(this, "Neispravan unos!");
         else if (tip == null) {
-            if (!new TipoviTretmana().add(new TipTretmana(-1, nazivTxt.getText(), true))) showMessageDialog(this, "Greška sa čuvanjem tipa!");
+            if (!new TipoviTretmana().add(new TipTretmana(-1, nazivTxt.getText(), true))) showMessageDialog(this, "Greška sa dodavanjem tipa!");
             else Close(update);
         } else {
-            if (!new TipoviTretmana().edit(tip, new TipTretmana(-1, nazivTxt.getText()))) showMessageDialog(this, "Greška sa čuvanjem tipa!");
+            if (!new TipoviTretmana().edit(tip, new TipTretmana(-1, nazivTxt.getText()))) showMessageDialog(this, "Greška sa izmenom tipa!");
             else Close(update);
         }
     }

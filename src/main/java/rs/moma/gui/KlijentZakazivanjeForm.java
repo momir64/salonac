@@ -160,7 +160,7 @@ public class KlijentZakazivanjeForm extends ZakazivanjeForm {
         gbc.fill       = GridBagConstraints.HORIZONTAL;
         mainPanel.add(maxTrajanjeTxt, gbc);
         final JLabel label4 = new JLabel();
-        label4.setText(" minuta");
+        label4.setText(" min");
         gbc        = new GridBagConstraints();
         gbc.gridx  = 6;
         gbc.gridy  = 2;

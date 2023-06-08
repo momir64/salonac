@@ -271,12 +271,12 @@ public class MenadzerPage extends JFrame {
             columnModel.getColumn(2).setCellRenderer(new NumberRenderer(false));
 
         } else if (((NameValue) entitetTypeBox.getSelectedItem()).Value == ZakazaniTretman.class) {
-            ArrayList<ZakazaniTretman> zakazaniTretmani = new ZakazaniTretmani().get();
+            ArrayList<ZakazaniTretman> zakazaniTretmani = toArrayList(new ZakazaniTretmani().get().stream().sorted(Comparator.comparing(tr -> tr.Vreme)));
             Zaposleni                  zaposleni        = new Zaposleni();
             Klijenti                   klijenti         = new Klijenti();
             Tretmani                   tretmani         = new Tretmani();
             for (ZakazaniTretman tretman : zakazaniTretmani)
-                values.add(new Object[]{tretman, tretmani.get(tretman.TretmanID).Naziv, tretman.Vreme.format(DateTimeFormatter.ofPattern("HH:mm dd.MM.yyyy.")),
+                values.add(new Object[]{tretman, tretmani.get(tretman.TretmanID).Naziv, tretman.Vreme,
                                         getStanjeName(tretman.Stanje), klijenti.get(tretman.KlijentID).getDisplayName(),
                                         zaposleni.get(tretman.KozmeticarID).getDisplayName(),
                                         tretman.getPlaceniIznos(), padLeft(String.valueOf(tretman.Trajanje), 3) + " min"});
@@ -284,6 +284,7 @@ public class MenadzerPage extends JFrame {
                                                                                                       "Kozmetičar", "Cena", "Trajanje"}));
             columnModel.removeColumn(columnModel.getColumn(0));
             columnModel.getColumn(5).setCellRenderer(new NumberRenderer(false));
+            columnModel.getColumn(1).setCellRenderer(new DateRenderer(false));
             columnModel.getColumn(0).setMinWidth(180);
             columnModel.getColumn(3).setMinWidth(110);
         }

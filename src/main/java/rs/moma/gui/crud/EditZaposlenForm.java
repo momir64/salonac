@@ -6,6 +6,7 @@ import rs.moma.gui.crud.helper.CheckBoxListRenderer;
 import rs.moma.gui.crud.helper.CheckListTip;
 import rs.moma.gui.helper.NameValue;
 import rs.moma.gui.helper.NumericKeyAdapter;
+import rs.moma.managers.Klijenti;
 import rs.moma.managers.TipoviTretmana;
 import rs.moma.managers.Zaposleni;
 
@@ -96,11 +97,12 @@ public class EditZaposlenForm extends JDialog {
 
     public void Save(Zaposlen zaposlen, Runnable update) {
         if (!isInputValid(imeTxt, prezimeTxt, polBox, telefonTxt, adresaTxt, usernameTxt, lozinkaTxt)) showMessageDialog(this, "Neispravan unos!");
+        else if (new Klijenti().isUsernameTaken(usernameTxt.getText())) showMessageDialog(this, "Uneto korisničko ime je zauzeto!");
         else if (zaposlen == null) {
-            if (!new Zaposleni().add(getData())) showMessageDialog(this, "Greška sa čuvanjem tipa!");
+            if (!new Zaposleni().add(getData())) showMessageDialog(this, "Greška sa dodavanjem zaposlenog!");
             else Close(update);
         } else {
-            if (!new Zaposleni().edit(zaposlen, getData())) showMessageDialog(this, "Greška sa čuvanjem tipa!");
+            if (!new Zaposleni().edit(zaposlen, getData())) showMessageDialog(this, "Greška sa izmenom zaposlenog!");
             else Close(update);
         }
     }

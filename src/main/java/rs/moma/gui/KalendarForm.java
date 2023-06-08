@@ -14,12 +14,14 @@ import javax.swing.table.TableModel;
 import java.awt.*;
 import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import static rs.moma.helper.DataTools.getMonthName;
+
 public abstract class KalendarForm extends JFrame {
-    protected final String[]          meseci         = {"Januar", "Februar", "Mart", "April", "Maj", "Jun", "Jul", "Avgust", "Septembar", "Oktobar", "Novembar", "Decembar"};
     protected final DefaultTableModel kalendarModel  = new DefaultTableModel(null, new String[]{"Pon", "Uto", "Sre", "Čet", "Pet", "Sub", "Ned"});
     protected final Calendar          kalendar       = new GregorianCalendar();
     protected final boolean           isEmptyDateSelectable;
@@ -74,7 +76,7 @@ public abstract class KalendarForm extends JFrame {
 
     protected LocalDate cellToDate(int row, int column) {
         try {
-            return LocalDate.of(kalendar.get(Calendar.YEAR), kalendar.get(Calendar.MONTH) + 1, 2 - kalendar.get(Calendar.DAY_OF_WEEK) + row * 7 + column);
+            return LocalDate.of(kalendar.get(Calendar.YEAR), kalendar.get(Calendar.MONTH) + 1, 3 - kalendar.get(Calendar.DAY_OF_WEEK) + row * 7 + column);
         } catch (DateTimeException e) {
             return null;
         }
@@ -93,10 +95,10 @@ public abstract class KalendarForm extends JFrame {
         kalendarModel.setRowCount(6);
         selectedColumn = -1;
         selectedRow    = -1;
-        int i = kalendar.get(Calendar.DAY_OF_WEEK) - 1;
+        int i = (kalendar.get(Calendar.DAY_OF_WEEK) + 5) % 7;
         for (int day = 1; day <= kalendar.getActualMaximum(Calendar.DAY_OF_MONTH); day++)
              kalendarModel.setValueAt(day, i / 7, i++ % 7);
-        mesecLbl.setText(meseci[kalendar.get(Calendar.MONTH)] + " " + kalendar.get(Calendar.YEAR));
+        mesecLbl.setText(getMonthName(kalendar.get(Calendar.MONTH)) + " " + kalendar.get(Calendar.YEAR));
     }
 
     protected abstract String[][] tretmanToList(ZakazaniTretman tretman);
@@ -116,9 +118,12 @@ public abstract class KalendarForm extends JFrame {
     protected abstract void updatePage();
 
     public void removeTretman(ZakazaniTretman tretman) {
-        new ZakazaniTretmani().otkaziTretman(tretman, showEdit);
-        fillTretmani();
-        updatePage();
+        // ako je showEdit true, to znači da je u pitanju recepcioner (salon), u suprotnom je klijent
+        if (showEdit || tretman.Vreme.isAfter(LocalDateTime.now())) {
+            new ZakazaniTretmani().otkaziTretman(tretman, showEdit);
+            fillTretmani();
+            updatePage();
+        }
     }
 
     public void editTretman(ZakazaniTretman tretman) {

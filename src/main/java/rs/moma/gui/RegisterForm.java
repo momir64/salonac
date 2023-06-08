@@ -33,7 +33,7 @@ public class RegisterForm extends JDialog {
             Klijenti klijenti = new Klijenti();
             if (!isInputValid(imeTxt, prezimeTxt, telefonTxt, adresaTxt, usernameTxt, passwordTxt))
                 showMessageDialog(this, "Neispravan unos!");
-            else if (!klijenti.isUsernameFree(usernameTxt.getText()))
+            else if (klijenti.isUsernameTaken(usernameTxt.getText()))
                 showMessageDialog(this, "Uneto korisničko ime je zauzeto!");
             else if (isInputFilled(imeTxt, prezimeTxt, telefonTxt, adresaTxt, usernameTxt, passwordTxt)) {
                 klijenti.add(new Klijent(imeTxt.getText(),

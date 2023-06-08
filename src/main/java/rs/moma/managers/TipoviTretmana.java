@@ -51,7 +51,7 @@ public class TipoviTretmana {
     }
 
     // Pravljenje ključeva
-    private boolean isTakenID(int id, ArrayList<TipTretmana> tipoviTretmana) {
+    private boolean isTakenID(int id) {
         for (TipTretmana tipTretmana : tipoviTretmana)
             if (tipTretmana.ID == id)
                 return true;
@@ -60,7 +60,7 @@ public class TipoviTretmana {
 
     public int getNewID() {
         int i = 0;
-        while (isTakenID(i, tipoviTretmana)) i++;
+        while (isTakenID(i)) i++;
         return i;
     }
 }

@@ -49,11 +49,12 @@ public class EditKlijentForm extends JDialog {
 
     public void Save(Klijent klijent, Runnable update) {
         if (!isInputValid(imeTxt, prezimeTxt, polBox, telefonTxt, adresaTxt, usernameTxt, lozinkaTxt)) showMessageDialog(this, "Neispravan unos!");
+        else if (new Klijenti().isUsernameTaken(usernameTxt.getText())) showMessageDialog(this, "Uneto korisničko ime je zauzeto!");
         else if (klijent == null) {
-            if (!new Klijenti().add(getData())) showMessageDialog(this, "Greška sa čuvanjem tipa!");
+            if (!new Klijenti().add(getData())) showMessageDialog(this, "Greška sa dodavanjem klijenta!");
             else Close(update);
         } else {
-            if (!new Klijenti().edit(klijent, getData())) showMessageDialog(this, "Greška sa čuvanjem tipa!");
+            if (!new Klijenti().edit(klijent, getData())) showMessageDialog(this, "Greška sa izmenom klijenta!");
             else Close(update);
         }
     }
