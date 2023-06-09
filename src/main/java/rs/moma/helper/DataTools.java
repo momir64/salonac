@@ -16,13 +16,14 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class DataTools {
-    public static final String fileZakazaniTretmani = "data/zakazani_tretmani.csv";
-    public static final String fileTipoviTretmana   = "data/tipovi_tretmana.csv";
-    public static final String fileZaposleni        = "data/zaposleni.csv";
-    public static final String fileTretmani         = "data/tretmani.csv";
-    public static final String fileKlijenti         = "data/klijenti.csv";
-    public static final String fileIsplate          = "data/isplate.csv";
-    public static final String fileSalon            = "data/salon.csv";
+    public static final String fileFolder           = "data";
+    public static final String fileZakazaniTretmani = fileFolder + "/zakazani_tretmani.csv";
+    public static final String fileTipoviTretmana   = fileFolder + "/tipovi_tretmana.csv";
+    public static final String fileZaposleni        = fileFolder + "/zaposleni.csv";
+    public static final String fileTretmani         = fileFolder + "/tretmani.csv";
+    public static final String fileKlijenti         = fileFolder + "/klijenti.csv";
+    public static final String fileIsplate          = fileFolder + "/isplate.csv";
+    public static final String fileSalon            = fileFolder + "/salon.csv";
     public static final String SP1                  = ";";
     public static final String SP2                  = "║";
     public static final String SP3                  = "┼";

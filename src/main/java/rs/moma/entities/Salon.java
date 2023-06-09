@@ -11,8 +11,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-import static rs.moma.helper.DataTools.SP1;
-import static rs.moma.helper.DataTools.fileSalon;
+import static rs.moma.helper.DataTools.*;
 
 public class Salon {
     public String Naziv;
@@ -50,6 +49,7 @@ public class Salon {
 
     private void save() {
         try {
+            Files.createDirectories(Paths.get(fileFolder));
             Files.write(Paths.get(fileSalon), (Naziv + SP1 + PocetakRadnogVremena + SP1 + KrajRadnogVremena + SP1 + MinIznosLojalnosti).getBytes());
         } catch (Exception e) {
             System.err.println("Desila se greška prilikom čuvanja slaona!");
