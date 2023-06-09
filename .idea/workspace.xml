@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="ANALYZE_INJECTED_CODE" value="false" />
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="862dc988-3b47-4e9f-a471-6deffbc3cc0c" name="Changes" comment="Aktivan/neaktivan korisnik">
-      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/entities/helper/Korisnik.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/entities/helper/Korisnik.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/gui/helper/DateRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/gui/helper/DateRenderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/helper/KozmeticarVreme.java" beforeDir="false" />
+    <list default="true" id="862dc988-3b47-4e9f-a471-6deffbc3cc0c" name="Changes" comment="Update">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/entities/Isplata.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/entities/Isplata.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/helper/RadnikPlata.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/entities/helper/RadnikPlata.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/managers/Isplate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/managers/Isplate.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +82,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1686224629965</updated>
-      <workItem from="1686224632122" duration="20844000" />
+      <workItem from="1686224632122" duration="21155000" />
     </task>
     <task id="LOCAL-00001" summary="Update">
       <created>1686225511483</created>
@@ -129,7 +133,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686283206371</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Update">
+      <created>1686283511862</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1686283511862</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -149,9 +160,9 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Small fixes and updates" />
     <MESSAGE value="Moved to helper" />
-    <MESSAGE value="Update" />
     <MESSAGE value="Aktivan/neaktivan korisnik" />
-    <option name="LAST_COMMIT_MESSAGE" value="Aktivan/neaktivan korisnik" />
+    <MESSAGE value="Update" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/salonac$Main.ic" NAME="Main Coverage Results" MODIFIED="1686282167587" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

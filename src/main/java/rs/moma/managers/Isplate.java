@@ -3,7 +3,7 @@ package rs.moma.managers;
 import rs.moma.entities.Isplata;
 import rs.moma.helper.DataTools;
 import rs.moma.helper.NazivVrednostVreme;
-import rs.moma.helper.RadnikPlata;
+import rs.moma.entities.helper.RadnikPlata;
 
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;

@@ -1,4 +1,4 @@
-package rs.moma.helper;
+package rs.moma.entities.helper;
 
 import static rs.moma.helper.DataTools.SP2;
 

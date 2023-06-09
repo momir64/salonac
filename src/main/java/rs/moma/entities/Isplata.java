@@ -1,7 +1,7 @@
 package rs.moma.entities;
 
 import rs.moma.entities.helper.ClassWithID;
-import rs.moma.helper.RadnikPlata;
+import rs.moma.entities.helper.RadnikPlata;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
