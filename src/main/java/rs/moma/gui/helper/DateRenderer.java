@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class DateRenderer extends DefaultTableCellRenderer {
-    boolean DoubleSpace;
+    final boolean DoubleSpace;
 
     public DateRenderer() {
         DoubleSpace = true;

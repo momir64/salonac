@@ -13,7 +13,7 @@ public class Korisnik implements ClassWithID {
     public final String         Adresa;
     public final String         Username;
     public final String         Lozinka;
-    public       boolean        Aktivan;
+    public final boolean        Aktivan;
 
     public Korisnik(int id, String ime, String prezime, DataTools.EPol pol, String telefon, String adresa, String username, String lozinka, boolean aktivan) {
         ID       = id;
