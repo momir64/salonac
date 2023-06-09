@@ -7,53 +7,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="862dc988-3b47-4e9f-a471-6deffbc3cc0c" name="Changes" comment="Update">
+    <list default="true" id="862dc988-3b47-4e9f-a471-6deffbc3cc0c" name="Changes" comment="Safe start">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.backups/data.charts/isplate.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.backups/data.charts/klijenti.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.backups/data.charts/salon.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.backups/data.charts/tipovi_tretmana.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.backups/data.charts/tretmani.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.backups/data.charts/zakazani_tretmani.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.backups/data.charts/zaposleni.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.backups/data.cp3/isplate.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.backups/data.cp3/klijenti.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.backups/data.cp3/salon.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.backups/data.cp3/tipovi_tretmana.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.backups/data.cp3/tretmani.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.backups/data.cp3/zakazani_tretmani.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.backups/data.cp3/zaposleni.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.backups/data.empty/isplate.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.backups/data.empty/klijenti.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.backups/data.empty/salon.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.backups/data.empty/tipovi_tretmana.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.backups/data.empty/tretmani.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.backups/data.empty/zakazani_tretmani.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.backups/data.empty/zaposleni.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.backups/data.test/isplate.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.backups/data.test/klijenti.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.backups/data.test/salon.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.backups/data.test/tipovi_tretmana.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.backups/data.test/tretmani.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.backups/data.test/zakazani_tretmani.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.backups/data.test/zaposleni.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.backups/data.test2/isplate.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.backups/data.test2/klijenti.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.backups/data.test2/salon.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.backups/data.test2/tipovi_tretmana.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.backups/data.test2/tretmani.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.backups/data.test2/zakazani_tretmani.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.backups/data.test2/zaposleni.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/isplate.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/isplate.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/klijenti.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/klijenti.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/salon.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/salon.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/tipovi_tretmana.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/tipovi_tretmana.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/tretmani.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/tretmani.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/zakazani_tretmani.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/zakazani_tretmani.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/zaposleni.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/zaposleni.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/entities/Salon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/entities/Salon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/helper/DataTools.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/helper/DataTools.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -124,7 +79,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1686224629965</updated>
-      <workItem from="1686224632122" duration="24113000" />
+      <workItem from="1686224632122" duration="25421000" />
     </task>
     <task id="LOCAL-00001" summary="Update">
       <created>1686225511483</created>
@@ -189,7 +144,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686283836277</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Safe start">
+      <created>1686286891551</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1686286891551</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -211,7 +173,8 @@
     <MESSAGE value="Moved to helper" />
     <MESSAGE value="Aktivan/neaktivan korisnik" />
     <MESSAGE value="Update" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update" />
+    <MESSAGE value="Safe start" />
+    <option name="LAST_COMMIT_MESSAGE" value="Safe start" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/salonac$Main.ic" NAME="Main Coverage Results" MODIFIED="1686282167587" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
