@@ -1,6 +1,6 @@
 package rs.moma.entities;
 
-import rs.moma.helper.ClassWithID;
+import rs.moma.entities.helper.ClassWithID;
 import rs.moma.helper.RadnikPlata;
 
 import java.time.LocalDateTime;

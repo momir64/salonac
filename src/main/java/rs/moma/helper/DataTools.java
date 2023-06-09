@@ -1,5 +1,6 @@
 package rs.moma.helper;
 
+import rs.moma.entities.helper.ClassWithID;
 import rs.moma.gui.helper.NameValue;
 
 import javax.swing.*;

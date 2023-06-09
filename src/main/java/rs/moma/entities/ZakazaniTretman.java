@@ -1,7 +1,7 @@
 package rs.moma.entities;
 
 import rs.moma.helper.DataTools.EStanjeTermina;
-import rs.moma.helper.ClassWithID;
+import rs.moma.entities.helper.ClassWithID;
 import rs.moma.managers.ZakazaniTretmani;
 
 import java.time.LocalDateTime;

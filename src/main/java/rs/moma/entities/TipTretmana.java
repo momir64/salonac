@@ -1,6 +1,6 @@
 package rs.moma.entities;
 
-import rs.moma.helper.ClassWithID;
+import rs.moma.entities.helper.ClassWithID;
 import rs.moma.managers.TipoviTretmana;
 
 import static rs.moma.helper.DataTools.SP1;

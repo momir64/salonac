@@ -3,7 +3,7 @@ package rs.moma.gui;
 import rs.moma.entities.*;
 import rs.moma.gui.helper.NameValue;
 import rs.moma.gui.helper.DateKeyAdapter;
-import rs.moma.helper.ClassWithID;
+import rs.moma.entities.helper.ClassWithID;
 import rs.moma.managers.Klijenti;
 import rs.moma.managers.Tretmani;
 import rs.moma.managers.ZakazaniTretmani;

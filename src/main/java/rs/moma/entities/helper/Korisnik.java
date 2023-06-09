@@ -1,4 +1,6 @@
-package rs.moma.helper;
+package rs.moma.entities.helper;
+
+import rs.moma.helper.DataTools;
 
 import static rs.moma.helper.DataTools.SP1;
 
@@ -11,8 +13,9 @@ public class Korisnik implements ClassWithID {
     public final String         Adresa;
     public final String         Username;
     public final String         Lozinka;
+    public       boolean        Aktivan;
 
-    public Korisnik(int id, String ime, String prezime, DataTools.EPol pol, String telefon, String adresa, String username, String lozinka) {
+    public Korisnik(int id, String ime, String prezime, DataTools.EPol pol, String telefon, String adresa, String username, String lozinka, boolean aktivan) {
         ID       = id;
         Ime      = ime;
         Prezime  = prezime;
@@ -21,6 +24,7 @@ public class Korisnik implements ClassWithID {
         Adresa   = adresa;
         Username = username;
         Lozinka  = lozinka;
+        Aktivan  = aktivan;
     }
 
     public Korisnik(String line) {
@@ -33,6 +37,7 @@ public class Korisnik implements ClassWithID {
         Adresa   = data[5];
         Username = data[6];
         Lozinka  = data[7];
+        Aktivan  = Boolean.parseBoolean(data[8]);
     }
 
     @Override
@@ -44,7 +49,8 @@ public class Korisnik implements ClassWithID {
                Telefon + SP1 +
                Adresa + SP1 +
                Username + SP1 +
-               Lozinka;
+               Lozinka + SP1 +
+               Aktivan;
     }
 
     @Override
