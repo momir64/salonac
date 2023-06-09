@@ -78,6 +78,6 @@ public class Klijenti {
 
     // Prijava
     public Klijent prijava(String username, String password) {
-        return klijenti.stream().filter(klijent -> klijent.Username.equalsIgnoreCase(username) && klijent.Lozinka.equals(password)).findFirst().orElse(null);
+        return klijenti.stream().filter(klijent -> klijent.Username.equalsIgnoreCase(username) && klijent.Lozinka.equals(password) && klijent.Aktivan).findFirst().orElse(null);
     }
 }

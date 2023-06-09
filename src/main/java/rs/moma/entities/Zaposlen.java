@@ -1,6 +1,6 @@
 package rs.moma.entities;
 
-import rs.moma.helper.Korisnik;
+import rs.moma.entities.helper.Korisnik;
 import rs.moma.managers.Tretmani;
 import rs.moma.managers.ZakazaniTretmani;
 import rs.moma.managers.Zaposleni;
@@ -27,9 +27,9 @@ public class Zaposlen extends Korisnik {
     public final int[]          ZaduzeniTipoviTretmana;
 
     public Zaposlen(int id, String ime, String prezime, EPol pol, String telefon, String adresa, String username,
-                    String lozinka, ETipZaposlenog tipZaposlenog, ENivoSpreme sprema, float koeficijentSprema,
+                    String lozinka, boolean aktivan, ETipZaposlenog tipZaposlenog, ENivoSpreme sprema, float koeficijentSprema,
                     int godineStaza, float koeficijentStaz, float plataOsnova, String bonus, int[] zaduzeniTipoviTretmana) {
-        super(id, ime, prezime, pol, telefon, adresa, username, lozinka);
+        super(id, ime, prezime, pol, telefon, adresa, username, lozinka, aktivan);
         TipZaposlenog          = tipZaposlenog;
         Sprema                 = sprema;
         KoeficijentSprema      = koeficijentSprema;
@@ -41,23 +41,23 @@ public class Zaposlen extends Korisnik {
     }
 
     public Zaposlen(String ime, String prezime, EPol pol, String telefon, String adresa, String username,
-                    String lozinka, ETipZaposlenog tipZaposlenog, ENivoSpreme sprema, float koeficijentSprema,
+                    String lozinka, boolean aktivan, ETipZaposlenog tipZaposlenog, ENivoSpreme sprema, float koeficijentSprema,
                     int godineStaza, float koeficijentStaz, float plataOsnova, String bonus, int[] zaduzeniTipoviTretmana) {
-        this(new Zaposleni().getNewID(), ime, prezime, pol, telefon, adresa, username, lozinka, tipZaposlenog, sprema,
+        this(new Zaposleni().getNewID(), ime, prezime, pol, telefon, adresa, username, lozinka, aktivan, tipZaposlenog, sprema,
              koeficijentSprema, godineStaza, koeficijentStaz, plataOsnova, bonus, zaduzeniTipoviTretmana);
     }
 
     public Zaposlen(String line) {
-        super(String.join(SP1, Arrays.copyOfRange(line.split(SP1), 0, 8)));
+        super(String.join(SP1, Arrays.copyOfRange(line.split(SP1), 0, 9)));
         String[] data = line.split(SP1);
-        TipZaposlenog          = ETipZaposlenog.valueOf(data[8]);
-        Sprema                 = ENivoSpreme.valueOf(data[9]);
-        KoeficijentSprema      = Float.parseFloat(data[10]);
-        GodineStaza            = Integer.parseInt(data[11]);
-        KoeficijentStaz        = Float.parseFloat(data[12]);
-        PlataOsnova            = Float.parseFloat(data[13]);
-        Bonus                  = data[14];
-        ZaduzeniTipoviTretmana = Arrays.stream(Arrays.copyOfRange(data, 15, data.length)).mapToInt(Integer::parseInt).toArray();
+        TipZaposlenog          = ETipZaposlenog.valueOf(data[9]);
+        Sprema                 = ENivoSpreme.valueOf(data[10]);
+        KoeficijentSprema      = Float.parseFloat(data[11]);
+        GodineStaza            = Integer.parseInt(data[12]);
+        KoeficijentStaz        = Float.parseFloat(data[13]);
+        PlataOsnova            = Float.parseFloat(data[14]);
+        Bonus                  = data[15];
+        ZaduzeniTipoviTretmana = Arrays.stream(Arrays.copyOfRange(data, 16, data.length)).mapToInt(Integer::parseInt).toArray();
     }
 
     @Override

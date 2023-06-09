@@ -15,25 +15,25 @@
       </vspacer>
       <hspacer id="720e4">
         <constraints>
-          <grid row="1" column="3" row-span="9" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="3" row-span="10" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
           <gridbag weightx="3.0" weighty="0.0"/>
         </constraints>
       </hspacer>
       <vspacer id="a7bd1">
         <constraints>
-          <grid row="8" column="0" row-span="1" col-span="3" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <grid row="9" column="0" row-span="1" col-span="3" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
           <gridbag weightx="0.0" weighty="0.0" ipady="20"/>
         </constraints>
       </vspacer>
       <hspacer id="5a7a7">
         <constraints>
-          <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
           <gridbag weightx="2.0" weighty="0.0"/>
         </constraints>
       </hspacer>
       <component id="87164" class="javax.swing.JButton" binding="saveBtn">
         <constraints>
-          <grid row="9" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="10" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
           <gridbag weightx="0.0" weighty="0.0"/>
         </constraints>
         <properties>
@@ -45,7 +45,7 @@
       </component>
       <vspacer id="b229d">
         <constraints>
-          <grid row="10" column="0" row-span="1" col-span="4" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <grid row="11" column="0" row-span="1" col-span="4" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
           <gridbag weightx="0.0" weighty="1.0"/>
         </constraints>
       </vspacer>
@@ -60,7 +60,7 @@
       </component>
       <hspacer id="23ed8">
         <constraints>
-          <grid row="1" column="1" row-span="7" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="1" row-span="8" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
           <gridbag weightx="0.0" weighty="0.0" ipadx="20"/>
         </constraints>
       </hspacer>
@@ -184,6 +184,26 @@
         <properties>
           <labelFor value="a867b"/>
           <text value="Telefon:"/>
+        </properties>
+      </component>
+      <component id="cf1cf" class="javax.swing.JCheckBox" binding="aktivanCB">
+        <constraints>
+          <grid row="8" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <selected value="true"/>
+          <text value="Aktivan"/>
+        </properties>
+      </component>
+      <component id="69e5e" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="2" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.5" weighty="0.0" ipady="30"/>
+        </constraints>
+        <properties>
+          <labelFor value="62964"/>
+          <text value=" "/>
         </properties>
       </component>
     </children>

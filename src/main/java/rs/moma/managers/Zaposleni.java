@@ -79,6 +79,6 @@ public class Zaposleni {
 
     // Prijava
     public Zaposlen prijava(String username, String password) {
-        return zaposleni.stream().filter(zaposlen -> zaposlen.Username.equalsIgnoreCase(username) && zaposlen.Lozinka.equals(password)).findFirst().orElse(null);
+        return zaposleni.stream().filter(zaposlen -> zaposlen.Username.equalsIgnoreCase(username) && zaposlen.Lozinka.equals(password) && zaposlen.Aktivan).findFirst().orElse(null);
     }
 }

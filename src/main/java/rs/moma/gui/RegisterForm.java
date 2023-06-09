@@ -42,7 +42,7 @@ public class RegisterForm extends JDialog {
                                          telefonTxt.getText(),
                                          adresaTxt.getText(),
                                          usernameTxt.getText(),
-                                         passwordTxt.getText()));
+                                         passwordTxt.getText(), true));
                 setVisible(false);
                 dispose();
             } else

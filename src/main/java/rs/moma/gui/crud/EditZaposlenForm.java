@@ -26,6 +26,7 @@ public class EditZaposlenForm extends JDialog {
     private JButton              removeBonusRuleBtn;
     private JList<CheckListTip>  tipoviTretmanaLst;
     private JButton              saveBonusRuleBtn;
+    private JPanel               kozmeticarPanel;
     private JTextField           bonusOfWhatTxt;
     private JTextField           bonusPeriodTxt;
     private JComboBox<NameValue> bonusOfWhatBox;
@@ -38,6 +39,7 @@ public class EditZaposlenForm extends JDialog {
     private JTextField           lozinkaTxt;
     private JTextField           kSpremaTxt;
     private JComboBox<NameValue> spremaBox;
+    private JCheckBox            aktivanCB;
     private JTextField           adresaTxt;
     private JPanel               mainPanel;
     private JTextField           kStazTxt;
@@ -46,7 +48,6 @@ public class EditZaposlenForm extends JDialog {
     private JTextField           imeTxt;
     private JComboBox<NameValue> tipBox;
     private JComboBox<NameValue> polBox;
-    private JPanel               kozmeticarPanel;
 
     public EditZaposlenForm(JFrame parent, Zaposlen zaposlen, Runnable update) {
         super(parent, zaposlen != null ? "Zaposleni: " + zaposlen.getDisplayName() : "Dodavanje zaposlenog", true);
@@ -85,8 +86,8 @@ public class EditZaposlenForm extends JDialog {
 
     public Zaposlen getData() {
         return new Zaposlen(imeTxt.getText(), prezimeTxt.getText(), (EPol) getSelectedValue(polBox), telefonTxt.getText(), adresaTxt.getText(), usernameTxt.getText(),
-                            lozinkaTxt.getText(), (ETipZaposlenog) getSelectedValue(tipBox), (ENivoSpreme) getSelectedValue(spremaBox), txtToFloat(kSpremaTxt), txtToInt(stazTxt),
-                            txtToFloat(kStazTxt), txtToFloat(osnovicaTxt), saveBonusRule(), getZaduzeniTipovi());
+                            lozinkaTxt.getText(), aktivanCB.isSelected(), (ETipZaposlenog) getSelectedValue(tipBox), (ENivoSpreme) getSelectedValue(spremaBox),
+                            txtToFloat(kSpremaTxt), txtToInt(stazTxt), txtToFloat(kStazTxt), txtToFloat(osnovicaTxt), saveBonusRule(), getZaduzeniTipovi());
     }
 
     public void Close(Runnable update) {
@@ -97,7 +98,8 @@ public class EditZaposlenForm extends JDialog {
 
     public void Save(Zaposlen zaposlen, Runnable update) {
         if (!isInputValid(imeTxt, prezimeTxt, polBox, telefonTxt, adresaTxt, usernameTxt, lozinkaTxt)) showMessageDialog(this, "Neispravan unos!");
-        else if (new Klijenti().isUsernameTaken(usernameTxt.getText())) showMessageDialog(this, "Uneto korisničko ime je zauzeto!");
+        else if (new Klijenti().isUsernameTaken(usernameTxt.getText()) && (zaposlen == null || !zaposlen.Username.equalsIgnoreCase(usernameTxt.getText())))
+            showMessageDialog(this, "Uneto korisničko ime je zauzeto!");
         else if (zaposlen == null) {
             if (!new Zaposleni().add(getData())) showMessageDialog(this, "Greška sa dodavanjem zaposlenog!");
             else Close(update);
@@ -117,7 +119,7 @@ public class EditZaposlenForm extends JDialog {
     }
 
     public void fillInput(Zaposlen zaposlen) {
-        fillInputKorisnik(zaposlen, imeTxt, prezimeTxt, polBox, telefonTxt, adresaTxt, usernameTxt, lozinkaTxt);
+        fillInputKorisnik(zaposlen, imeTxt, prezimeTxt, polBox, telefonTxt, adresaTxt, usernameTxt, lozinkaTxt, aktivanCB);
         tipBox.setSelectedItem(new NameValue("", zaposlen.TipZaposlenog));
         spremaBox.setSelectedItem(new NameValue("", zaposlen.Sprema));
         kSpremaTxt.setText(String.valueOf(zaposlen.KoeficijentSprema));
@@ -248,7 +250,7 @@ public class EditZaposlenForm extends JDialog {
         gbc            = new GridBagConstraints();
         gbc.gridx      = 1;
         gbc.gridy      = 1;
-        gbc.gridheight = 11;
+        gbc.gridheight = 12;
         gbc.fill       = GridBagConstraints.HORIZONTAL;
         gbc.ipadx      = 20;
         mainPanel.add(spacer2, gbc);
@@ -265,7 +267,7 @@ public class EditZaposlenForm extends JDialog {
         gbc            = new GridBagConstraints();
         gbc.gridx      = 8;
         gbc.gridy      = 1;
-        gbc.gridheight = 13;
+        gbc.gridheight = 14;
         gbc.weightx    = 3.0;
         gbc.fill       = GridBagConstraints.HORIZONTAL;
         mainPanel.add(spacer3, gbc);
@@ -381,7 +383,7 @@ public class EditZaposlenForm extends JDialog {
         final JPanel spacer4 = new JPanel();
         gbc         = new GridBagConstraints();
         gbc.gridx   = 0;
-        gbc.gridy   = 13;
+        gbc.gridy   = 14;
         gbc.weightx = 2.0;
         gbc.fill    = GridBagConstraints.HORIZONTAL;
         mainPanel.add(spacer4, gbc);
@@ -392,7 +394,7 @@ public class EditZaposlenForm extends JDialog {
         saveBtn.setText("Sačuvaj");
         gbc           = new GridBagConstraints();
         gbc.gridx     = 2;
-        gbc.gridy     = 13;
+        gbc.gridy     = 14;
         gbc.gridwidth = 6;
         gbc.fill      = GridBagConstraints.HORIZONTAL;
         gbc.ipadx     = 300;
@@ -400,7 +402,7 @@ public class EditZaposlenForm extends JDialog {
         final JPanel spacer5 = new JPanel();
         gbc           = new GridBagConstraints();
         gbc.gridx     = 0;
-        gbc.gridy     = 14;
+        gbc.gridy     = 15;
         gbc.gridwidth = 9;
         gbc.weighty   = 1.0;
         gbc.fill      = GridBagConstraints.VERTICAL;
@@ -408,7 +410,7 @@ public class EditZaposlenForm extends JDialog {
         final JPanel spacer6 = new JPanel();
         gbc           = new GridBagConstraints();
         gbc.gridx     = 0;
-        gbc.gridy     = 12;
+        gbc.gridy     = 13;
         gbc.gridwidth = 8;
         gbc.fill      = GridBagConstraints.VERTICAL;
         gbc.ipady     = 20;
@@ -532,7 +534,7 @@ public class EditZaposlenForm extends JDialog {
         gbc            = new GridBagConstraints();
         gbc.gridx      = 7;
         gbc.gridy      = 1;
-        gbc.gridheight = 11;
+        gbc.gridheight = 12;
         gbc.weightx    = 2.0;
         gbc.fill       = GridBagConstraints.BOTH;
         mainPanel.add(kozmeticarPanel, gbc);
@@ -663,6 +665,25 @@ public class EditZaposlenForm extends JDialog {
         gbc.fill       = GridBagConstraints.HORIZONTAL;
         gbc.ipadx      = 5;
         mainPanel.add(spacer11, gbc);
+        aktivanCB = new JCheckBox();
+        aktivanCB.setSelected(true);
+        aktivanCB.setText("Aktivan");
+        gbc           = new GridBagConstraints();
+        gbc.gridx     = 2;
+        gbc.gridy     = 12;
+        gbc.gridwidth = 5;
+        gbc.fill      = GridBagConstraints.BOTH;
+        mainPanel.add(aktivanCB, gbc);
+        final JLabel label16 = new JLabel();
+        label16.setText(" ");
+        gbc         = new GridBagConstraints();
+        gbc.gridx   = 0;
+        gbc.gridy   = 12;
+        gbc.weightx = 0.5;
+        gbc.anchor  = GridBagConstraints.EAST;
+        gbc.fill    = GridBagConstraints.VERTICAL;
+        gbc.ipady   = 30;
+        mainPanel.add(label16, gbc);
         label1.setLabelFor(imeTxt);
         label2.setLabelFor(prezimeTxt);
         label3.setLabelFor(polBox);
@@ -676,6 +697,7 @@ public class EditZaposlenForm extends JDialog {
         label11.setLabelFor(osnovicaTxt);
         label12.setLabelFor(kSpremaTxt);
         label13.setLabelFor(kStazTxt);
+        label16.setLabelFor(osnovicaTxt);
     }
     /**
      * @noinspection ALL

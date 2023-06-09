@@ -29,11 +29,14 @@ import static rs.moma.helper.DataTools.EStanjeTermina.*;
 import static rs.moma.helper.DataTools.*;
 
 public class MenadzerPage extends JFrame {
+    private JPanel               realizovaniPoKozmeticarimaPanel;
     private JTextField           odPeriodIzvestajiTxt;
     private JTextField           doPeriodIzvestajiTxt;
+    private JPanel               procenatStatusaPanel;
     private JTable               zaposleniIzvestajTbl;
     private JTable               tretmaniIzvestajTbl;
     private JButton              isplatiZaposleneBtn;
+    private JPanel               prihodiTipoviPanel;
     private JTextField           odPeriodPrihodiTxt;
     private JTextField           doPeriodPrihodiTxt;
     private JTable               prihodiRashodiTbl;
@@ -58,10 +61,8 @@ public class MenadzerPage extends JFrame {
     private JLabel               prihodiLbl;
     private JLabel               rashodiLbl;
     private JPanel               mainPanel;
+    private JTabbedPane          tabsPane;
     private JLabel               saldoLbl;
-    private JPanel               prihodiTipoviPanel;
-    private JPanel               realizovaniPoKozmeticarimaPanel;
-    private JPanel               procenatStatusaPanel;
 
     public MenadzerPage(Zaposlen menadzer, WelcomePage homePage) {
         $$$setupUI$$$();
@@ -125,6 +126,7 @@ public class MenadzerPage extends JFrame {
         showPrihodiBtn.addActionListener(e -> showPrihodi());
         editEntitetBtn.addActionListener(e -> editEntiet());
         addEntitetBtn.addActionListener(e -> addEntitet());
+        tabsPane.addChangeListener(e -> refresh());
 
         this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
@@ -133,6 +135,10 @@ public class MenadzerPage extends JFrame {
         });
 
         setVisible(true);
+        refresh();
+    }
+
+    public void refresh() {
         showDijagrami();
         makeIzvestaji();
         showEntiteti();
@@ -141,6 +147,9 @@ public class MenadzerPage extends JFrame {
     }
 
     public void showDijagrami() {
+        prihodiTipoviPanel.removeAll();
+        procenatStatusaPanel.removeAll();
+        realizovaniPoKozmeticarimaPanel.removeAll();
         if (!new ZakazaniTretmani().get().isEmpty()) {
             XYChart chart = makePrihodiTipoviChart();
             if (chart != null) prihodiTipoviPanel.add(new XChartPanel<>(chart));
@@ -233,7 +242,7 @@ public class MenadzerPage extends JFrame {
         ArrayList<Object[]> values      = new ArrayList<>();
 
         if (((NameValue) entitetTypeBox.getSelectedItem()).Value == Klijent.class) {
-            ArrayList<Klijent> klijenti = new Klijenti().get();
+            ArrayList<Klijent> klijenti = toArrayList(new Klijenti().get().stream().sorted(Comparator.comparing(klijent -> klijent.Ime)));
             for (Klijent klijent : klijenti)
                 values.add(new Object[]{klijent, klijent.Ime, klijent.Prezime, getPolName(klijent.Pol), klijent.Telefon, klijent.Adresa, klijent.Username, klijent.Lozinka});
             entitetiTbl.setModel(new DefaultTableModel(values.toArray(new Object[][]{}), new String[]{"", "Ime", "Prezime", "Pol", "Telefon", "Adresa", "Username", "Lozinka"}));
@@ -241,7 +250,7 @@ public class MenadzerPage extends JFrame {
             columnModel.getColumn(4).setMinWidth(150);
 
         } else if (((NameValue) entitetTypeBox.getSelectedItem()).Value == Zaposlen.class) {
-            ArrayList<Zaposlen> zaposleni = new Zaposleni().get();
+            ArrayList<Zaposlen> zaposleni = toArrayList(new Zaposleni().get().stream().sorted(Comparator.comparing(zaposlen -> zaposlen.Ime)));
             for (Zaposlen zaposlen : zaposleni)
                 values.add(new Object[]{zaposlen, zaposlen.Ime, zaposlen.Prezime, getPolName(zaposlen.Pol), zaposlen.Telefon, zaposlen.Adresa, zaposlen.Username, zaposlen.Lozinka,
                                         getTipZaposlenogName(zaposlen.TipZaposlenog), getSpremaName(zaposlen.Sprema), zaposlen.GodineStaza, zaposlen.PlataOsnova});
@@ -255,7 +264,7 @@ public class MenadzerPage extends JFrame {
             columnModel.getColumn(10).setCellRenderer(new NumberRenderer());
 
         } else if (((NameValue) entitetTypeBox.getSelectedItem()).Value == TipTretmana.class) {
-            ArrayList<TipTretmana> tipovi = new TipoviTretmana().get();
+            ArrayList<TipTretmana> tipovi = toArrayList(new TipoviTretmana().get().stream().sorted(Comparator.comparing(tipTretmana -> tipTretmana.Tip)));
             for (TipTretmana tip : tipovi)
                 values.add(new Object[]{tip, tip.Tip});
             entitetiTbl.setModel(new DefaultTableModel(values.toArray(new Object[][]{}), new String[]{"", "Tip"}));
@@ -263,7 +272,7 @@ public class MenadzerPage extends JFrame {
 
         } else if (((NameValue) entitetTypeBox.getSelectedItem()).Value == Tretman.class) {
             TipoviTretmana     tipoviTretmana = new TipoviTretmana();
-            ArrayList<Tretman> tretmani       = new Tretmani().get();
+            ArrayList<Tretman> tretmani       = toArrayList(new Tretmani().get().stream().sorted(Comparator.comparing(tretman -> tretman.Naziv)));
             for (Tretman tretman : tretmani)
                 values.add(new Object[]{tretman, tretman.Naziv, tipoviTretmana.get(tretman.TipID).Tip, tretman.Cena, padLeft(String.valueOf(tretman.Trajanje), 3) + " min"});
             entitetiTbl.setModel(new DefaultTableModel(values.toArray(new Object[][]{}), new String[]{"", "Naziv", "Tip", "Cena", "Trajanje"}));
@@ -421,7 +430,7 @@ public class MenadzerPage extends JFrame {
         createUIComponents();
         mainPanel = new JPanel();
         mainPanel.setLayout(new GridBagLayout());
-        final JTabbedPane  tabbedPane1 = new JTabbedPane();
+        tabsPane = new JTabbedPane();
         GridBagConstraints gbc;
         gbc         = new GridBagConstraints();
         gbc.gridx   = 0;
@@ -429,10 +438,10 @@ public class MenadzerPage extends JFrame {
         gbc.weightx = 1.0;
         gbc.weighty = 1.0;
         gbc.fill    = GridBagConstraints.BOTH;
-        mainPanel.add(tabbedPane1, gbc);
+        mainPanel.add(tabsPane, gbc);
         final JPanel panel1 = new JPanel();
         panel1.setLayout(new GridBagLayout());
-        tabbedPane1.addTab("Salon", panel1);
+        tabsPane.addTab("Salon", panel1);
         final JLabel label1 = new JLabel();
         label1.setHorizontalAlignment(4);
         label1.setHorizontalTextPosition(4);
@@ -534,7 +543,7 @@ public class MenadzerPage extends JFrame {
         panel1.add(nazivSalonaTxt, gbc);
         final JPanel panel2 = new JPanel();
         panel2.setLayout(new GridBagLayout());
-        tabbedPane1.addTab("Finansije", panel2);
+        tabsPane.addTab("Finansije", panel2);
         final JPanel spacer5 = new JPanel();
         gbc            = new GridBagConstraints();
         gbc.gridx      = 0;
@@ -741,7 +750,7 @@ public class MenadzerPage extends JFrame {
         panel2.add(label8, gbc);
         final JPanel panel3 = new JPanel();
         panel3.setLayout(new GridBagLayout());
-        tabbedPane1.addTab("Kartica lojalnosti", panel3);
+        tabsPane.addTab("Kartica lojalnosti", panel3);
         final JPanel spacer13 = new JPanel();
         gbc            = new GridBagConstraints();
         gbc.gridx      = 0;
@@ -839,7 +848,7 @@ public class MenadzerPage extends JFrame {
         scrollPane2.setViewportView(lojalniLst);
         final JPanel panel4 = new JPanel();
         panel4.setLayout(new GridBagLayout());
-        tabbedPane1.addTab("Baza podataka", panel4);
+        tabsPane.addTab("Baza podataka", panel4);
         final JPanel spacer20 = new JPanel();
         gbc            = new GridBagConstraints();
         gbc.gridx      = 0;
@@ -954,7 +963,7 @@ public class MenadzerPage extends JFrame {
         scrollPane3.setViewportView(entitetiTbl);
         final JPanel panel5 = new JPanel();
         panel5.setLayout(new GridBagLayout());
-        tabbedPane1.addTab("Izveštaji", panel5);
+        tabsPane.addTab("Izveštaji", panel5);
         final JPanel spacer28 = new JPanel();
         gbc            = new GridBagConstraints();
         gbc.gridx      = 0;
@@ -1181,7 +1190,7 @@ public class MenadzerPage extends JFrame {
         scrollPane5.setViewportView(zaposleniIzvestajTbl);
         final JPanel panel6 = new JPanel();
         panel6.setLayout(new GridBagLayout());
-        tabbedPane1.addTab("Dijagrami", panel6);
+        tabsPane.addTab("Dijagrami", panel6);
         prihodiTipoviPanel = new JPanel();
         prihodiTipoviPanel.setLayout(new GridBagLayout());
         gbc         = new GridBagConstraints();

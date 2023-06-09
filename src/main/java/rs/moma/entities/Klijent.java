@@ -2,18 +2,18 @@ package rs.moma.entities;
 
 import rs.moma.helper.DataTools;
 import rs.moma.managers.Klijenti;
-import rs.moma.helper.Korisnik;
+import rs.moma.entities.helper.Korisnik;
 import rs.moma.managers.ZakazaniTretmani;
 
 import java.util.ArrayList;
 
 public class Klijent extends Korisnik {
-    public Klijent(int id, String ime, String prezime, DataTools.EPol pol, String telefon, String adresa, String username, String lozinka) {
-        super(id, ime, prezime, pol, telefon, adresa, username, lozinka);
+    public Klijent(int id, String ime, String prezime, DataTools.EPol pol, String telefon, String adresa, String username, String lozinka, boolean aktivan) {
+        super(id, ime, prezime, pol, telefon, adresa, username, lozinka, aktivan);
     }
 
-    public Klijent(String ime, String prezime, DataTools.EPol pol, String telefon, String adresa, String username, String lozinka) {
-        super(new Klijenti().getNewID(), ime, prezime, pol, telefon, adresa, username, lozinka);
+    public Klijent(String ime, String prezime, DataTools.EPol pol, String telefon, String adresa, String username, String lozinka, boolean aktivan) {
+        super(new Klijenti().getNewID(), ime, prezime, pol, telefon, adresa, username, lozinka, aktivan);
     }
 
     public Klijent(String line) {

@@ -18,6 +18,7 @@ public class EditKlijentForm extends JDialog {
     private JTextField           telefonTxt;
     private JTextField           adresaTxt;
     private JPanel               mainPanel;
+    private JCheckBox            aktivanCB;
     private JButton              saveBtn;
     private JTextField           imeTxt;
     private JComboBox<NameValue> polBox;
@@ -30,7 +31,7 @@ public class EditKlijentForm extends JDialog {
         setContentPane(mainPanel);
 
         fillPolBox(polBox);
-        if (klijent != null) fillInputKorisnik(klijent, imeTxt, prezimeTxt, polBox, telefonTxt, adresaTxt, usernameTxt, lozinkaTxt);
+        if (klijent != null) fillInputKorisnik(klijent, imeTxt, prezimeTxt, polBox, telefonTxt, adresaTxt, usernameTxt, lozinkaTxt, aktivanCB);
 
         saveBtn.addActionListener(e -> Save(klijent, update));
 
@@ -38,7 +39,8 @@ public class EditKlijentForm extends JDialog {
     }
 
     public Klijent getData() {
-        return new Klijent(imeTxt.getText(), prezimeTxt.getText(), (EPol) getSelectedValue(polBox), telefonTxt.getText(), adresaTxt.getText(), usernameTxt.getText(), lozinkaTxt.getText());
+        return new Klijent(imeTxt.getText(), prezimeTxt.getText(), (EPol) getSelectedValue(polBox), telefonTxt.getText(),
+                           adresaTxt.getText(), usernameTxt.getText(), lozinkaTxt.getText(), aktivanCB.isSelected());
     }
 
     public void Close(Runnable update) {
@@ -49,7 +51,8 @@ public class EditKlijentForm extends JDialog {
 
     public void Save(Klijent klijent, Runnable update) {
         if (!isInputValid(imeTxt, prezimeTxt, polBox, telefonTxt, adresaTxt, usernameTxt, lozinkaTxt)) showMessageDialog(this, "Neispravan unos!");
-        else if (new Klijenti().isUsernameTaken(usernameTxt.getText())) showMessageDialog(this, "Uneto korisničko ime je zauzeto!");
+        else if (new Klijenti().isUsernameTaken(usernameTxt.getText()) && (klijent == null || !klijent.Username.equalsIgnoreCase(usernameTxt.getText())))
+            showMessageDialog(this, "Uneto korisničko ime je zauzeto!");
         else if (klijent == null) {
             if (!new Klijenti().add(getData())) showMessageDialog(this, "Greška sa dodavanjem klijenta!");
             else Close(update);
@@ -88,14 +91,14 @@ public class EditKlijentForm extends JDialog {
         gbc            = new GridBagConstraints();
         gbc.gridx      = 3;
         gbc.gridy      = 1;
-        gbc.gridheight = 9;
+        gbc.gridheight = 10;
         gbc.weightx    = 3.0;
         gbc.fill       = GridBagConstraints.HORIZONTAL;
         mainPanel.add(spacer2, gbc);
         final JPanel spacer3 = new JPanel();
         gbc           = new GridBagConstraints();
         gbc.gridx     = 0;
-        gbc.gridy     = 8;
+        gbc.gridy     = 9;
         gbc.gridwidth = 3;
         gbc.fill      = GridBagConstraints.VERTICAL;
         gbc.ipady     = 20;
@@ -103,7 +106,7 @@ public class EditKlijentForm extends JDialog {
         final JPanel spacer4 = new JPanel();
         gbc         = new GridBagConstraints();
         gbc.gridx   = 0;
-        gbc.gridy   = 9;
+        gbc.gridy   = 10;
         gbc.weightx = 2.0;
         gbc.fill    = GridBagConstraints.HORIZONTAL;
         mainPanel.add(spacer4, gbc);
@@ -114,13 +117,13 @@ public class EditKlijentForm extends JDialog {
         saveBtn.setText("Sačuvaj");
         gbc       = new GridBagConstraints();
         gbc.gridx = 2;
-        gbc.gridy = 9;
+        gbc.gridy = 10;
         gbc.fill  = GridBagConstraints.HORIZONTAL;
         mainPanel.add(saveBtn, gbc);
         final JPanel spacer5 = new JPanel();
         gbc           = new GridBagConstraints();
         gbc.gridx     = 0;
-        gbc.gridy     = 10;
+        gbc.gridy     = 11;
         gbc.gridwidth = 4;
         gbc.weighty   = 1.0;
         gbc.fill      = GridBagConstraints.VERTICAL;
@@ -137,7 +140,7 @@ public class EditKlijentForm extends JDialog {
         gbc            = new GridBagConstraints();
         gbc.gridx      = 1;
         gbc.gridy      = 1;
-        gbc.gridheight = 7;
+        gbc.gridheight = 8;
         gbc.fill       = GridBagConstraints.HORIZONTAL;
         gbc.ipadx      = 20;
         mainPanel.add(spacer6, gbc);
@@ -254,6 +257,24 @@ public class EditKlijentForm extends JDialog {
         gbc.fill    = GridBagConstraints.VERTICAL;
         gbc.ipady   = 30;
         mainPanel.add(label7, gbc);
+        aktivanCB = new JCheckBox();
+        aktivanCB.setSelected(true);
+        aktivanCB.setText("Aktivan");
+        gbc       = new GridBagConstraints();
+        gbc.gridx = 2;
+        gbc.gridy = 8;
+        gbc.fill  = GridBagConstraints.BOTH;
+        mainPanel.add(aktivanCB, gbc);
+        final JLabel label8 = new JLabel();
+        label8.setText(" ");
+        gbc         = new GridBagConstraints();
+        gbc.gridx   = 0;
+        gbc.gridy   = 8;
+        gbc.weightx = 0.5;
+        gbc.anchor  = GridBagConstraints.EAST;
+        gbc.fill    = GridBagConstraints.VERTICAL;
+        gbc.ipady   = 30;
+        mainPanel.add(label8, gbc);
         label1.setLabelFor(imeTxt);
         label2.setLabelFor(prezimeTxt);
         label3.setLabelFor(polBox);
@@ -261,6 +282,7 @@ public class EditKlijentForm extends JDialog {
         label5.setLabelFor(usernameTxt);
         label6.setLabelFor(lozinkaTxt);
         label7.setLabelFor(telefonTxt);
+        label8.setLabelFor(lozinkaTxt);
     }
     /**
      * @noinspection ALL
