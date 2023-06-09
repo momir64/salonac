@@ -21,7 +21,7 @@ public class ZakazivanjeForm extends JDialog {
 
     public void fillTretmaniBox(ArrayList<Tretman> tretmani, JComboBox<NameValue> tretmanBox, JComboBox<NameValue> kozmeticarBox, JComboBox<NameValue> vremeBox, LocalDate datum, ZakazaniTretman oldTretman) {
         ArrayList<Zaposlen> zaposleni = new Zaposleni().get();
-        tretmani.removeIf(tretman -> zaposleni.stream().noneMatch(zaposlen -> Arrays.stream(zaposlen.ZaduzeniTipoviTretmana).anyMatch(tipID -> tipID == tretman.TipID)));
+        tretmani.removeIf(tretman -> zaposleni.stream().noneMatch(zaposlen -> zaposlen.Aktivan && Arrays.stream(zaposlen.ZaduzeniTipoviTretmana).anyMatch(tipID -> tipID == tretman.TipID)));
         tretmani.sort(Comparator.comparing(tip -> tip.Naziv));
         tretmanBox.setModel(new DefaultComboBoxModel<>(tretmani.stream().map(t -> new NameValue(t.Naziv, t)).toArray(NameValue[]::new)));
         fillKozmeticariBox(tretmanBox, kozmeticarBox, vremeBox, datum, oldTretman);

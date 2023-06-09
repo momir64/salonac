@@ -41,7 +41,7 @@ public class KlijentZakazivanjeForm extends ZakazivanjeForm {
 
         ArrayList<Zaposlen>    zaposleni = new Zaposleni().get();
         ArrayList<TipTretmana> tipovi    = new TipoviTretmana().get();
-        tipovi.removeIf(tip -> zaposleni.stream().noneMatch(zaposlen -> Arrays.stream(zaposlen.ZaduzeniTipoviTretmana).anyMatch(tipID -> tipID != -1 && tipID == tip.ID)));
+        tipovi.removeIf(tip -> zaposleni.stream().noneMatch(zaposlen -> zaposlen.Aktivan && Arrays.stream(zaposlen.ZaduzeniTipoviTretmana).anyMatch(tipID -> tipID == tip.ID)));
         tipovi.add(new TipTretmana(-1, ""));
         tipovi.sort(Comparator.comparing(tip -> tip.Tip));
         tipBox.setModel(new DefaultComboBoxModel<>(tipovi.stream().map(tip -> new NameValue(tip.Tip, tip.ID)).toArray(NameValue[]::new)));

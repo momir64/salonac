@@ -115,7 +115,7 @@ public class RecepcionerZakazivanjeForm extends ZakazivanjeForm {
     }
 
     public void fillKlijentiBox() {
-        ArrayList<Klijent> klijenti = new Klijenti().get();
+        ArrayList<Klijent> klijenti = toArrayList(new Klijenti().get().stream().filter(klijent -> klijent.Aktivan));
         klijenti.sort(Comparator.comparing(tip -> tip.Ime));
         klijentBox.setModel(new DefaultComboBoxModel<>(klijenti.stream().map(k -> new NameValue(k.getDisplayName(), k)).toArray(NameValue[]::new)));
     }

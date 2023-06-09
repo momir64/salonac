@@ -4,31 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="862dc988-3b47-4e9f-a471-6deffbc3cc0c" name="Changes" comment="Small fixes and updates">
+    <list default="true" id="862dc988-3b47-4e9f-a471-6deffbc3cc0c" name="Changes" comment="Update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/klijenti.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/klijenti.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/zakazani_tretmani.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/zakazani_tretmani.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/zaposleni.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/zaposleni.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/entities/Isplata.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/entities/Isplata.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/entities/Klijent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/entities/Klijent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/entities/TipTretmana.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/entities/TipTretmana.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/entities/Tretman.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/entities/Tretman.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/entities/ZakazaniTretman.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/entities/ZakazaniTretman.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/entities/Zaposlen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/entities/Zaposlen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/gui/MenadzerPage.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/gui/MenadzerPage.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/gui/MenadzerPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/gui/MenadzerPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/gui/KlijentZakazivanjeForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/gui/KlijentZakazivanjeForm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/gui/RecepcionerZakazivanjeForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/gui/RecepcionerZakazivanjeForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/gui/RegisterForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/gui/RegisterForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/gui/crud/EditKlijentForm.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/gui/crud/EditKlijentForm.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/gui/crud/EditKlijentForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/gui/crud/EditKlijentForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/gui/crud/EditZaposlenForm.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/gui/crud/EditZaposlenForm.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/gui/crud/EditZaposlenForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/gui/crud/EditZaposlenForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/gui/crud/helper/EditKorisnikForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/gui/crud/helper/EditKorisnikForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/helper/ClassWithID.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/entities/helper/ClassWithID.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/helper/DataTools.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/helper/DataTools.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/helper/Korisnik.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/entities/helper/Korisnik.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/managers/Klijenti.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/managers/Klijenti.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/managers/ZakazaniTretmani.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/managers/ZakazaniTretmani.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/gui/ZakazivanjeForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/gui/ZakazivanjeForm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/managers/Zaposleni.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/managers/Zaposleni.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -96,7 +77,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1686224629965</updated>
-      <workItem from="1686224632122" duration="18727000" />
+      <workItem from="1686224632122" duration="20346000" />
     </task>
     <task id="LOCAL-00001" summary="Update">
       <created>1686225511483</created>
@@ -112,15 +93,50 @@
       <option name="project" value="LOCAL" />
       <updated>1686245980822</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Moved to helper">
+      <created>1686281382112</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1686281382112</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Update">
+      <created>1686281414495</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1686281414495</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Aktivan/neaktivan korisnik">
+      <created>1686281698335</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1686281698335</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Update">
+      <created>1686281719792</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1686281719792</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Update" />
     <MESSAGE value="Small fixes and updates" />
-    <option name="LAST_COMMIT_MESSAGE" value="Small fixes and updates" />
+    <MESSAGE value="Moved to helper" />
+    <MESSAGE value="Aktivan/neaktivan korisnik" />
+    <MESSAGE value="Update" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/salonac$Main.ic" NAME="Main Coverage Results" MODIFIED="1686282167587" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>rs.moma.*</FILTER>
+    </SUITE>
   </component>
 </project>
