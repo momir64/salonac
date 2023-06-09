@@ -165,7 +165,7 @@ public class ZakazaniTretmani {
     }
 
     public ArrayList<NameValue> getStatusiDijagramData() {
-        return toArrayList(Arrays.stream(values()).map(status -> new NameValue(getStanjeName(status), countOfStatus(status, LocalDateTime.now().minusDays(30), null))));
+        return toArrayList(Arrays.stream(values()).map(status -> new NameValue(getStanjeName(status), countOfStatus(status, LocalDateTime.now().minusDays(30), LocalDateTime.now()))));
     }
 
     public ArrayList<NameValue> getPrihodiTipDijagramData() {

@@ -4,30 +4,30 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="862dc988-3b47-4e9f-a471-6deffbc3cc0c" name="Changes" comment="Update">
+    <list default="true" id="862dc988-3b47-4e9f-a471-6deffbc3cc0c" name="Changes" comment="Small fixes and updates">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/isplate.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/isplate.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/tipovi_tretmana.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/tipovi_tretmana.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/tretmani.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/tretmani.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/klijenti.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/klijenti.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/zakazani_tretmani.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/zakazani_tretmani.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/zaposleni.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/zaposleni.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/gui/KalendarForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/gui/KalendarForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/gui/KlijentZakazivanjeForm.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/gui/KlijentZakazivanjeForm.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/gui/KlijentZakazivanjeForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/gui/KlijentZakazivanjeForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/gui/KozmeticarPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/gui/KozmeticarPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/entities/Isplata.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/entities/Isplata.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/entities/Klijent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/entities/Klijent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/entities/TipTretmana.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/entities/TipTretmana.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/entities/Tretman.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/entities/Tretman.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/entities/ZakazaniTretman.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/entities/ZakazaniTretman.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/entities/Zaposlen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/entities/Zaposlen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/gui/MenadzerPage.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/gui/MenadzerPage.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/gui/MenadzerPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/gui/MenadzerPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/gui/RecepcionerZakazivanjeForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/gui/RecepcionerZakazivanjeForm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/gui/RegisterForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/gui/RegisterForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/gui/crud/EditKlijentForm.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/gui/crud/EditKlijentForm.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/gui/crud/EditKlijentForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/gui/crud/EditKlijentForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/gui/crud/EditTipTretmanaForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/gui/crud/EditTipTretmanaForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/gui/crud/EditTretmanForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/gui/crud/EditTretmanForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/gui/crud/EditZakazaniTretmanForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/gui/crud/EditZakazaniTretmanForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/gui/crud/EditZaposlenForm.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/gui/crud/EditZaposlenForm.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/gui/crud/EditZaposlenForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/gui/crud/EditZaposlenForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/gui/helper/DateRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/gui/helper/DateRenderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/gui/helper/NumericKeyAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/gui/helper/NumericKeyAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/gui/crud/helper/EditKorisnikForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/gui/crud/helper/EditKorisnikForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/helper/ClassWithID.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/entities/helper/ClassWithID.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/helper/DataTools.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/helper/DataTools.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/helper/Korisnik.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/entities/helper/Korisnik.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/managers/Klijenti.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/managers/Klijenti.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/managers/TipoviTretmana.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/managers/TipoviTretmana.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/managers/Tretmani.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/managers/Tretmani.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/managers/ZakazaniTretmani.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/managers/ZakazaniTretmani.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/managers/Zaposleni.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/managers/Zaposleni.java" afterDir="false" />
     </list>
@@ -96,7 +96,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1686224629965</updated>
-      <workItem from="1686224632122" duration="12006000" />
+      <workItem from="1686224632122" duration="18727000" />
     </task>
     <task id="LOCAL-00001" summary="Update">
       <created>1686225511483</created>
@@ -105,7 +105,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686225511483</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Small fixes and updates">
+      <created>1686245980822</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1686245980822</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -113,6 +120,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Update" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update" />
+    <MESSAGE value="Small fixes and updates" />
+    <option name="LAST_COMMIT_MESSAGE" value="Small fixes and updates" />
   </component>
 </project>
