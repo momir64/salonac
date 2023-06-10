@@ -76,13 +76,6 @@ public class Zaposlen extends Korisnik {
         return str.toString();
     }
 
-    @Override
-    public boolean equals(Object zaposleni) {
-        if (this == zaposleni) return true;
-        if (!(zaposleni instanceof Zaposlen)) return false;
-        return ID == ((Zaposlen) zaposleni).ID;
-    }
-
     // Specijalne get metode
     public ArrayList<Tretman> getTretmani() {
         ArrayList<Tretman> tretmani = new ArrayList<>();

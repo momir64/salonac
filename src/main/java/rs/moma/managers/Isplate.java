@@ -65,7 +65,7 @@ public class Isplate {
 
     // Isplate
     public ArrayList<RadnikPlata> generatePlate() {
-        return toArrayList(new Zaposleni().get().stream().map(zaposleni -> new RadnikPlata(zaposleni.ID, zaposleni.getPlata())));
+        return toArrayList(new Zaposleni().get().stream().filter(zaposlen -> zaposlen.Aktivan).map(zaposlen -> new RadnikPlata(zaposlen.ID, zaposlen.getPlata())));
     }
 
     public void isplati() {

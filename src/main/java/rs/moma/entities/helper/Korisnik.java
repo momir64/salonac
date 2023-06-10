@@ -57,7 +57,7 @@ public class Korisnik implements ClassWithID {
     public boolean equals(Object korisnik) {
         if (this == korisnik) return true;
         if (!(korisnik instanceof Korisnik)) return false;
-        return ID == ((Korisnik) korisnik).ID;
+        return ID == ((Korisnik) korisnik).ID || Username.equals(((Korisnik) korisnik).Username);
     }
 
     @Override
