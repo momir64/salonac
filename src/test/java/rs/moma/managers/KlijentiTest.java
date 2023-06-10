@@ -41,10 +41,10 @@ public class KlijentiTest {
         klijenti.add(new Klijent(9, "Ime4", "Prezime4", MALE, "33333", "aresa4", "username4", "lozinka4", false));
         klijenti.add(new Klijent(5, "Ime5", "Prezime5", OTHER, "44444", "aresa5", "username5", "lozinka5", true));
 
-        zakazaniTretmani.add(new ZakazaniTretman(0, 3, 244.4f, 44 * 3, LocalDate.now().atTime(11, 11), ZAKAZAN, 1, 3, false));
-        zakazaniTretmani.add(new ZakazaniTretman(1, 3, 244.4f, 44 * 3, LocalDate.now().atTime(22, 22), ZAKAZAN, 1, 4, true));
-        zakazaniTretmani.add(new ZakazaniTretman(3, 3, 544.4f, 44 * 3, LocalDate.now().atTime(14, 14), ZAKAZAN, 3, 4, false));
-        zakazaniTretmani.add(new ZakazaniTretman(5, 3, 144.4f, 44 * 3, LocalDate.now().atTime(17, 17), ZAKAZAN, 5, 4, false));
+        zakazaniTretmani.add(new ZakazaniTretman(0, 3, 244.4f, 44, LocalDate.now().atTime(11, 11), ZAKAZAN, 1, 3, false));
+        zakazaniTretmani.add(new ZakazaniTretman(1, 3, 244.4f, 44, LocalDate.now().atTime(22, 22), ZAKAZAN, 1, 4, true));
+        zakazaniTretmani.add(new ZakazaniTretman(3, 3, 544.4f, 44, LocalDate.now().atTime(14, 14), ZAKAZAN, 3, 4, false));
+        zakazaniTretmani.add(new ZakazaniTretman(5, 3, 144.4f, 44, LocalDate.now().atTime(17, 17), ZAKAZAN, 5, 4, false));
 
         new Salon("salon", 0, 23, 300);
     }
@@ -89,15 +89,15 @@ public class KlijentiTest {
 
     @Test
     public void testRemove() {
-        klijenti.remove(new Klijent(3, "Ime3", "Prezime3", MALE, "22222", "aresa3", "username3", "lozinka3", true));
+        assertTrue(klijenti.remove(new Klijent(3, "Ime3", "Prezime3", MALE, "22222", "aresa3", "username3", "lozinka3", true)));
         assertTrue(klijenti.get().stream().noneMatch(tretman -> tretman.ID == 3));
         assertEquals(4, klijenti.get().size());
     }
 
     @Test
     public void testEdit() {
-        klijenti.edit(new Klijent(3, "Ime3", "Prezime3", MALE, "22222", "aresa3", "username3", "lozinka3", true),
-                      new Klijent(8, "Ime8", "Prezime8", MALE, "88888", "aresa8", "username8", "lozinka8", true));
+        assertTrue(klijenti.edit(new Klijent(3, "Ime3", "Prezime3", MALE, "22222", "aresa3", "username3", "lozinka3", true),
+                                 new Klijent(8, "Ime8", "Prezime8", MALE, "88888", "aresa8", "username8", "lozinka8", true)));
         assertTrue(klijenti.get().stream().anyMatch(klijent -> klijent.ID == 3 && areSame(klijent, 3, "Ime8", "Prezime8", MALE, "88888", "aresa8", "username8", "lozinka8", true)));
         assertEquals(5, klijenti.get().size());
     }

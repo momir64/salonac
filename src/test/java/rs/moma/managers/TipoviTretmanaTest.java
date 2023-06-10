@@ -62,14 +62,14 @@ public class TipoviTretmanaTest {
 
     @Test
     public void testRemove() {
-        tipoviTretmana.remove(new TipTretmana(1, ""));
+        assertTrue(tipoviTretmana.remove(new TipTretmana(1, "")));
         assertTrue(tipoviTretmana.get().stream().noneMatch(tip -> tip.ID == 1));
         assertEquals(2, tipoviTretmana.get().size());
     }
 
     @Test
     public void testEdit() {
-        tipoviTretmana.edit(new TipTretmana(1, ""), new TipTretmana(9, "novo"));
+        assertTrue(tipoviTretmana.edit(new TipTretmana(1, ""), new TipTretmana(9, "novo")));
         assertTrue(tipoviTretmana.get().stream().anyMatch(tip -> tip.ID == 1 && tip.Tip.equals("novo")));
         assertEquals(3, tipoviTretmana.get().size());
     }

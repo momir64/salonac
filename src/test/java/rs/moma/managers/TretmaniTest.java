@@ -33,11 +33,11 @@ public class TretmaniTest {
         tipoviTretmana.add(new TipTretmana(1, "tip2"));
         tipoviTretmana.add(new TipTretmana(2, "tip3"));
 
-        tretmani.add(new Tretman(0, 0, "tretman1", 111.1f, 11 * 3));
-        tretmani.add(new Tretman(1, 0, "tretman2", 222.2f, 22 * 3));
-        tretmani.add(new Tretman(8, 0, "tretman3", 333.3f, 33 * 3));
-        tretmani.add(new Tretman(3, 1, "tretman4", 244.4f, 44 * 3));
-        tretmani.add(new Tretman(9, 1, "tretman5", 555.5f, 55 * 3));
+        tretmani.add(new Tretman(0, 0, "tretman1", 111.1f, 11));
+        tretmani.add(new Tretman(1, 0, "tretman2", 222.2f, 22));
+        tretmani.add(new Tretman(8, 0, "tretman3", 333.3f, 33));
+        tretmani.add(new Tretman(3, 1, "tretman4", 244.4f, 44));
+        tretmani.add(new Tretman(9, 1, "tretman5", 555.5f, 55));
     }
 
     @After
@@ -48,45 +48,45 @@ public class TretmaniTest {
     @Test
     public void testRead() {
         ArrayList<Tretman> tr = tretmani.get();
-        assertTrue(areSame(tr.get(0), 0, 0, "tretman1", 111.1f, 11 * 3));
-        assertTrue(areSame(tr.get(1), 1, 0, "tretman2", 222.2f, 22 * 3));
-        assertTrue(areSame(tr.get(2), 8, 0, "tretman3", 333.3f, 33 * 3));
-        assertTrue(areSame(tr.get(3), 3, 1, "tretman4", 244.4f, 44 * 3));
-        assertTrue(areSame(tr.get(4), 9, 1, "tretman5", 555.5f, 55 * 3));
+        assertTrue(areSame(tr.get(0), 0, 0, "tretman1", 111.1f, 11));
+        assertTrue(areSame(tr.get(1), 1, 0, "tretman2", 222.2f, 22));
+        assertTrue(areSame(tr.get(2), 8, 0, "tretman3", 333.3f, 33));
+        assertTrue(areSame(tr.get(3), 3, 1, "tretman4", 244.4f, 44));
+        assertTrue(areSame(tr.get(4), 9, 1, "tretman5", 555.5f, 55));
         assertEquals(5, tr.size());
     }
 
     @Test
     public void testAddExisting() {
-        assertFalse(tretmani.add(new Tretman(1, 2, "tretman6", 666.6f, 66 * 3)));
+        assertFalse(tretmani.add(new Tretman(1, 2, "tretman6", 666.6f, 66)));
         assertEquals(5, tretmani.get().size());
     }
 
     @Test
     public void testAddNew() {
-        assertTrue(tretmani.add(new Tretman(5, 2, "tretman6", 666.6f, 66 * 3)));
+        assertTrue(tretmani.add(new Tretman(5, 2, "tretman6", 666.6f, 66)));
         ArrayList<Tretman> tr = tretmani.get();
-        assertTrue(areSame(tr.get(5), 5, 2, "tretman6", 666.6f, 66 * 3));
+        assertTrue(areSame(tr.get(5), 5, 2, "tretman6", 666.6f, 66));
         assertEquals(6, tr.size());
     }
 
     @Test
     public void testGetByID() {
         Tretman tretman = tretmani.get(8);
-        assertTrue(areSame(tretman, 8, 0, "tretman3", 333.3f, 33 * 3));
+        assertTrue(areSame(tretman, 8, 0, "tretman3", 333.3f, 33));
     }
 
     @Test
     public void testRemove() {
-        tretmani.remove(new Tretman(8, 0, "tretman3", 333.3f, 33 * 3));
+        assertTrue(tretmani.remove(new Tretman(8, 0, "tretman3", 333.3f, 33)));
         assertTrue(tretmani.get().stream().noneMatch(tretman -> tretman.ID == 8));
         assertEquals(4, tretmani.get().size());
     }
 
     @Test
     public void testEdit() {
-        tretmani.edit(new Tretman(8, 0, "tretman3", 333.3f, 33 * 3), new Tretman(0, 2, "novo", 99, 99 * 3));
-        assertTrue(tretmani.get().stream().anyMatch(tretman -> tretman.ID == 8 && areSame(tretman, 8, 2, "novo", 99, 99 * 3)));
+        assertTrue(tretmani.edit(new Tretman(8, 0, "tretman3", 333.3f, 33), new Tretman(0, 2, "novo", 99, 99)));
+        assertTrue(tretmani.get().stream().anyMatch(tretman -> tretman.ID == 8 && areSame(tretman, 8, 2, "novo", 99, 99)));
         assertEquals(5, tretmani.get().size());
     }
 
@@ -104,8 +104,8 @@ public class TretmaniTest {
     @Test
     public void testFilter() {
         ArrayList<Tretman> tr = tretmani.filter(0, null, -1, -1, 200, 400);
-        assertTrue(areSame(tr.get(0), 1, 0, "tretman2", 222.2f, 22 * 3));
-        assertTrue(areSame(tr.get(1), 8, 0, "tretman3", 333.3f, 33 * 3));
+        assertTrue(areSame(tr.get(0), 1, 0, "tretman2", 222.2f, 22));
+        assertTrue(areSame(tr.get(1), 8, 0, "tretman3", 333.3f, 33));
         assertEquals(2, tr.size());
     }
 }

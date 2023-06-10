@@ -27,7 +27,7 @@ public class ZakazaniTretmani {
             List<String> lines = Files.readAllLines(Paths.get(fileZakazaniTretmani), StandardCharsets.UTF_8);
             for (String line : lines)
                 zakazaniTretmani.add(new ZakazaniTretman(line));
-            for (ZakazaniTretman tretman : updateStanjeTretmana(zakazaniTretmani))
+            for (ZakazaniTretman tretman : updateStanjeTretmana())
                 DataTools.edit(zakazaniTretmani, fileZakazaniTretmani, poruka, tretman, tretman);
         } catch (Exception e) {
             System.err.println("Desila se greška prilikom čitanja zakazanih tretmana!");
@@ -222,7 +222,7 @@ public class ZakazaniTretmani {
         edit(tretman, tretman);
     }
 
-    public ArrayList<ZakazaniTretman> updateStanjeTretmana(ArrayList<ZakazaniTretman> tretmani) {
-        return toArrayList(tretmani.stream().filter(tretman -> tretman.Vreme.isBefore(LocalDateTime.now()) && tretman.Stanje == ZAKAZAN).peek(tretman -> tretman.Stanje = IZVRSEN));
+    public ArrayList<ZakazaniTretman> updateStanjeTretmana() {
+        return toArrayList(zakazaniTretmani.stream().filter(tretman -> tretman.Vreme.isBefore(LocalDateTime.now()) && tretman.Stanje == ZAKAZAN).peek(tretman -> tretman.Stanje = IZVRSEN));
     }
 }

@@ -7,18 +7,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="862dc988-3b47-4e9f-a471-6deffbc3cc0c" name="Changes" comment="Dataseobenije">
-      <change afterPath="$PROJECT_DIR$/src/test/java/rs/moma/managers/IsplateTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/rs/moma/managers/KlijentiTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/rs/moma/managers/TestHelper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/rs/moma/managers/TipoviTretmanaTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/rs/moma/managers/TretmaniTest.java" afterDir="false" />
+    <list default="true" id="862dc988-3b47-4e9f-a471-6deffbc3cc0c" name="Changes" comment="Testovi">
       <change afterPath="$PROJECT_DIR$/src/test/java/rs/moma/managers/ZakazaniTretmaniTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/rs/moma/managers/ZaposleniTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/entities/Zaposlen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/entities/Zaposlen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/entities/helper/Korisnik.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/entities/helper/Korisnik.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rs/moma/managers/Isplate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rs/moma/managers/Isplate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/rs/moma/managers/IsplateTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/rs/moma/managers/IsplateTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/rs/moma/managers/KlijentiTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/rs/moma/managers/KlijentiTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/rs/moma/managers/TipoviTretmanaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/rs/moma/managers/TipoviTretmanaTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/rs/moma/managers/TretmaniTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/rs/moma/managers/TretmaniTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/rs/moma/managers/ZaposleniTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/rs/moma/managers/ZaposleniTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -209,7 +205,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686305122358</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Testovi">
+      <created>1686381135227</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1686381135227</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -233,7 +236,8 @@
     <MESSAGE value="Update" />
     <MESSAGE value="Safe start" />
     <MESSAGE value="Dataseobenije" />
-    <option name="LAST_COMMIT_MESSAGE" value="Dataseobenije" />
+    <MESSAGE value="Testovi" />
+    <option name="LAST_COMMIT_MESSAGE" value="Testovi" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/salonac$Main.ic" NAME="Main Coverage Results" MODIFIED="1686282167587" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

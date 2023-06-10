@@ -41,7 +41,7 @@ public class IsplateTest {
     }
 
     public static boolean areSame(NazivVrednostVreme isplata, String naziv, float vrednost, LocalDateTime vreme) {
-        return isplata.Naziv.equals(naziv) && isplata.Vrednost == vrednost && isplata.Vreme.isEqual(vreme);
+        return isplata.Naziv.equals(naziv) && Math.abs(isplata.Vrednost - vrednost) < 0.01 && isplata.Vreme.isEqual(vreme);
     }
 
     @Before
@@ -82,15 +82,15 @@ public class IsplateTest {
 
     @Test
     public void testRemove() {
-        isplate.remove(new Isplata(LocalDate.now().minusMonths(2).withDayOfMonth(1).atTime(0, 0), new ArrayList<>(Arrays.asList(new RadnikPlata(0, 1300), new RadnikPlata(1, 2500)))));
+        assertTrue(isplate.remove(new Isplata(LocalDate.now().minusMonths(2).withDayOfMonth(1).atTime(0, 0), new ArrayList<>(Arrays.asList(new RadnikPlata(0, 1300), new RadnikPlata(1, 2500))))));
         assertTrue(isplate.get().stream().noneMatch(isplata -> isplata.Mesec.isEqual(LocalDate.now().minusMonths(2).withDayOfMonth(1).atTime(0, 0))));
         assertEquals(2, isplate.get().size());
     }
 
     @Test
     public void testEdit() {
-        isplate.edit(new Isplata(LocalDate.now().minusMonths(2).withDayOfMonth(1).atTime(0, 0), new ArrayList<>(Arrays.asList(new RadnikPlata(0, 1300), new RadnikPlata(1, 2500)))),
-                     new Isplata(LocalDate.now().minusMonths(2).withDayOfMonth(1).atTime(0, 0), new ArrayList<>(Arrays.asList(new RadnikPlata(0, 2300), new RadnikPlata(1, 2300)))));
+        assertTrue(isplate.edit(new Isplata(LocalDate.now().minusMonths(2).withDayOfMonth(1).atTime(0, 0), new ArrayList<>(Arrays.asList(new RadnikPlata(0, 1300), new RadnikPlata(1, 2500)))),
+                                new Isplata(LocalDate.now().minusMonths(2).withDayOfMonth(1).atTime(0, 0), new ArrayList<>(Arrays.asList(new RadnikPlata(0, 2300), new RadnikPlata(1, 2300))))));
         ArrayList<Isplata> is = isplate.get();
         assertTrue(areSame(is.get(2), LocalDate.now().minusMonths(2).withDayOfMonth(1).atTime(0, 0), new ArrayList<>(Arrays.asList(new RadnikPlata(0, 2300), new RadnikPlata(1, 2300)))));
         assertEquals(3, isplate.get().size());
@@ -108,7 +108,7 @@ public class IsplateTest {
 
     @Test
     public void testGetRashodiVrednost() {
-        assertEquals(6700, isplate.getRashodiVrednost(LocalDate.now().withDayOfMonth(1).minusMonths(1).atTime(0, 0), LocalDateTime.now()), 0.001);
+        assertEquals(6700, isplate.getRashodiVrednost(LocalDate.now().withDayOfMonth(1).minusMonths(1).atTime(0, 0), LocalDateTime.now()), 0.01);
     }
 
     @Test

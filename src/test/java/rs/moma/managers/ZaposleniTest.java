@@ -92,15 +92,15 @@ public class ZaposleniTest {
 
     @Test
     public void testRemove() {
-        zaposleni.remove(new Zaposlen(3, "Ime3", "Prezime3", MALE, "22222", "aresa3", "username3", "lozinka3", false, MENADZER, STRUKOVNA, 0, 40, 0, 40000, "", new int[]{-1}));
+        assertTrue(zaposleni.remove(new Zaposlen(3, "Ime3", "Prezime3", MALE, "22222", "aresa3", "username3", "lozinka3", false, MENADZER, STRUKOVNA, 0, 40, 0, 40000, "", new int[]{-1})));
         assertTrue(zaposleni.get().stream().noneMatch(tretman -> tretman.ID == 3));
         assertEquals(4, zaposleni.get().size());
     }
 
     @Test
     public void testEdit() {
-        zaposleni.edit(new Zaposlen(3, "Ime3", "Prezime3", MALE, "22222", "aresa3", "username3", "lozinka3", true, KOZMETICAR, OPSTA, 0, 30, 0, 30000, "", new int[]{2}),
-                       new Zaposlen(8, "Ime8", "Prezime8", MALE, "88888", "aresa8", "username8", "lozinka8", true, KOZMETICAR, STRUCNA, 0, 80, 0, 80000, "", new int[]{2, 4, 6}));
+        assertTrue(zaposleni.edit(new Zaposlen(3, "Ime3", "Prezime3", MALE, "22222", "aresa3", "username3", "lozinka3", true, KOZMETICAR, OPSTA, 0, 30, 0, 30000, "", new int[]{2}),
+                                  new Zaposlen(8, "Ime8", "Prezime8", MALE, "88888", "aresa8", "username8", "lozinka8", true, KOZMETICAR, STRUCNA, 0, 80, 0, 80000, "", new int[]{2, 4, 6})));
         assertTrue(zaposleni.get().stream().anyMatch(klijent -> klijent.ID == 3 && areSame(klijent, 3, "Ime8", "Prezime8", MALE, "88888", "aresa8", "username8", "lozinka8", true,
                                                                                            KOZMETICAR, STRUCNA, 0, 80, 0, 80000, "", new int[]{2, 4, 6})));
         assertEquals(5, zaposleni.get().size());
